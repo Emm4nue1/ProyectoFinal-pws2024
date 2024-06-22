@@ -7,6 +7,7 @@ app.use(express.json());
 app.use(cors({origin: 'http://localhost:4200'}));
 //Cargamos el modulo de direccionamiento de rutas
 app.use('/api/usuario', require('./routes/usuario.route.js'));
+app.use('/api/local', require('./routes/local.route.js'));
 
 //app.use('/api/sector', require('./routes/sector.route'));
 //setting
