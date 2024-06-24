@@ -9,6 +9,7 @@ app.use(cors({origin: 'http://localhost:4200'}));
 app.use('/api/usuario', require('./routes/usuario.route.js'));
 app.use('/api/local', require('./routes/local.route.js'));
 app.use('/api/propietario', require('./routes/propietario.route.js'));
+app.use('/api/alquiler', require('./routes/alquiler.route.js'));
 
 //app.use('/api/sector', require('./routes/sector.route'));
 //setting

@@ -4,7 +4,7 @@ const {Schema} = mongoose;
 const LocalSchema = new Schema({
     superficie: {type: Number, required: true},
     habilitado: {type: Boolean, required: true},
-    cuotaMes: {type: Number, required: true},
+    costoMes: {type: Number, required: true},
     imagen: {type: String, required: true},
     alquilado: {type: Boolean, required: true}
 })
