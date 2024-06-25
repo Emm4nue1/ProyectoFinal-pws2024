@@ -7,6 +7,6 @@ const PropietarioSchema = new Schema({
     dni: {type: Number, required: true},
     email: {type: String, required: true},
     telefono: {type: Number, required: true}
-})
+},{ versionKey: false })
 
 module.exports = mongoose.models.Propietario || mongoose.model('Propietario', PropietarioSchema);

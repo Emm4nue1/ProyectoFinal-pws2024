@@ -7,6 +7,6 @@ const LocalSchema = new Schema({
     costoMes: {type: Number, required: true},
     imagen: {type: String, required: true},
     alquilado: {type: Boolean, required: true}
-})
+},{ versionKey: false })
 
 module.exports = mongoose.models.Local || mongoose.model('Local', LocalSchema);
