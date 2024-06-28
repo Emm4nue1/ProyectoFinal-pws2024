@@ -1,0 +1,32 @@
+<div class="container">
+
+    <div class="row">
+        <h3 class="col-12 text-center text-primary text-decoration-underline" >LISTADO DE PROPIETARIOS</h3>
+    </div>
+    <button type="button" class="btn btn-outline-primary my-3" (click)="agregarPropietario()"> AGREGAR </button>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Apellido</th>
+                <th scope="col">Nombres</th>
+                <th scope="col">DNI</th>
+                <th scope="col">Email</th>
+                <th scope="col">Telefono</th>
+                <th scope="col">Opciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let p of propietarios">
+                <th>{{p.apellido}}</th>
+                <td>{{p.nombres}}</td>
+                <td>{{p.dni}}</td>
+                <td>{{p.email}}</td>
+                <td>{{p.telefono}}</td>
+                <td>
+                    <button type="button" class="btn btn-outline-warning" (click)="modificarPropietario(p._id)"> EDITAR </button>
+                    <button type="button" class="btn btn-outline-danger" (click)="eliminarPropietario(p._id)"> ELIMINAR </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

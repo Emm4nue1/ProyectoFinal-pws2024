@@ -1,0 +1,21 @@
+<nav class="navbar navbar-expand-lg bg-success-subtle custom-navbar">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <!-- <ul class="navbar-nav mx-auto mb-2 mb-lg-0"> -->
+        <ul class="navbar-nav  mb-2 mb-lg-0">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    Propietario
+                </a>
+                <ul class="dropdown-menu">
+                    <li class="nav-item">
+                        <a class="nav-link custom-nav-link" [routerLink]="['propietario-form','0']">Nuevo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link custom-nav-link" [routerLink]="['propietario-lista']">Lista</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>
