@@ -9,4 +9,14 @@ export class Local {
     // constructor(){
     //     this.imagen = "/assets/images/productos/producto_nuevo.png"
     // }
+    constructor(){
+        this.superficie = 0;
+        this.habilitado = false;
+        this.costoMes = 0;
+        this.imagen = "";
+        this.alquilado = false;
+        
+    }
+    
+    
 }

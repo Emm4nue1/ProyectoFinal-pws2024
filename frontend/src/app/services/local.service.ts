@@ -80,5 +80,5 @@ export class LocalService {
       return this.http.delete(this.urlBase + "local/" + _id, httpOption);
     }
 
-
+    
 }
