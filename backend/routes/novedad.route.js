@@ -1,5 +1,4 @@
 const novedadCtrl = require('./../controllers/novedad.controller');
-
 const express = require('express');
 const router = express.Router();
 

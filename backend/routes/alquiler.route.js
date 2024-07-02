@@ -1,5 +1,4 @@
 const alquilerCtrl = require('../controllers/alquiler.controller')
-
 const express = require('express');
 const router = express.Router();
 

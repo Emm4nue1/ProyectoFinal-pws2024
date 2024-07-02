@@ -9,4 +9,4 @@ const LocalSchema = new Schema({
     alquilado: {type: Boolean, required: true}
 },{ versionKey: false })
 
-module.exports = mongoose.models.Local || mongoose.model('Local', LocalSchema);
+module.exports = mongoose.models.Local || mongoose.model('Locales', LocalSchema);

@@ -1,18 +1,18 @@
 const express = require('express');
 const cors = require('cors');
-const {mongoose} = require('./database');
-var app = express();
+const { mongoose } = require('./database');
+const app = express();
 //middlewares
 app.use(express.json());
 app.use(cors({origin: 'http://localhost:4200'}));
 //Cargamos el modulo de direccionamiento de rutas
 app.use('/api/usuario', require('./routes/usuario.route.js'));
 app.use('/api/local', require('./routes/local.route.js'));
-app.use('/api/propietario', require('./routes/propietario.route.js'));
+/* app.use('/api/propietario', require('./routes/propietario.route.js')); */ //eliminar lo dejo por las dudas.
 app.use('/api/alquiler', require('./routes/alquiler.route.js'));
-app.use('/api/novedad', require('./routes/novedad.route.js'));
-
-//app.use('/api/sector', require('./routes/sector.route'));
+app.use('/api/alquiler/pago', require('./routes/pago.route.js'));
+app.use('/api/local/novedades', require('./routes/novedad.route.js'));
+app.use('/api/local/promociones', require('./routes/promocion.route.js'));
 //setting
 app.set('port', process.env.PORT || 3000);
 //starting the server

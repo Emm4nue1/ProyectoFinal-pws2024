@@ -1,11 +1,11 @@
 const mongoose = require ('mongoose');
 const {Schema} = mongoose;
-const Usuario = require ('./usuario')
 
 const NovedadSchema = new Schema({
-    usuario: {type: Schema.Types.ObjectId, ref: Usuario, required: true},
-    texto: {type: String, required: true},
-    estado: { type: String, required: true, enum: ['pendiente', 'procesado'] }
-},{ versionKey: false })
+    LocalId: { type: Schema.Types.ObjectId, ref: 'Locales', required: true },
+    usuarioId: { type: Schema.Types.ObjectId, ref: 'Usuarios', required: true },
+    texto: { type: String, required: true },
+    estado: { type: String, enum: ['Pendiente', 'Procesado'], required: true }
+  }, { versionKey: false });
 
-module.exports = mongoose.models.Novedad || mongoose.model('Novedad', NovedadSchema);
+module.exports = mongoose.models.Novedad || mongoose.model('Novedades', NovedadSchema);
