@@ -1,14 +1,12 @@
 const mongoose = require('mongoose');
 const {Schema} = mongoose;
-const Propietario = require('./propietario');
-const Local = require('./local');
 
 const AlquilerSchema = new Schema({
-    propietario: {type: Schema.Types.ObjectId, ref: Propietario, required: true},
-    local: {type: Schema.Types.ObjectId, ref: Local, required: true},
-    plazoMes: {type: Number, required: true},
-    costoAlquiler: {type: Number, required: true},
-    fechaAlquiler: {type: Date, required: true}
-},{ versionKey: false })
+    propietarioId: { type: Schema.Types.ObjectId, ref: 'Usuarios', required: true },
+    localId: { type: Schema.Types.ObjectId, ref: 'Locales', required: true },
+    plazomes: { type: Number, required: true },
+    costoalquiler: { type: Number, required: true },
+    fechaAlquiler: { type: Date, required: true }
+  }, { versionKey: false });
 
-module.exports = mongoose.models.Alquiler || mongoose.model('Alquiler', AlquilerSchema);
+module.exports = mongoose.models.Alquiler || mongoose.model('Alquileres', AlquilerSchema);
