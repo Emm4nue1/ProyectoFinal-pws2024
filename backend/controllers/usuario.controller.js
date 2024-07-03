@@ -3,7 +3,7 @@ const usuarioCtrl = {};
 
 usuarioCtrl.getUsuarios = async (req, res) => {
     try {
-        const usuarios = await Usuario.find();
+        const usuarios = await Usuario.find().populate("rol");
         res.json(usuarios);
     } catch (error) {
         res.status(500).json({
@@ -89,40 +89,40 @@ usuarioCtrl.deleteUsuario = async (req, res) => {
     }
 };
 
-usuarioCtrl.getPropietarios = async (req, res) => {
-    try {
-        const propietarios = await Usuario.find({ perfil: 'Propietario' });
-        res.json(propietarios);
-    } catch (error) {
-        res.status(500).json({
-            'status': '0',
-            'message': 'Error al obtener los propietarios'
-        });
-    }
-};
+// usuarioCtrl.getPropietarios = async (req, res) => {
+//     try {
+//         const propietarios = await Usuario.find({ perfil: 'Propietario' });
+//         res.json(propietarios);
+//     } catch (error) {
+//         res.status(500).json({
+//             'status': '0',
+//             'message': 'Error al obtener los propietarios'
+//         });
+//     }
+// };
 
-usuarioCtrl.getAdministrativos = async (req, res) => {
-    try {
-        const administrativos = await Usuario.find({ perfil: 'Administrativo' });
-        res.json(administrativos);
-    } catch (error) {
-        res.status(500).json({
-            'status': '0',
-            'message': 'Error al obtener los administrativos'
-        });
-    }
-};
-//trae al dueño/s
-usuarioCtrl.getTitular = async (req, res) => {
-    try {
-        const titular = await Usuario.find({ perfil: 'Dueño' });
-        res.json(titular);
-    } catch (error) {
-        res.status(500).json({
-            'status': '0',
-            'message': 'Error al obtener los propietarios'
-        });
-    }
-};
+// usuarioCtrl.getAdministrativos = async (req, res) => {
+//     try {
+//         const administrativos = await Usuario.find({ perfil: 'Administrativo' });
+//         res.json(administrativos);
+//     } catch (error) {
+//         res.status(500).json({
+//             'status': '0',
+//             'message': 'Error al obtener los administrativos'
+//         });
+//     }
+// };
+// //trae al dueño/s
+// usuarioCtrl.getTitular = async (req, res) => {
+//     try {
+//         const titular = await Usuario.find({ perfil: 'Dueño' });
+//         res.json(titular);
+//     } catch (error) {
+//         res.status(500).json({
+//             'status': '0',
+//             'message': 'Error al obtener los propietarios'
+//         });
+//     }
+// };
 
 module.exports = usuarioCtrl;
