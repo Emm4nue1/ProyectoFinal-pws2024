@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton+SC&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
+
+/* estilo de fuente para el texto "Galeria Jujuy" */
+.anton-sc-regular {
+    font-family: "Anton SC", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.manrope{
+    font-family: "Manrope", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+  }
+
+.row-contenedor {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+}
+
+.contenedor-carousel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.carousel {
+    width: 100%;
+    height: 50vh;
+}
+
+.carousel-item img {
+    width: 100%;
+    height: 50vh;
+    object-fit: cover;
+}
+
+
+/* Seccion de Locales */
+.card {
+    width: 100%;
+    height: 25vh;
+    box-shadow: 10px 10px 5px -3px rgba(0, 0, 0, 0.75);
+    -webkit-box-shadow: 10px 10px 5px -3px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 10px 10px 5px -3px rgba(0, 0, 0, 0.75);
+}
+
+.card-imagen {
+    width: 20%;
+}
+
+.card-cuerpo {
+    width: 80%;
+
+}
+
+.card-imagen img {
+    width: 100%;
+    height: 25vh;
+    object-fit: cover;
+}
+
+
+/* Seccion de ubicacion */
+.section-ubicacion{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.card-direccion{
+    display: flex;
+    gap: 10px;
+    flex-direction: row;
+    justify-content: center;
+    padding: 10px;
+    width: 100%;
+}
+
+.direccion-texto{
+    width: 50%;
+    border: solid 2px white;
+    border-radius: 20px;
+    overflow: hidden;
+    padding: 30px 5%;
+    background-color: rgb(250, 195, 43);
+}
+
+.direccion-ubicacion{
+    width: 50%;
+    border: solid 2px white;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.direccion-ubicacion iframe{
+    width: 100%;
+    height: 100%;
+}
