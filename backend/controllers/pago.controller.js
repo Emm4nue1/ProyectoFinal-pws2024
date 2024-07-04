@@ -3,12 +3,14 @@ const pagoCtrl = {};
 
 // Crear un nuevo pago
 pagoCtrl.createPago = async (req, res) => {
+  console.log('req.body:', req.body);
   try {
-    const nuevoPago = new Pago(req.body);
-    await nuevoPago.save();
-    res.status(201).json(nuevoPago);
+    const pago = new Pago(req.body);
+    await pago.save();
+    res.json({ status: '1', msg: 'Pago guardado.' });
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    console.error('Error:', error);
+    res.status(400).json({ status: '0', msg: 'Error procesando operación.', error: error.message });
   }
 };
 
@@ -18,7 +20,8 @@ pagoCtrl.getPagos = async (req, res) => {
     const pagos = await Pago.find();
     res.json(pagos);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    console.error('Error:', error);
+    res.status(500).json({ status: '0', msg: 'Error procesando operación.', error: error.message });
   }
 };
 
@@ -26,27 +29,28 @@ pagoCtrl.getPagos = async (req, res) => {
 pagoCtrl.getPagoById = async (req, res) => {
   try {
     const pago = await Pago.findById(req.params.id);
-    if (pago) {
-      res.json(pago);
-    } else {
-      res.status(404).json({ message: 'Pago no encontrado' });
+    if (!pago) {
+      return res.status(404).json({ status: '0', msg: 'Pago no encontrado.' });
     }
+    res.json(pago);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    console.error('Error:', error);
+    res.status(500).json({ status: '0', msg: 'Error procesando operación.', error: error.message });
   }
 };
 
 // Actualizar un pago por ID
 pagoCtrl.updatePago = async (req, res) => {
+  console.log('req.body:', req.body);
   try {
     const pago = await Pago.findByIdAndUpdate(req.params.id, req.body, { new: true });
-    if (pago) {
-      res.json(pago);
-    } else {
-      res.status(404).json({ message: 'Pago no encontrado' });
+    if (!pago) {
+      return res.status(404).json({ status: '0', msg: 'Pago no encontrado.' });
     }
+    res.json({ status: '1', msg: 'Pago actualizado.' });
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    console.error('Error:', error);
+    res.status(400).json({ status: '0', msg: 'Error procesando operación.', error: error.message });
   }
 };
 
@@ -54,13 +58,13 @@ pagoCtrl.updatePago = async (req, res) => {
 pagoCtrl.deletePago = async (req, res) => {
   try {
     const pago = await Pago.findByIdAndDelete(req.params.id);
-    if (pago) {
-      res.json({ message: 'Pago eliminado' });
-    } else {
-      res.status(404).json({ message: 'Pago no encontrado' });
+    if (!pago) {
+      return res.status(404).json({ status: '0', msg: 'Pago no encontrado.' });
     }
+    res.json({ status: '1', msg: 'Pago eliminado.' });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    console.error('Error:', error);
+    res.status(500).json({ status: '0', msg: 'Error procesando operación.', error: error.message });
   }
 };
 

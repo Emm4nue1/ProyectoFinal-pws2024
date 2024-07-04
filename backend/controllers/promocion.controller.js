@@ -3,12 +3,14 @@ const promocionCtrl = {};
 
 // Crear una nueva promoción
 promocionCtrl.createPromocion = async (req, res) => {
+  console.log('req.body:', req.body);
   try {
-    const nuevaPromocion = new Promocion(req.body);
-    await nuevaPromocion.save();
-    res.status(201).json(nuevaPromocion);
+    const promocion = new Promocion(req.body);
+    await promocion.save();
+    res.json({ status: '1', msg: 'Promoción guardada.' });
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    console.error('Error:', error);
+    res.status(400).json({ status: '0', msg: 'Error procesando operación.', error: error.message });
   }
 };
 
@@ -18,7 +20,8 @@ promocionCtrl.getPromociones = async (req, res) => {
     const promociones = await Promocion.find();
     res.json(promociones);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    console.error('Error:', error);
+    res.status(500).json({ status: '0', msg: 'Error procesando operación.', error: error.message });
   }
 };
 
@@ -26,27 +29,28 @@ promocionCtrl.getPromociones = async (req, res) => {
 promocionCtrl.getPromocionById = async (req, res) => {
   try {
     const promocion = await Promocion.findById(req.params.id);
-    if (promocion) {
-      res.json(promocion);
-    } else {
-      res.status(404).json({ message: 'Promoción no encontrada' });
+    if (!promocion) {
+      return res.status(404).json({ status: '0', msg: 'Promoción no encontrada.' });
     }
+    res.json(promocion);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    console.error('Error:', error);
+    res.status(500).json({ status: '0', msg: 'Error procesando operación.', error: error.message });
   }
 };
 
 // Actualizar una promoción por ID
 promocionCtrl.updatePromocion = async (req, res) => {
+  console.log('req.body:', req.body);
   try {
     const promocion = await Promocion.findByIdAndUpdate(req.params.id, req.body, { new: true });
-    if (promocion) {
-      res.json(promocion);
-    } else {
-      res.status(404).json({ message: 'Promoción no encontrada' });
+    if (!promocion) {
+      return res.status(404).json({ status: '0', msg: 'Promoción no encontrada.' });
     }
+    res.json({ status: '1', msg: 'Promoción actualizada.' });
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    console.error('Error:', error);
+    res.status(400).json({ status: '0', msg: 'Error procesando operación.', error: error.message });
   }
 };
 
@@ -54,13 +58,13 @@ promocionCtrl.updatePromocion = async (req, res) => {
 promocionCtrl.deletePromocion = async (req, res) => {
   try {
     const promocion = await Promocion.findByIdAndDelete(req.params.id);
-    if (promocion) {
-      res.json({ message: 'Promoción eliminada' });
-    } else {
-      res.status(404).json({ message: 'Promoción no encontrada' });
+    if (!promocion) {
+      return res.status(404).json({ status: '0', msg: 'Promoción no encontrada.' });
     }
+    res.json({ status: '1', msg: 'Promoción eliminada.' });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    console.error('Error:', error);
+    res.status(500).json({ status: '0', msg: 'Error procesando operación.', error: error.message });
   }
 };
 

@@ -1,4 +1,4 @@
-const pagoCtrl = require('./../controllers/pago.controller');
+const pagoCtrl = require('../controllers/pago.controller');
 const express = require('express');
 const router = express.Router();
 
