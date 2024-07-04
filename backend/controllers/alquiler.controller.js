@@ -2,14 +2,23 @@ const Alquiler = require('../models/alquiler');
 const alquilerCtrl = {}
 
 alquilerCtrl.getAlquileres = async (req, res) => {
-    var alquileres = await Alquiler.find().populate(["propietario", "local"]);
+    var alquileres = await Alquiler.find();
     res.json(alquileres);
 }
 
 alquilerCtrl.getAlquilerById = async (req, res) => {
-    const alquiler = await Alquiler.findById(req.params.id).populate(["propietario", "local"]);
-    res.json(alquiler);
-}
+    try {
+      const alquiler = await Alquiler.findById(req.params.id);
+      if (!alquiler) {
+        return res.status(404).json({ status: '0', msg: 'Alquiler no encontrado.' });
+      }
+      res.json(alquiler);
+    } catch (error) {
+      console.error('Error:', error);
+      res.status(500).json({ status: '0', msg: 'Error procesando operación.', error: error.message });
+    }
+  };
+
 
 alquilerCtrl.createAlquiler = async (req, res) => {
     var alquiler = new Alquiler(req.body)
