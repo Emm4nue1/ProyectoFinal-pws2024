@@ -1,9 +1,11 @@
 const mongoose = require('mongoose');
 const {Schema} = mongoose;
+const Local = require ('./local')
+const Usuario = require ('./usuario')
 
 const AlquilerSchema = new Schema({
-    propietarioId: { type: Schema.Types.ObjectId, ref: 'Usuarios', required: true },
-    localId: { type: Schema.Types.ObjectId, ref: 'Locales', required: true },
+    propietario: { type: Schema.Types.ObjectId, ref: Usuario, required: true },
+    local: { type: Schema.Types.ObjectId, ref: Local, required: true },
     plazomes: { type: Number, required: true },
     costoalquiler: { type: Number, required: true },
     fechaAlquiler: { type: Date, required: true }
