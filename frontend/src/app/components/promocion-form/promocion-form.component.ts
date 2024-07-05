@@ -3,8 +3,7 @@ import { PromocionService } from '../../services/promocion.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Promocion } from '../../models/promocion';
-import { Usuario } from '../../models/usuario';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LocalService } from '../../services/local.service';
 import { Local } from '../../models/local';
 
@@ -26,6 +25,7 @@ export class PromocionFormComponent {
 
   constructor(
     private promocionService: PromocionService,
+    private router: Router,
     private activatedRoute: ActivatedRoute,
     private localService: LocalService
   ){
@@ -39,7 +39,7 @@ export class PromocionFormComponent {
         this.iniciarVariable();
       } else {
         this.accion = "update";
-        // this.cargarPropietario(params['id']);
+        this.cargarPromocionActualizar(params['id']);
       }
     })
   }
@@ -61,16 +61,26 @@ export class PromocionFormComponent {
     )
   }
 
-  cargarPromocion(id: string): void {
+  cargarPromocionActualizar(id: string): void {
     this.promocionService.getPromocionById(id).subscribe(
       (result: any) => {
+        console.log(result);
         this.promocion = result;
-        //console.log(this.propietario);
+        // this.promocion.nroLocal= this.promocion.local.numeroLocal;
+        this.promocion.fechaInicio= this.parsearFecha(new Date(result.fechaInicio))
+        this.promocion.fechaFin= this.parsearFecha(new Date(result.fechaFin))
       },
       (error: any) => {
         console.log(error);
       }
     )
+  }
+
+  parsearFecha(fecha: Date): string {
+    var anio = fecha.getUTCFullYear();
+    var mes = String(fecha.getUTCMonth() + 1).padStart(2, '0');
+    var dia = String(fecha.getUTCDate()).padStart(2, '0');
+    return `${anio}-${mes}-${dia}`;
   }
 
   cargarLocales(): void {
@@ -84,5 +94,20 @@ export class PromocionFormComponent {
       }
     )
   }
+
+  modificarPromocion(){
+    this.promocionService.updatePromocion(this.promocion).subscribe(
+      (result)=>{
+        console.log(result);
+      },
+      (error)=>{
+        console.log(error);
+      }
+    )
+  }
+
+  irALista(){
+    this.router.navigate(['promocion-lista']);
+    }
 
 }
