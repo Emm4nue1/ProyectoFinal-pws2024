@@ -2,13 +2,12 @@
     <div class="col-12 col-sm-12 col-md-11 contenedor">
         <h1>Listado de promociones</h1>
         <div class="col-md-4">
-            <button type="button" class="btn btn-primary my-3"> AGREGAR </button>
+            <button type="button" class="btn btn-primary my-3"(click)="agregarPromocion()"> AGREGAR </button>
         </div>
         <table class="table table-hover table table-striped table-dark">
             <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Nombre del Propietario</th>
                     <th scope="col">N° de Local</th>
                     <th scope="col">Descripción</th>
                     <th scope="col">Fecha de Inicio</th>
@@ -17,18 +16,17 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
+                <tr *ngFor="let p of promociones">
 
                     <th>#</th>
-                    <td>Nombre del Propietario</td>
-                    <td>1</td>
-                    <td>Descripcion</td>
-                    <td>Fecha de Inicio</td>
-                    <td>Fecha de Fin</td>
+                    <td>{{p.local.superficie}}</td>
+                    <td>{{p.descripcion}}</td>
+                    <td>{{p.fechaInicio}}</td>
+                    <td>{{p.fechaFin}}</td>
                     <td>
                         <div class="btn-lista-promocion">
-                            <button type="button" class="btn btn-warning m-md-2">Actualizar</button>
-                            <button type="button" class="btn btn-danger m-md-2">Eliminar</button>
+                            <button type="button" class="btn btn-warning m-md-2"(click)="modificarPromocion(p._id)">Actualizar</button>
+                            <button type="button" class="btn btn-danger m-md-2" (click)="eliminarPromocion(p._id)">Eliminar</button>
                         </div>
                     </td>
                 </tr>

@@ -17,7 +17,7 @@ promocionCtrl.createPromocion = async (req, res) => {
 // Obtener todas las promociones
 promocionCtrl.getPromociones = async (req, res) => {
   try {
-    const promociones = await Promocion.find();
+    const promociones = await Promocion.find().populate("local");
     res.json(promociones);
   } catch (error) {
     console.error('Error:', error);

@@ -12,13 +12,13 @@ export class PromocionService {
 
   constructor(private http: HttpClient) { }
 
-  getPromociones(): Observable<Promocion>{
+  getPromociones(): Observable<any>{
     let httpOption = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
     }
-    return this.http.get<Promocion>(this.urlBase, httpOption);
+    return this.http.get(this.urlBase, httpOption);
   }
 
   getPromocionById(idPromocion: string): Observable<Promocion>{
@@ -31,13 +31,14 @@ export class PromocionService {
     return this.http.get<Promocion>(this.urlBase + idPromocion, httpOption)
   }
 
-  createPromocion(promocion: Promocion): Observable<Promocion>{
+  postPromocion(promocion: Promocion): Observable<any>{
     let httpOption = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
     }
-    return this.http.post<Promocion>(this.urlBase, promocion, httpOption)
+    let body: any = JSON.stringify(promocion)
+    return this.http.post(this.urlBase, body, httpOption)
   }
 
   updatePromocion(promocion: Promocion): Observable<Promocion>{
