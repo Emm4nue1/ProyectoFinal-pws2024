@@ -36,7 +36,7 @@ export class UsuarioFormComponent {
         this.iniciarVariable();
       } else {
         this.accion = 'update';
-        //this.cargarUsuario(params['id']);
+        this.cargarUsuario(params['id']);
       }
     });
   }
@@ -60,6 +60,7 @@ export class UsuarioFormComponent {
     )
   }
 
+
   agregarUsuario(){
     this.usuarioService.addUsuario(this.usuario).subscribe(
       result => {
@@ -79,7 +80,7 @@ export class UsuarioFormComponent {
   acualizarUsuario(){
     this.usuarioService.updateUsuario(this.usuario).subscribe(
       result => {
-        if (result. status ==  1){
+        if (result.status ==  1){
           alert("Usuario actualizado con exito");
           this.router.navigate(['usuario-lista'])
         }
@@ -89,7 +90,19 @@ export class UsuarioFormComponent {
         console.log(error);
       }
     )
-    //this.usuario = new Usuario();
+    this.usuario = new Usuario();
+  }
+
+  cargarUsuario(id: string): void {
+    this.usuarioService.getUsuario(id).subscribe(
+      (result: any) => {
+        this.usuario = result;
+        //console.log(this.propietario);
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    )
   }
 
   atras(){
@@ -97,6 +110,3 @@ export class UsuarioFormComponent {
   }
 
 }
-
-
-

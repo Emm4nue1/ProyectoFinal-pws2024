@@ -20,7 +20,7 @@ export class UsuarioListaComponent {
 
 
   constructor(private router: Router,
-              private usuarioService: UsuarioService   
+              private usuarioService: UsuarioService 
   ) {
     this.usuarios = new Array<Usuario>();
     this.getUsuarios();
