@@ -8,7 +8,7 @@ import { Local } from '../models/local';
 })
 export class LocalService {
 
-  urlBase:string="http://localhost:4200/api/";
+  urlBase:string="http://localhost:3000/api/";
   constructor(private http:HttpClient) {
 
    }

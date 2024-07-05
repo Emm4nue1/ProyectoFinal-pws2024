@@ -7,7 +7,15 @@
             </div>
             <div class="contenedor-formulario p-3">
                 <div class="mb-3">
-                    <label for="descripcion" class="form-label">Descripcion</label>
+                    <label for="idrol" class="form-label">Locales</label>
+                    <select class="form-select" id="local" name="local" [(ngModel)]="promocion.local">
+
+                        <option *ngFor="let l of locales" [ngValue]="l">{{l.superficie}}</option>
+
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="descripcion" class="form-label">Descripción</label>
                     <input type="text" class="form-control" id="descripcion" name="descripcion"
                         placeholder="Ingrese una descripción">
                 </div>
@@ -27,9 +35,8 @@
                         placeholder="Ingrese la url de una imagen">
                 </div>
                 <div class="boton-formulario">
-                    <button type="submit" class="btn btn-success m-md-2" data-bs-toggle="modal"
-                        data-bs-target="#staticBackdropRegistrarPromocion">Registrar</button>
-                    <!-- <button type="submit" class="btn btn-warning m-md-2" data-bs-toggle="modal" data-bs-target="#staticBackdropModificarPromocion">Actualizar</button> -->
+                    <button *ngIf="accion == 'new'" type="submit" class="btn btn-success m-md-2" (click)="crearPromocion()">Registrar</button>
+                    <button *ngIf="accion == 'update'"type="submit" class="btn btn-warning m-md-2">Actualizar</button>
 
                     <button type="button" class="btn btn-primary m-md-2">Ir a lista Promociones</button>
                 </div>
