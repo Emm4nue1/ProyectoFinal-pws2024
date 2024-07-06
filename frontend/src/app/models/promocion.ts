@@ -5,16 +5,14 @@ export class Promocion {
     local: Local;
     imagen: string;
     descripcion: string;
-    fechaInicio: string;
-    fechaFin: string;
-    nroLocal: string;
+    fechaInicio: Date;
+    fechaFin: Date;
 
     constructor(){
         this.local = new Local();
         this.imagen = "";
         this.descripcion = "";
-        this.fechaInicio = "";
-        this.fechaFin = "";
-        this.nroLocal = "";
+        this.fechaInicio = new Date();
+        this.fechaFin = new Date();
     }
 }

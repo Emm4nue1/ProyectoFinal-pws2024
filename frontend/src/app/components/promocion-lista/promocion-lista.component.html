@@ -19,10 +19,10 @@
                 <tr *ngFor="let p of promociones">
 
                     <th>#</th>
-                    <td>{{p.local.numeroLocal}}</td>
+                    <td>{{p.local.superficie}}</td>
                     <td>{{p.descripcion}}</td>
-                    <td>{{p.fechaInicio | date: "dd-MM-yyyy": "GMT"}}</td>
-                    <td>{{p.fechaFin | date: "dd-MM-yyyy": "GMT"}}</td>
+                    <td>{{p.fechaInicio}}</td>
+                    <td>{{p.fechaFin}}</td>
                     <td>
                         <div class="btn-lista-promocion">
                             <button type="button" class="btn btn-warning m-md-2"(click)="modificarPromocion(p._id)">Actualizar</button>
