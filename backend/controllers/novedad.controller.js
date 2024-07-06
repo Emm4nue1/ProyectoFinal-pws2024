@@ -17,7 +17,7 @@ novedadCtrl.createNovedad = async (req, res) => {
 // Obtener todas las novedades
 novedadCtrl.getNovedades = async (req, res) => {
   try {
-    const novedades = await Novedad.find();
+    const novedades = await Novedad.find().populate(['local', 'usuario']);
     res.json(novedades);
   } catch (error) {
     console.error('Error:', error);
@@ -28,7 +28,7 @@ novedadCtrl.getNovedades = async (req, res) => {
 // Obtener una novedad por ID
 novedadCtrl.getNovedadById = async (req, res) => {
   try {
-    const novedad = await Novedad.findById(req.params.id);
+    const novedad = await Novedad.findById(req.params.id).populate(['local', 'usuario']);
     if (!novedad) {
       return res.status(404).json({ status: '0', msg: 'Novedad no encontrada.' });
     }

@@ -41,6 +41,21 @@
               </li>
             </ul>
           </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"
+              routerLinkActive="active"> Novedad</a>
+            <ul class="dropdown-menu">
+              <li class="nav-item">
+                <a class="nav-link custom-nav-link" [routerLink]="['novedad-form','0']"
+                  routerLinkActive="active">Nueva novedad</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link custom-nav-link" [routerLink]="['novedad-lista']"
+                  routerLinkActive="active">Lista</a>
+              </li>
+            </ul>
+          </li>
         </ul>
         <button type="submit" class="btn btn-success" [routerLink]="['login']" routerLinkActive="active">Inciar Sesion</button>
       </div>
