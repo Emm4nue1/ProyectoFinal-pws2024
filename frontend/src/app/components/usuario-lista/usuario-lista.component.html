@@ -1,34 +1,41 @@
-<div class="container">
+<body>
 
-    <div class="row mt-3">
-        <h3 class="col-12 text-center text-primary text-decoration-underline" >LISTADO DE USUARIOS</h3>
+    <div class="container">
+
+        <div class="row mt-3">
+            <h3 class="col-12 text-center text-primary text-decoration-underline">LISTADO DE USUARIOS</h3>
+        </div>
+        <div class="col-md-4">
+            <button type="button" class="btn btn-outline-primary my-3" (click)="agregarUsuario()">AGREGAR</button>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th scope="col">Rol</th>
+                    <th scope="col">Apellido y Nombre</th>
+                    <th scope="col">DNI</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Telefono</th>
+                    <th scope="col">Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let u of usuarios">
+                    <td>{{u.rol.nombre}}</td>
+                    <td>{{u.apellido}}, {{u.nombre}}</td>
+                    <td>{{u.dni}}</td>
+                    <td>{{u.email}}</td>
+                    <td>{{u.telefono}}</td>
+                    <td>
+                        <button type="button" class="btn btn-outline-warning" (click)="modificarUsuario(u)">
+                            <i class="bi bi-pencil-square"></i>
+                        </button>
+                        <button type="button" class="btn btn-outline-danger mx-3" (click)="eliminarUsuario(u)">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
-    <div class="col-md-4">
-        <button type="button" class="btn btn-outline-primary my-3" (click)="agregarUsuario()"> AGREGAR </button>
-    </div>
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">Rol</th>
-                <th scope="col">Apellido y Nombre</th>
-                <th scope="col">DNI</th>
-                <th scope="col">Email</th>
-                <th scope="col">Telefono</th>
-                <th scope="col">Opciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let u of usuarios">
-                <td>{{u.rol.nombre}}</td>
-                <td>{{u.apellido}}, {{u.nombre}}</td>
-                <td>{{u.dni}}</td>
-                <td>{{u.email}}</td>
-                <td>{{u.telefono}}</td>
-                <td>
-                    <button type="button" class="btn btn-outline-warning" (click)="modificarUsuario(u)"> EDITAR </button>
-                    <button type="button" class="btn btn-outline-danger" (click)="eliminarUsuario(u)"> ELIMINAR </button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+</body>
