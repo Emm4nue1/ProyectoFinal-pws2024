@@ -6,6 +6,8 @@ import { PromocionFormComponent } from './components/promocion-form/promocion-fo
 import { PromocionListaComponent } from './components/promocion-lista/promocion-lista.component';
 import { LoginComponent } from './components/login/login.component';
 import { AlquilerFormComponent } from './components/alquiler-form/alquiler-form.component';
+import { NovedadFormComponent } from './components/novedad-form/novedad-form.component';
+import { NovedadListaComponent } from './components/novedad-lista/novedad-lista.component';
 
 export const routes: Routes = [
 
@@ -18,6 +20,9 @@ export const routes: Routes = [
     {path: 'login', component:LoginComponent}, 
     {path: 'alquiler-form', component: AlquilerFormComponent},
     {path: 'alquiler-form/:id', component: AlquilerFormComponent},
+    {path: 'novedad-form', component: NovedadFormComponent},
+    {path: 'novedad-form/:id', component: NovedadFormComponent},
+    {path: 'novedad-lista', component: NovedadListaComponent},
 
     { path: 'home', component: HomeComponent },
     { path: '**', pathMatch: 'full', redirectTo: 'home' },
