@@ -7,9 +7,64 @@
             <input name="apellido" type="text" class="form-control" id="idapellido" [(ngModel)]="usuario.apellido">
         </div>
 
+<<<<<<< Updated upstream
         <div class="input-group">
             <span class="input-group-text">Nombres</span>
             <input name="nombre" type="text" class="form-control" id="idnombre" [(ngModel)]="usuario.nombre">
+=======
+                <div class="mb-3">
+                    <label for="idapellido" class="form-label">Apellido</label>
+                    <input name="apellido" type="text" class="form-control" id="idapellido"
+                        [(ngModel)]="usuario.apellido">
+                </div>
+
+                <div class="mb-3">
+                    <label for="idnombre" class="form-label">Nombres</label>
+                    <input name="nombre" type="text" class="form-control" id="idnombre" [(ngModel)]="usuario.nombre">
+                </div>
+
+                <div class="mb-3">
+                    <label for="iddni" class="form-label">DNI</label>
+                    <input name="dni" type="number" class="form-control" id="iddni" [(ngModel)]="usuario.dni">
+                </div>
+
+                <div class="mb-3">
+                    <label for="idemail" class="form-label">Email</label>
+                    <input name="email" type="text" class="form-control" id="idemail" [(ngModel)]="usuario.email">
+                </div>
+
+                <div class="mb-3">
+                    <label for="idtelefono" class="form-label">Telefono</label>
+                    <input name="telefono" type="text" class="form-control" id="idtelefono"
+                        [(ngModel)]="usuario.telefono">
+                </div>
+
+                <div class="col-auto">
+                    <label for="inputPassword6" class="col-form-label">Password</label>
+                    <input name="password" type="password" id="inputPassword6" class="form-control"
+                        aria-describedby="passwordHelpInline" [(ngModel)]="usuario.password">
+                </div>
+
+                <div class="mb-3">
+                    <label for="idrol" class="form-label">Rol</label>
+                    <select class="form-select" id="idrol" name="rol" [(ngModel)]="usuario.rol">
+
+                        <option *ngFor="let r of roles" [ngValue]="r">{{r.nombre}}</option>
+
+                    </select>
+                </div>
+
+                <!-- <div class="mb-3 form-check">
+                    <label class="form-check-label" for="idactivo">Activo</label>
+                    <input type="checkbox" class="form-check-input" id="idactivo" name="activo" [(ngModel)]="usuario.activo">
+                </div> -->
+
+                <button *ngIf="accion == 'new'" type="button" class="btn btn-outline-success" (click)="agregarUsuario()">Guardar</button>
+                <button *ngIf="accion == 'update'" type="button" class="btn btn-outline-success" (click)="acualizarUsuario()">Actualizar</button>
+                <button type="button" class="btn btn-outline-primary mx-5" (click)="atras()">Ir a Lista</button>
+
+            </form>
+>>>>>>> Stashed changes
         </div>
 
         <div class="input-group">

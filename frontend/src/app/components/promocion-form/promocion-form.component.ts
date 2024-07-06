@@ -50,6 +50,8 @@ export class PromocionFormComponent {
   }
 
   crearPromocion(){
+    this.promocion.fechaInicio.toString();
+    this.promocion.fechaFin.toString();
     this.promocionService.postPromocion(this.promocion).subscribe(
       (result)=>{
         console.log(result);
@@ -87,6 +89,7 @@ export class PromocionFormComponent {
     this.localService.getLocales().subscribe(
       (result: any) => {
         this.locales = result;
+       
         console.log(this.locales);
       },
       (error: any) => {

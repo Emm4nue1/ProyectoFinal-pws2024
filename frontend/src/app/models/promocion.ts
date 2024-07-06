@@ -7,7 +7,7 @@ export class Promocion {
     descripcion: string;
     fechaInicio: string;
     fechaFin: string;
-    nroLocal: string;
+    
 
     constructor(){
         this.local = new Local();
@@ -15,6 +15,6 @@ export class Promocion {
         this.descripcion = "";
         this.fechaInicio = "";
         this.fechaFin = "";
-        this.nroLocal = "";
+        
     }
 }

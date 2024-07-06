@@ -5,6 +5,7 @@ import { UsuarioFormComponent } from './components/usuario-form/usuario-form.com
 import { PromocionFormComponent } from './components/promocion-form/promocion-form.component';
 import { PromocionListaComponent } from './components/promocion-lista/promocion-lista.component';
 import { LoginComponent } from './components/login/login.component';
+import { AlquilerFormComponent } from './components/alquiler-form/alquiler-form.component';
 
 export const routes: Routes = [
 
@@ -15,6 +16,8 @@ export const routes: Routes = [
     {path: 'promocion-form/:id', component: PromocionFormComponent},
     {path: 'promocion-lista', component: PromocionListaComponent},
     {path: 'login', component:LoginComponent}, 
+    {path: 'alquiler-form', component: AlquilerFormComponent},
+    {path: 'alquiler-form/:id', component: AlquilerFormComponent},
 
     { path: 'home', component: HomeComponent },
     { path: '**', pathMatch: 'full', redirectTo: 'home' },

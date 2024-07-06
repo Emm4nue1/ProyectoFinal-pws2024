@@ -8,9 +8,10 @@
             <div class="contenedor-formulario p-3">
                 <div class="mb-3">
                     <label for="local" class="form-label">Locales</label>
-                    <select class="form-select" id="local" name="local" [(ngModel)]="promocion.nroLocal">
+                    <select class="form-select" id="local" name="local" [(ngModel)]="promocion.local">
 
-                        <option *ngFor="let l of locales" [ngValue]="l.numeroLocal">{{l.numeroLocal}}</option>
+                        <option *ngFor="let l of locales" [ngValue]="l">{{l.numeroLocal}}</option>
+                        
 
                     </select>
                 </div>
