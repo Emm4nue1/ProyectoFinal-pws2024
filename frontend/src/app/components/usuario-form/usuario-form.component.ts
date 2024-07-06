@@ -62,14 +62,15 @@ export class UsuarioFormComponent {
 
 
   agregarUsuario(){
+    console.log(this.usuario);
     this.usuarioService.addUsuario(this.usuario).subscribe(
       result => {
-        if (result. status ==  1){
+        if (result.status ==  1){
           alert("Usuario registrado con exito");
           this.router.navigate(['usuario-lista'])
         }
       },
-      (error: any) => {
+      error => {
         alert("Error al registrar Usuario");
         console.log(error);
       }

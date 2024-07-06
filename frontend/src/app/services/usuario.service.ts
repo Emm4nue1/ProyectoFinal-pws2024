@@ -32,10 +32,11 @@ export class UsuarioService {
     return this._http.get(this.urlHost + id, httpOptions);
   }
   
-  addUsuario(usuario:Usuario):Observable<any>{
+  addUsuario(usuario: Usuario):Observable<any>{
+    console.log("usuario en service", usuario);
     let httpOptions = {
       headers: new HttpHeaders({
-        'content-type': 'application/json'
+        'Content-Type': 'application/json'
       }),
     }
     let body: any = JSON.stringify(usuario)

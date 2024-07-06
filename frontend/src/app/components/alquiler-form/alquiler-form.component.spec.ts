@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NavbarComponent } from './navbar.component';
+import { AlquilerFormComponent } from './alquiler-form.component';
 
-describe('NavbarComponent', () => {
-  let component: NavbarComponent;
-  let fixture: ComponentFixture<NavbarComponent>;
+describe('AlquilerFormComponent', () => {
+  let component: AlquilerFormComponent;
+  let fixture: ComponentFixture<AlquilerFormComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NavbarComponent]
+      imports: [AlquilerFormComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(NavbarComponent);
+    fixture = TestBed.createComponent(AlquilerFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

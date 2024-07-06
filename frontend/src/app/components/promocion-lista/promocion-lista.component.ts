@@ -16,39 +16,41 @@ export class PromocionListaComponent {
 
   promociones: Array<Promocion> = [];//Para obtener todas las sucripciones de la bd.
 
-  constructor(private promocionService: PromocionService, private router: Router){
+  constructor(private promocionService: PromocionService, private router: Router) {
     this.obtenerPromociones();
   }
 
-  obtenerPromociones(){
+  obtenerPromociones() {
     this.promocionService.getPromociones().subscribe(
-      (result)=>{
-        // console.log(result);
-        this.promociones= result;
+      (result) => {
+        console.log(result);
+        this.promociones = result;
         
       },
-      (error) =>{
+      (error) => {
         console.log(error);
       }
     )
   }
 
-  agregarPromocion(){
-    this.router.navigate(['promocion-form',"0"]);
+  agregarPromocion() {
+    this.router.navigate(['promocion-form', "0"]);
   }
 
-  modificarPromocion(_id: string){
+  modificarPromocion(_id: string) {
     this.router.navigate(['promocion-form', _id]);
   }
 
-  eliminarPromocion(_id: string){
+  eliminarPromocion(_id: string) {
     this.promocionService.deletePromocionById(_id).subscribe(
-      (result:any)=>{
+      (result: any) => {
         this.obtenerPromociones();
       }, (error: any) => {
         console.log(error);
       }
     )
   }
+
+
 
 }
