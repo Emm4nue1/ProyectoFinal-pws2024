@@ -17,7 +17,7 @@ export class NovedadListaComponent {
   novedades: Array<Novedad> = [];
 
   constructor(private novedadService: NovedadService,
-              private router: Router) {
+    private router: Router) {
     this.novedad = new Novedad();
     this.novedades = [];
 
@@ -25,6 +25,7 @@ export class NovedadListaComponent {
   }
 
   obtenerNovedades() {
+    this.novedades = new Array<Novedad>();
     this.novedadService.getNovedades().subscribe(
       (result) => {
         console.log(result);
@@ -50,6 +51,15 @@ export class NovedadListaComponent {
   }
 
   eliminarNovedad(idNodevad: string) {
-  
+    this.novedadService.deleteNovedad(idNodevad).subscribe(
+      (result) => {
+        console.log(result);
+        alert("Novedad eliminada");
+        this.obtenerNovedades();
+      },
+      (error) => {
+        console.log(error);
+      }
+    )
   }
 }
