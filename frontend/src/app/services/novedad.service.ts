@@ -48,4 +48,13 @@ export class NovedadService {
     let body: any = JSON.stringify(novedad);
     return this.http.put(this.urlBase + novedad._id, body, httpOption);
   }
+
+  deleteNovedad(idNovedad: string): Observable<any> {
+    let httpOption = {
+      headers: new HttpHeaders({
+
+      })
+    }
+    return this.http.delete(this.urlBase + idNovedad, httpOption);
+  }
 }
