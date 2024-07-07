@@ -33,9 +33,10 @@ export class AlquilerService {
   }
   
   addAlquiler(alquiler: Alquiler):Observable<any>{
+    console.log("entro addAlquiler",alquiler);
     let httpOptions = {
       headers: new HttpHeaders({
-        'content-type': 'application/json'
+        'Content-Type': 'application/json'
       }),
     }
     let body: any = JSON.stringify(alquiler)

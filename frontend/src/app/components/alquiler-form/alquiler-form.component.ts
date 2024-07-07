@@ -61,6 +61,7 @@ export class AlquilerFormComponent {
     }
 
     crearAlquiler(){
+      console.log("entro en crear alquiler",this.alquiler);
       this.alquilerService.addAlquiler(this.alquiler).subscribe(
         (result)=>{
           console.log(result);

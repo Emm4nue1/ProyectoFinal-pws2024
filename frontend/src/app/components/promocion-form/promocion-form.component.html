@@ -10,8 +10,8 @@
                     <label for="local" class="form-label">Locales</label>
                     <select class="form-select" id="local" name="local" [(ngModel)]="promocion.local">
 
+                        <option *ngIf="accion == 'update'" [ngValue]="promocion.local" selected>{{promocion.local.numeroLocal}}</option>
                         <option *ngFor="let l of locales" [ngValue]="l">{{l.numeroLocal}}</option>
-                        
 
                     </select>
                 </div>

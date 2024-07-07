@@ -20,7 +20,7 @@ export class PromocionFormComponent {
   promocion = new Promocion();
   accion: string = "new";
   locales = Array<Local>();
-  
+ 
 
 
   constructor(
