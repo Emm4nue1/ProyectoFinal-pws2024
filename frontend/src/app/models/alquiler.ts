@@ -4,14 +4,14 @@ import { Usuario } from "./usuario";
 export class Alquiler {
 
     _id!: string;
-    propietario: Usuario;
+    usuario: Usuario;
     local: Local;
     plazomes: number;
     costoalquiler: number;
     fechaAlquiler: Date;
     
     constructor() {
-        this.propietario = new Usuario();
+        this.usuario = new Usuario();
         this.local = new Local();
         this.plazomes = 0;
         this.costoalquiler = 0;

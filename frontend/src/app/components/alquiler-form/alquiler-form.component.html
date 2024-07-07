@@ -8,24 +8,22 @@
             <div class="contenedor-formulario p-3">
                 <div class="mb-3">
                     <label for="propietario" class="form-label">Propietario</label>
-                    <select class="form-select" id="propietario" name="propietario" [(ngModel)]="propietario.nombre">
-                    
-                        <option *ngFor="let p of propietarios" [ngValue]="p._id">{{p.apellido}},{{p.nombre}}</option>
-
+                    <select class="form-select" id="propietario" name="propietario" [(ngModel)]="alquiler.usuario">
+                        <option *ngFor="let p of propietarios" [ngValue]="p">{{p.apellido}},{{p.nombre}}</option>
                     </select>
                 </div>
                 <div class="mb-3">
                     <label for="nrolocal" class="form-label">Número de local</label>
-                    <select class="form-select" id="nrolocal" name="nrolocal" [(ngModel)]="local.numeroLocal">
+                    <select class="form-select" id="nrolocal" name="nrolocal" [(ngModel)]="alquiler.local">
 
-                        <option *ngFor="let l of locales" [ngValue]="l._id">{{l.numeroLocal}}</option>
+                        <option *ngFor="let l of locales" [ngValue]="l">{{l.numeroLocal}}</option>
 
                     </select>
                 </div>
                 <div class="mb-3">
                     <label for="plazo-mes" class="form-label">Plazo del Mes para pagar</label>
                     <input type="number" class="form-control" id="plazo-mes" name="plazo-mes"
-                        placeholder="Ingrese el plazo del mes." [(ngModel)]="alquiler.local">
+                        placeholder="Ingrese el plazo del mes." [(ngModel)]="alquiler.plazomes">
                 </div>
                 <div class="mb-3">
                     <label for="costomes" class="form-label">Costo del alquiler</label>
@@ -40,7 +38,7 @@
                 </div>
                
                 <div class="boton-formulario">
-                    <button type="submit" class="btn btn-success m-md-2" >Registrar</button>
+                    <button  class="btn btn-success m-md-2" (click)="crearAlquiler()">Registrar</button>
                     <!-- <button *ngIf="accion == 'update'"type="submit" class="btn btn-warning m-md-2" (click)="modificarPromocion()">Actualizar</button> -->
 
                     <!-- <button type="button" class="btn btn-primary m-md-2"(click)="irALista()">Ir a lista Promociones</button> -->
