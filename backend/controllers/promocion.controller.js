@@ -28,7 +28,7 @@ promocionCtrl.getPromociones = async (req, res) => {
 // Obtener una promoción por ID
 promocionCtrl.getPromocionById = async (req, res) => {
   try {
-    const promocion = await Promocion.findById(req.params.id);
+    const promocion = await Promocion.findById(req.params.id).populate("local");
     if (!promocion) {
       return res.status(404).json({ status: '0', msg: 'Promoción no encontrada.' });
     }
