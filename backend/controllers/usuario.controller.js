@@ -1,4 +1,5 @@
 const Usuario = require('../models/usuario');
+const bcrypt = require('bcrypt');
 const usuarioCtrl = {};
 
 usuarioCtrl.getUsuarios = async (req, res) => {
@@ -89,40 +90,36 @@ usuarioCtrl.deleteUsuario = async (req, res) => {
     }
 };
 
-// usuarioCtrl.getPropietarios = async (req, res) => {
-//     try {
-//         const propietarios = await Usuario.find({ perfil: 'Propietario' });
-//         res.json(propietarios);
-//     } catch (error) {
-//         res.status(500).json({
-//             'status': '0',
-//             'message': 'Error al obtener los propietarios'
-//         });
-//     }
-// };
-
-// usuarioCtrl.getAdministrativos = async (req, res) => {
-//     try {
-//         const administrativos = await Usuario.find({ perfil: 'Administrativo' });
-//         res.json(administrativos);
-//     } catch (error) {
-//         res.status(500).json({
-//             'status': '0',
-//             'message': 'Error al obtener los administrativos'
-//         });
-//     }
-// };
-// //trae al dueño/s
-// usuarioCtrl.getTitular = async (req, res) => {
-//     try {
-//         const titular = await Usuario.find({ perfil: 'Dueño' });
-//         res.json(titular);
-//     } catch (error) {
-//         res.status(500).json({
-//             'status': '0',
-//             'message': 'Error al obtener los propietarios'
-//         });
-//     }
-// };
+usuarioCtrl.loginUsuario = async (req, res) => {
+    const { email, password } = req.body;
+    try {
+      const usuario = await Usuario.findOne({ email });
+      if (!usuario) {
+        return res.status(404).json({
+          status: '0',
+          message: 'Usuario no encontrado'
+        });
+      }
+  
+      const esContraseñaValida = await bcrypt.compare(password, usuario.password);
+      if (!esContraseñaValida) {
+        return res.status(401).json({
+          status: '0',
+          message: 'Contraseña inválida'
+        });
+      }
+  
+      res.json({
+        status: '1',
+        message: 'Inicio de sesión exitoso',
+        user : usuario
+      });
+    } catch (error) {
+      res.status(500).json({
+        status: '0',
+        message: 'Error al iniciar sesión'
+      });
+    }
+  };
 
 module.exports = usuarioCtrl;
