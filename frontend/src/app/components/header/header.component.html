@@ -56,6 +56,21 @@
               </li>
             </ul>
           </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"
+              routerLinkActive="active"> Alquiler</a>
+            <ul class="dropdown-menu">
+              <li class="nav-item">
+                <a class="nav-link custom-nav-link" [routerLink]="['alquiler-form','0']"
+                  routerLinkActive="active">Nuevo alquiler</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link custom-nav-link" [routerLink]="['alquiler-lista']"
+                  routerLinkActive="active">Lista</a>
+              </li>
+            </ul>
+          </li>
         </ul>
         <button *ngIf="!isAuthenticated()" type="submit" class="btn btn-success" [routerLink]="['login']" routerLinkActive="active">Iniciar Sesión</button>
         <div *ngIf="isAuthenticated()">

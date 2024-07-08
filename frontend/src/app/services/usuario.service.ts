@@ -17,7 +17,7 @@ export class UsuarioService {
   getUsuarios(): Observable<any> {
     let httpOptions = {
       headers: new HttpHeaders({
-        'content-type': 'application/json'
+        
       }),
     }
     return this._http.get(this.urlHost, httpOptions);
@@ -26,7 +26,7 @@ export class UsuarioService {
   getUsuario(id: string): Observable<any> {
     let httpOptions = {
       headers: new HttpHeaders({
-        'content-type': 'application/json'
+        
       }),
     }
     return this._http.get(this.urlHost + id, httpOptions);
@@ -46,7 +46,7 @@ export class UsuarioService {
   updateUsuario(usuario: Usuario): Observable<any>{
     let httpOptions = {
       headers: new HttpHeaders({
-        'content-type': 'application/json'
+        'Content-Type': 'application/json'
       }),
     }
     let body: any = JSON.stringify(usuario)
@@ -56,7 +56,7 @@ export class UsuarioService {
   deleteUsuario(usuario: Usuario): Observable<any>{
     let httpOptions = {
       headers: new HttpHeaders({
-        'content-type': 'application/json'
+        
       }),
     }
     return this._http.delete(this.urlHost + usuario._id, httpOptions);
