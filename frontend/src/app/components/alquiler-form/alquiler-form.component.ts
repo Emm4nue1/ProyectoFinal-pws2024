@@ -7,6 +7,7 @@ import { UsuarioService } from '../../services/usuario.service';
 import { Local } from '../../models/local';
 import { Usuario } from '../../models/usuario';
 import { Alquiler } from '../../models/alquiler';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-alquiler-form',
@@ -16,61 +17,115 @@ import { Alquiler } from '../../models/alquiler';
   styleUrl: './alquiler-form.component.css'
 })
 export class AlquilerFormComponent {
-
   locales = Array<Local>();
   propietarios = Array<Usuario>();
   alquiler = new Alquiler();
   propietario = new Usuario();
   local = new Local();
 
+  accion: string = "new";
+
   constructor(
     private alquilerService: AlquilerService,
     private localService: LocalService,
-    private usuarioService: UsuarioService
-  ){
+    private usuarioService: UsuarioService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute) {
     this.cargarLocales();
     this.cargarPropietarios();
-    }
-    cargarLocales(): void {
-      this.localService.getLocales().subscribe(
-        (result: any) => {
-          this.locales = result;
-          console.log(this.locales);
-        },
-        (error: any) => {
-          console.log(error);
-        }
-      )
-    }
+    this.iniciarVariable();
+  }
 
-    iniciarVariable(): void {
-      this.alquiler = new Alquiler();
-      this.locales = new Array<Local>();
-    }
+  ngOnInit(): void {
+    this.activatedRoute.params.subscribe(params => {
+      if (params['id'] == "0") {
+        this.accion = "new";
+        this.iniciarVariable();
+      } else {
+        this.accion = "update";
+        this.cargarAlquilerActualizar(params['id']);
+      }
+    })
+  }
 
-    cargarPropietarios(): void {
-      this.usuarioService.getUsuarios().subscribe(
-        (result: any) => {
-          this.propietarios = result;
-          console.log(this.propietarios);
-        },
-        (error: any) => {
-          console.log(error);
-        }
-      )
-    }
+  cargarAlquilerActualizar(idAlquiler: string) {
+    this.alquilerService.getAlquiler(idAlquiler).subscribe(
+      (result) => {
+        console.log(result);
+        Object.assign(this.alquiler, result);
+        console.log(this.alquiler);
+        this.alquiler.fechaAlquiler = this.parsearFecha(new Date(result.fechaAlquiler))
+      },
+      (error) => {
+        console.log(error);
+      }
+    )
+  }
 
-    crearAlquiler(){
-      console.log("entro en crear alquiler",this.alquiler);
-      this.alquilerService.addAlquiler(this.alquiler).subscribe(
-        (result)=>{
-          console.log(result);
-          
-        },
-        (error)=>{
-          console.log(error);
-        }
-      )
-    }
+  parsearFecha(fecha: Date): string {
+    var anio = fecha.getUTCFullYear();
+    var mes = String(fecha.getUTCMonth() + 1).padStart(2, '0');
+    var dia = String(fecha.getUTCDate()).padStart(2, '0');
+    return `${anio}-${mes}-${dia}`;
+  }
 
+  cargarLocales(): void {
+    this.localService.getLocales().subscribe(
+      (result: any) => {
+        this.locales = result;
+        console.log(this.locales);
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    )
+  }
+
+  iniciarVariable(): void {
+    this.alquiler = new Alquiler();
+    this.locales = new Array<Local>();
+  }
+
+  cargarPropietarios(): void {
+    this.usuarioService.getUsuarios().subscribe(
+      (result: any) => {
+        this.propietarios = result;
+        console.log(this.propietarios);
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    )
+  }
+
+  crearAlquiler() {
+    console.log("entro en crear alquiler", this.alquiler);
+    this.alquilerService.addAlquiler(this.alquiler).subscribe(
+      (result) => {
+        console.log(result);
+        alert("Alquiler creado");
+        this.irALista();
+      },
+      (error) => {
+        console.log(error);
+      }
+    )
+  }
+
+  actualizarAlquiler() {
+    this.alquilerService.updateAlquiler(this.alquiler).subscribe(
+      (result) => {
+        console.log(result);
+        alert("Alquiler modificado");
+        this.irALista();
+      },
+      (error) => {
+        console.log(error);
+      }
+    )
+  }
+
+  irALista() {
+    this.router.navigate(['alquiler-lista']);
+  }
 }

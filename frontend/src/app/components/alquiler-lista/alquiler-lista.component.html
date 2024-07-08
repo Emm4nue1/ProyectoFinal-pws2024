@@ -1,0 +1,38 @@
+<div class="row justify-content-center ">
+    <div class="col-12 col-sm-12 col-md-11 contenedor">
+        <h1>Listado de Alquileres</h1>
+        <div class="col-md-4">
+            <button type="button" class="btn btn-primary my-3"(click)="agregarAlquiler()"> AGREGAR </button>
+        </div>
+        <table class="table table-hover table table-striped table-dark">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">N° de Local</th>
+                    <th scope="col">Usuario</th>
+                    <th scope="col">Costo Alquiler</th>
+                    <th scope="col">Fecha Alquiler</th>
+                    <th scope="col">Plazo mes</th>
+                    <th scope="col">Accion</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let a of alquileres">
+
+                    <th>#</th>
+                    <td>{{a.local.numeroLocal}}</td>
+                    <td>{{a.usuario.apellido}}, {{a.usuario.nombre}}</td>
+                    <td>{{a.costoalquiler}}</td>
+                    <td>{{a.fechaAlquiler | date: "dd-MM-yyyy": "GMT"}}</td>
+                    <td>{{a.plazomes}}</td>
+                    <td>
+                        <div class="btn-lista-alquiler">
+                            <button type="button" class="btn btn-danger m-md-2" (click)="eliminarAlquiler(a._id)">Eliminar</button>
+                            <button type="button" class="btn btn-warning m-md-2"(click)="modificarAlquiler(a._id)">Modificar</button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

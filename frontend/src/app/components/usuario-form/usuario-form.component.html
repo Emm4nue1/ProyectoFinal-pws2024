@@ -37,6 +37,7 @@
         <div class="input-group">
             <span class="input-group-text">Rol</span>
             <select class="form-select" id="idrol" name="rol" [(ngModel)]="usuario.rol">
+                <option *ngIf="accion == 'update'" [ngValue]="usuario.rol">{{usuario.rol.nombre}}</option>
                 <option *ngFor="let r of roles" [ngValue]="r">{{r.nombre}}</option>
             </select>
         </div>
