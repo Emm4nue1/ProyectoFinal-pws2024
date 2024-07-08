@@ -12,10 +12,13 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">N° de Local</th>
-                    <th scope="col">Descripción</th>
-                    <th scope="col">Fecha de Inicio</th>
-                    <th scope="col">Fecha de Fin</th>
-                    <th scope="col">Acción</th>
+                    <th scope="col">Superficie</th>
+                    <th scope="col">Alquilado</th>
+                    <th scope="col">Costo del Mes</th>
+                    <th scope="col">Habilitado</th>
+                    <th scope="col">Imagen</th>
+                    <th scope="col"></th>
+                    
                 </tr>
             </thead>
             <tbody>
@@ -24,11 +27,14 @@
                     <th>#</th>
                     <td>{{locales.numeroLocal}}</td>
                     <td>{{locales.superficie}}</td>
+                    <td>{{locales.alquilado}}</td>
                     <td>{{locales.costoMes}}</td>
+                    <td>{{locales.habilitado}}</td>
                     <td>{{locales.imagen}}</td>
                     <td>
                         <div class="btn-lista-promocion">
-                            <button type="button" class="btn btn-warning m-md-2"(click)="modificarLocal(locales._id)">Actualizar</button>
+                            <button type="button" class="btn btn-success m-md-2"(click)="modificarLocal(locales._id)">Actualizar</button>
+                            <button type="button" class="btn btn-warning m-md-2"(click)="eliminarLocal(locales._id)">Elminar</button>
                             
                         </div> 
                     </td>

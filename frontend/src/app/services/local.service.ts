@@ -52,7 +52,7 @@ export class LocalService {
     }
 
     //servicio Modificar Local
-    putTicket(local:Local): Observable<any> {
+    putLocal(local:Local): Observable<any> {
       const httpOption = {
         headers: new HttpHeaders({
           "Content-type": "application/json"
@@ -68,7 +68,7 @@ export class LocalService {
     }
 
     //servicio Eliminar Local
-    deleteTicket(_id: string): Observable<any> {
+    deleteLocal(_id: string): Observable<any> {
       const httpOption = {
         headers: new HttpHeaders({
   

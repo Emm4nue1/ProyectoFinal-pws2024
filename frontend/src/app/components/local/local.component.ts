@@ -22,13 +22,15 @@ export class LocalComponent {
 
   }
 
-
+//Muestra lista de Locales
   verLocales():void{
-
     this.localService.getLocales().subscribe(
       result => {
         console.log(result);
         this.locales=result;
+      },
+      (error) => {
+        console.log(error);
       })
   }
 
@@ -42,5 +44,20 @@ export class LocalComponent {
   }
   //Creacion de Local
 
+  //Elimina Local de la Lista
+  eliminarLocal(_id:string){
+    this.localService.deleteLocal(_id).subscribe(
+      (result:any)=>{
+        this.verLocales();
+
+      }, (error:any) =>{
+        console.log(error);
+      }
+    )
+  }
+
+
+
+  
 
 }
