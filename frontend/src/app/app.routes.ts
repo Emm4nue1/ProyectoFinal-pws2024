@@ -9,6 +9,8 @@ import { AlquilerFormComponent } from './components/alquiler-form/alquiler-form.
 import { NovedadFormComponent } from './components/novedad-form/novedad-form.component';
 import { NovedadListaComponent } from './components/novedad-lista/novedad-lista.component';
 import { AlquilerListaComponent } from './components/alquiler-lista/alquiler-lista.component';
+import { LocalComponent } from './components/local/local.component';
+import { LocalFormsComponent } from './components/local-forms/local-forms.component';
 
 export const routes: Routes = [
 
@@ -25,6 +27,11 @@ export const routes: Routes = [
     {path: 'novedad-form', component: NovedadFormComponent},
     {path: 'novedad-form/:id', component: NovedadFormComponent},
     {path: 'novedad-lista', component: NovedadListaComponent},
+    {path: 'local-lista', component: LocalComponent},
+    {path: 'local-forms', component: LocalFormsComponent},
+    {path: 'local-forms/:id', component: LocalFormsComponent},
+    
+
 
     { path: 'home', component: HomeComponent },
     { path: '**', pathMatch: 'full', redirectTo: 'home' },
