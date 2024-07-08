@@ -21,6 +21,7 @@ export class LocalFormsComponent {
 
   }
 
+
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
       if (params['id'] == "0") {
@@ -28,9 +29,20 @@ export class LocalFormsComponent {
         this.iniciarLocales();
       } else {
         this.accion = "update";
+        this.cargarLocal( params['id'] );
         
       }
     })
+  }
+
+  cargarLocal(id: string): void {
+    this.localService.getLocal(id).subscribe(
+      (result) => {
+        this.local = result;
+      },
+      error => {
+        alert("Error: " + error);
+      }); 
   }
 
 
@@ -53,12 +65,12 @@ export class LocalFormsComponent {
 
   //Modificar Local
   modificarLocal() {
+    
     this.localService.putLocal(this.local).subscribe(
       (result)=>{
-        console.log(result);
-       // alert("Local Actualizado");
+        //console.log(result);
+        alert("Local Actualizado");
         this.router.navigate(['local-lista'])
-
 
       },
       error => {
