@@ -17,7 +17,7 @@ export class AlquilerService {
    getAlquileres(): Observable<any> {
     let httpOptions = {
       headers: new HttpHeaders({
-        'content-type': 'application/json'
+        
       }),
     }
     return this._http.get(this.urlHost, httpOptions);
@@ -26,7 +26,7 @@ export class AlquilerService {
   getAlquiler(id: string): Observable<any> {
     let httpOptions = {
       headers: new HttpHeaders({
-        'content-type': 'application/json'
+        
       }),
     }
     return this._http.get(this.urlHost + id, httpOptions);
@@ -46,19 +46,19 @@ export class AlquilerService {
   updateAlquiler(alquiler: Alquiler): Observable<any>{
     let httpOptions = {
       headers: new HttpHeaders({
-        'content-type': 'application/json'
+        'Content-Type': 'application/json'
       }),
     }
     let body: any = JSON.stringify(alquiler)
     return this._http.put(this.urlHost + alquiler._id, body, httpOptions);
   }
 
-  deleteAlquiler(alquiler: Alquiler): Observable<any>{
+  deleteAlquiler(idAlquiler: string): Observable<any>{
     let httpOptions = {
       headers: new HttpHeaders({
-        'content-type': 'application/json'
+        
       }),
     }
-    return this._http.delete(this.urlHost + alquiler._id, httpOptions);
+    return this._http.delete(this.urlHost + idAlquiler, httpOptions);
   }
 }

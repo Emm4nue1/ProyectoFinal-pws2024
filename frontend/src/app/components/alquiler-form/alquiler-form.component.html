@@ -9,13 +9,15 @@
                 <div class="mb-3">
                     <label for="propietario" class="form-label">Propietario</label>
                     <select class="form-select" id="propietario" name="propietario" [(ngModel)]="alquiler.usuario">
+                        <option *ngIf="accion == 'update'" [ngValue]="alquiler.usuario">{{alquiler.usuario.apellido}},
+                            {{alquiler.usuario.nombre}}</option>
                         <option *ngFor="let p of propietarios" [ngValue]="p">{{p.apellido}},{{p.nombre}}</option>
                     </select>
                 </div>
                 <div class="mb-3">
                     <label for="nrolocal" class="form-label">Número de local</label>
                     <select class="form-select" id="nrolocal" name="nrolocal" [(ngModel)]="alquiler.local">
-
+                        <option *ngIf="accion == 'update'" [ngValue]="alquiler.local">{{alquiler.local.numeroLocal}}</option>
                         <option *ngFor="let l of locales" [ngValue]="l">{{l.numeroLocal}}</option>
 
                     </select>
@@ -38,10 +40,10 @@
                 </div>
                
                 <div class="boton-formulario">
-                    <button  class="btn btn-success m-md-2" (click)="crearAlquiler()">Registrar</button>
-                    <!-- <button *ngIf="accion == 'update'"type="submit" class="btn btn-warning m-md-2" (click)="modificarPromocion()">Actualizar</button> -->
+                    <button *ngIf="accion == 'new'" type="submit" class="btn btn-success m-md-2" (click)="crearAlquiler()">Registrar</button>
+                    <button *ngIf="accion == 'update'"type="submit" class="btn btn-warning m-md-2" (click)="actualizarAlquiler()">Actualizar</button>
 
-                    <!-- <button type="button" class="btn btn-primary m-md-2"(click)="irALista()">Ir a lista Promociones</button> -->
+                    <button type="button" class="btn btn-primary m-md-2"(click)="irALista()">Ir a lista Alquileres</button>
                 </div>
 
             </div>

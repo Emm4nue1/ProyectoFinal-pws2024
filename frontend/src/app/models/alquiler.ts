@@ -8,14 +8,14 @@ export class Alquiler {
     local: Local;
     plazomes: number;
     costoalquiler: number;
-    fechaAlquiler: Date;
+    fechaAlquiler: string;
     
     constructor() {
         this.usuario = new Usuario();
         this.local = new Local();
         this.plazomes = 0;
         this.costoalquiler = 0;
-        this.fechaAlquiler = new Date();
+        this.fechaAlquiler = "";
     }
 
 }

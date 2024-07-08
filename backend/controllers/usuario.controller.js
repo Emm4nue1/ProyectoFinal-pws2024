@@ -31,7 +31,7 @@ usuarioCtrl.createUsuario = async (req, res) => {
 
 usuarioCtrl.getUsuario = async (req, res) => {
     try {
-        const usuario = await Usuario.findById(req.params.id);
+        const usuario = await Usuario.findById(req.params.id).populate("rol");
         if (!usuario) {
             return res.status(404).json({
                 'status': '0',
