@@ -1,0 +1,41 @@
+
+
+
+<div class="row justify-content-center ">
+    <div class="col-12 col-sm-12 col-md-11 contenedor">
+        <h1>Listado de promociones</h1>
+        <div class="col-md-4">
+            <button type="button" class="btn btn-primary my-3" (click)="agregarLocal()"> AGREGAR </button>
+        </div>
+        <table class="table table-hover table table-striped table-dark">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">N° de Local</th>
+                    <th scope="col">Descripción</th>
+                    <th scope="col">Fecha de Inicio</th>
+                    <th scope="col">Fecha de Fin</th>
+                    <th scope="col">Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let locales of locales">
+
+                    <th>#</th>
+                    <td>{{locales.numeroLocal}}</td>
+                    <td>{{locales.superficie}}</td>
+                    <td>{{locales.costoMes}}</td>
+                    <td>{{locales.imagen}}</td>
+                    <td>
+                        <div class="btn-lista-promocion">
+                            <button type="button" class="btn btn-warning m-md-2"(click)="modificarLocal(locales._id)">Actualizar</button>
+                            
+                        </div> 
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
