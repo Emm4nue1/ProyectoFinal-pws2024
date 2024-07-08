@@ -20,14 +20,14 @@ usuarioCtrl.getUsuarios = async (req, res) => {
 usuarioCtrl.createUsuario = async (req, res) => {
     const usuario = new Usuario(req.body);
     try {
-        var existeUsuario = Usuario.findOne(usuario.email);
-        if (!existeUsuario){
+        const existeUsuario = await Usuario.findOne({ email: usuario.email });
+        if (!existeUsuario) {
             await usuario.save();
             res.status(201).json({
                 'status': '1',
                 'message': 'Usuario guardado.'
             });
-        }else{
+        } else {
             res.status(200).json({
                 'status': '0',
                 'message': 'Usuario ya existente.'
@@ -40,6 +40,7 @@ usuarioCtrl.createUsuario = async (req, res) => {
         });
     }
 };
+
 
 usuarioCtrl.getUsuario = async (req, res) => {
     try {
