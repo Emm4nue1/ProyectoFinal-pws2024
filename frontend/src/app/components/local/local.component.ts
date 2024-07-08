@@ -40,6 +40,7 @@ export class LocalComponent {
   agregarLocal() {
     this.router.navigate(['local-forms', "0"]);
   }
+  
 
 
 }
