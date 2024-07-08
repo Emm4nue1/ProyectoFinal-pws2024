@@ -67,6 +67,7 @@ export class LocalService {
       return this.http.put(this.urlBase + "local/" + local._id, body, httpOption);
     }
 
+
     //servicio Eliminar Local
     deleteLocal(_id: string): Observable<any> {
       const httpOption = {

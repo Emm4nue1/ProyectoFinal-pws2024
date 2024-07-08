@@ -26,7 +26,7 @@ export class LocalComponent {
   verLocales():void{
     this.localService.getLocales().subscribe(
       result => {
-        console.log(result);
+        //console.log(result);
         this.locales=result;
       },
       (error) => {
@@ -36,13 +36,14 @@ export class LocalComponent {
 
 
   modificarLocal(_id:string){
+    console.log(this.locales);
     this.router.navigate(['local-forms', _id]);
   }
 
   agregarLocal() {
     this.router.navigate(['local-forms', "0"]);
   }
-  //Creacion de Local
+  
 
   //Elimina Local de la Lista
   eliminarLocal(_id:string){
