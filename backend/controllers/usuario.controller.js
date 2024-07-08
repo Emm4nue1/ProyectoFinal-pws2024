@@ -1,9 +1,12 @@
 const Usuario = require('../models/usuario');
 const bcrypt = require('bcrypt');
 const usuarioCtrl = {};
+const jwt = require('jsonwebtoken');
+const usuario = require('../models/usuario');
 
 usuarioCtrl.getUsuarios = async (req, res) => {
     try {
+        console.log(req);
         const usuarios = await Usuario.find().populate("rol");
         res.json(usuarios);
     } catch (error) {
@@ -17,11 +20,19 @@ usuarioCtrl.getUsuarios = async (req, res) => {
 usuarioCtrl.createUsuario = async (req, res) => {
     const usuario = new Usuario(req.body);
     try {
-        await usuario.save();
-        res.status(201).json({
-            'status': '1',
-            'message': 'Usuario guardado.'
-        });
+        var existeUsuario = Usuario.findOne(usuario.email);
+        if (!existeUsuario){
+            await usuario.save();
+            res.status(201).json({
+                'status': '1',
+                'message': 'Usuario guardado.'
+            });
+        }else{
+            res.status(200).json({
+                'status': '0',
+                'message': 'Usuario ya existente.'
+            });
+        }
     } catch (error) {
         res.status(400).json({
             'status': '0',
@@ -91,9 +102,11 @@ usuarioCtrl.deleteUsuario = async (req, res) => {
 };
 
 usuarioCtrl.loginUsuario = async (req, res) => {
-    const { email, password } = req.body;
+    const { email , password } = req.body;
+    
     try {
-      const usuario = await Usuario.findOne({ email });
+      const usuario = await Usuario.findOne({ email }).populate('rol');
+      console.log(usuario);
       if (!usuario) {
         return res.status(404).json({
           status: '0',
@@ -112,14 +125,27 @@ usuarioCtrl.loginUsuario = async (req, res) => {
       res.json({
         status: '1',
         message: 'Inicio de sesión exitoso',
-        user : usuario
+        token: createToken(usuario)
       });
     } catch (error) {
+        console.log(error);
       res.status(500).json({
         status: '0',
         message: 'Error al iniciar sesión'
       });
     }
   };
+
+
+function createToken(usuario){
+    const payload = {
+        usuario_id: usuario._id,
+        username: usuario.nombre + " " + usuario.apellido,
+        usuario_rol: usuario.rol.nombre,
+        usuario_email: usuario.email
+    }
+
+    return jwt.sign(payload, "secreto");
+}
 
 module.exports = usuarioCtrl;

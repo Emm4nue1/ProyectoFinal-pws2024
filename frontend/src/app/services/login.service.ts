@@ -15,6 +15,6 @@ export class LoginService {
       'Content-Type': 'application/json'
     });
     const body = { email: email, password: password };
-    return this.http.post(this.url,body,{ headers: headers });
+    return this.http.post(this.url, body, { headers: headers });
   }
 }

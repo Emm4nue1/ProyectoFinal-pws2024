@@ -1,3 +1,4 @@
+const { verifyToken } = require('../controllers/auth.controller');
 const usuarioCtrl = require ('./../controllers/usuario.controller');
 const express = require('express');
 const router = express.Router();

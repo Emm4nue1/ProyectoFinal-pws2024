@@ -17,7 +17,7 @@ novedadCtrl.createNovedad = async (req, res) => {
 // Obtener todas las novedades
 novedadCtrl.getNovedades = async (req, res) => {
   try {
-    const novedades = await Novedad.find().populate(['local', 'usuario']);
+    const novedades = await Novedad.find({ usuario: req.usuario_id }).populate(['local', 'usuario']);
     res.json(novedades);
   } catch (error) {
     console.error('Error:', error);
