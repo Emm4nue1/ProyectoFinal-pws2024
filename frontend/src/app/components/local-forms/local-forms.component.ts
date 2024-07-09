@@ -59,8 +59,14 @@ export class LocalFormsComponent {
     this.local.usuario = this.authService.getUserId()!;
     this.localService.postLocal(this.local).subscribe(
       (result) => {
-        console.log(result)
-       this.router.navigate(['local-lista']);
+        if(result.status == 0){
+          alert("Local ya existe.");
+          return;
+        }else{
+          console.log(result)
+          alert("Local Creado");
+          this.router.navigate(['local-lista']);
+        }
       },
       error => {
         alert("Error: " + error);
