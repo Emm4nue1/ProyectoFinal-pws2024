@@ -7,6 +7,7 @@ export class Local {
     costoMes!: number;
     imagen!:string;
     alquilado!:boolean;
+    usuario!: string;
     // constructor(){
     //     this.imagen = "/assets/images/productos/producto_nuevo.png"
     // }
@@ -17,7 +18,7 @@ export class Local {
         this.costoMes = 0;
         this.imagen = "";
         this.alquilado = false;
-        
+        this.usuario = "";
     }
     
     

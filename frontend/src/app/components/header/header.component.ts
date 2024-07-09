@@ -4,6 +4,7 @@ import { UsuarioFormComponent } from '../usuario-form/usuario-form.component';
 import { UsuarioListaComponent } from '../usuario-lista/usuario-lista.component';
 import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common';
+import { MercadopagoService } from '../../services/mercadopago.service';
 
 @Component({
   selector: 'app-header',
@@ -13,7 +14,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router, private mercadopagoService: MercadopagoService) {}
 
   isAuthenticated(){
     return this.authService.isLoggedIn();
@@ -30,5 +31,10 @@ export class HeaderComponent {
 
   hasRole(role: String){
     return this.authService.getRole() == role;
+  }
+
+
+  pagar(){
+    //this.mercadopagoService.createPreference().suscribe
   }
 }

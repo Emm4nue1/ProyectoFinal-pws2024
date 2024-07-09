@@ -4,6 +4,7 @@ import { LocalService } from '../../services/local.service';
 import { Local } from '../../models/local';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-local-forms',
@@ -17,9 +18,11 @@ export class LocalFormsComponent {
   local = new Local();
   accion: string = "new";
   
-  constructor( private router:Router, private localService:LocalService,private activatedRoute: ActivatedRoute){
-
-  }
+  constructor( private router:Router, 
+    private localService:LocalService,
+    private activatedRoute: ActivatedRoute,
+    private authService: AuthService
+  ){}
 
 
   ngOnInit(): void {
@@ -53,6 +56,7 @@ export class LocalFormsComponent {
 
   //Crear Locales
   crearLocal(): void {
+    this.local.usuario = this.authService.getUserId()!;
     this.localService.postLocal(this.local).subscribe(
       (result) => {
         console.log(result)

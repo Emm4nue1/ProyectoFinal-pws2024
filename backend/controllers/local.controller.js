@@ -1,8 +1,9 @@
 const Local = require('../models/local');
 const localCtrl = {}
+
 //Obtener todos los locales.Probado.
 localCtrl.getLocales = async (req, res) => {
-    var locales = await Local.find();
+    var locales = await Local.find({ usuario: req.usuario_id });
     res.json(locales);
 }
 
@@ -14,6 +15,7 @@ localCtrl.getLocalById = async (req, res) => {
 
 //Crear local. Probado.
 localCtrl.createLocal = async (req, res) => {
+    console.log(req);
     var local = new Local(req.body)
     try {
         await local.save();

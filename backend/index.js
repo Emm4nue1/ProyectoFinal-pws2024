@@ -14,6 +14,7 @@ app.use('/api/alquiler/cuota/', require('./routes/cuota.route.js'));
 app.use('/api/alquiler/pago/', require('./routes/pago.route.js'));
 app.use('/api/alquiler', require('./routes/alquiler.route.js'));
 app.use('/api/rol', require('./routes/rol.route.js'));
+app.use('/api/mercadopago', require('./routes/mercadopago.route.js'));
 //setting
 app.set('port', process.env.PORT || 3000);
 //starting the server
