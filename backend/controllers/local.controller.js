@@ -11,16 +11,13 @@ const Usuario = require('../models/usuario');
 localCtrl.getLocales = async (req, res) => {
     try {
 
-        //CRISTIAN
-        //let filter = { usuario: req.usuario_id };
-        let filter = { };
+        let filter = { usuario: req.usuario_id };
+        //let filter = { };
 
-        // Filtro para habilitado
         if (req.query.habilitado != null ) {
             filter.habilitado = req.query.habilitado === 'true';
         }
 
-        // Filtro para alquilado
         if (req.query.alquilado != null) {
             filter.alquilado = req.query.alquilado === 'true';
         }

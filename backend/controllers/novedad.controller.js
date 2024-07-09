@@ -17,7 +17,7 @@ novedadCtrl.createNovedad = async (req, res) => {
 };
 
 // Obtener todas las novedades
-//CRISTIAN
+
 // novedadCtrl.getNovedades = async (req, res) => {
 //   try {
 //     const novedades = await Novedad.find({ usuario: req.usuario_id }).populate(['local', 'usuario']);
@@ -31,7 +31,10 @@ novedadCtrl.createNovedad = async (req, res) => {
 novedadCtrl.getNovedades = async (req, res) => {
   try {
     
-    filter = {};
+    //let filter = {};
+
+    let filter = { usuario: req.usuario_id };
+
     if (req.query.estado != null && req.query.estado != '') {
       filter.estado = req.query.estado;
     }
