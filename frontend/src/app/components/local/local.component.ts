@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Local } from '../../models/local';
 import { Router } from '@angular/router';
 import { LocalService } from '../../services/local.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SiNoPipe } from '../../pipes/si-no.pipe';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -15,7 +16,7 @@ import { SiNoPipe } from '../../pipes/si-no.pipe';
   styleUrl: './local.component.css'
 })
 export class LocalComponent {
-
+  toastSrvc = inject(ToastrService);
 
   locales: Array<Local> = [];
 
@@ -77,7 +78,7 @@ export class LocalComponent {
   eliminarLocal(_id: string) {
     this.localService.deleteLocal(_id).subscribe(
       (result: any) => {
-        alert("Local eliminado");
+        this.toastSrvc.success("Local eliminado con éxito.", "Operación exitosa");
         this.verLocales();
 
       }, (error: any) => {
