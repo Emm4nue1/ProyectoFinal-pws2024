@@ -2,6 +2,23 @@
 
     <div class="container">
 
+        <div class="input-group mt-5">
+            <span class="input-group-text">Busqueda por Rol</span>
+            <select class="form-select" id="idrol" name="rol" placeholder="Seleccione un Rol" [(ngModel)]= "rolAux" >
+                <option value="" disabled selected>Seleccione un Rol</option>
+                <option [ngValue]="">Todos</option>
+                <option *ngFor="let r of roles" [ngValue]="r.nombre">{{r.nombre}}</option>
+            </select>
+
+            <span class="input-group-text">Busqueda por Apellido</span>
+            <input name="apellido" type="text" class="form-control" id="idapellido" [(ngModel)] = "apellidoAux" >
+            
+            <span class="input-group-text">Busqueda por DNI</span>
+            <input name="dni" type="text" class="form-control" id="iddni" [(ngModel)] = "dniAux">
+
+            <button type="button" class="btn btn-outline-success" (click)="buscarYLimpiar()">Buscar</button>
+        </div>
+
         <div class="row mt-3">
             <h3 class="col-12 text-center text-primary text-decoration-underline">LISTADO DE USUARIOS</h3>
         </div>
