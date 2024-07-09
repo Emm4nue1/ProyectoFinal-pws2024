@@ -14,7 +14,8 @@ import { MercadopagoService } from '../../services/mercadopago.service';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
-  constructor(private authService: AuthService, private router: Router, private mercadopagoService: MercadopagoService) {}
+  constructor(private authService: AuthService, private router: Router, private mercadopagoService: MercadopagoService) {
+  }
 
   isAuthenticated(){
     return this.authService.isLoggedIn();
@@ -33,8 +34,18 @@ export class HeaderComponent {
     return this.authService.getRole() == role;
   }
 
+  comprar(){
+    this.mercadopagoService.createPreference().subscribe({
+      next: (result) => {
+        this.createCheckoutButton(result.id);
+      },
+      error: (error) => {
+        alert(error);
+      }
+    });
+  }
 
-  pagar(){
-    //this.mercadopagoService.createPreference().suscribe
+  createCheckoutButton(preferenceId: any){
+    this.mercadopagoService.createCheckout(preferenceId);
   }
 }
