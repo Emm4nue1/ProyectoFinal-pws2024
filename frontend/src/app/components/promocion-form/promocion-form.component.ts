@@ -7,7 +7,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { LocalService } from '../../services/local.service';
 import { Local } from '../../models/local';
 
-
 @Component({
   selector: 'app-promocion-form',
   standalone: true,
@@ -20,8 +19,6 @@ export class PromocionFormComponent {
   promocion = new Promocion();
   accion: string = "new";
   locales = Array<Local>();
- 
-
 
   constructor(
     private promocionService: PromocionService,
@@ -52,6 +49,7 @@ export class PromocionFormComponent {
   crearPromocion(){
     this.promocion.fechaInicio.toString();
     this.promocion.fechaFin.toString();
+
     this.promocionService.postPromocion(this.promocion).subscribe(
       (result)=>{
         console.log(result);

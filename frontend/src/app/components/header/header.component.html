@@ -87,14 +87,15 @@
               </li>
             </ul>
           </li>
-
-
         </ul>
+        
         <button *ngIf="!isAuthenticated()" type="submit" class="btn btn-success" [routerLink]="['login']" routerLinkActive="active">Iniciar Sesión</button>
         <div *ngIf="isAuthenticated()">
           <label class="me-md-3">{{getUserName()}}</label>
           <button type="submit" class="btn btn-success" (click)="cerrarSesion()">Cerrar Sesión</button>
         </div>
+
+        <button (click)="pagar()">Pagar Mercadopago</button>
       </div>
     </div>
   </nav>

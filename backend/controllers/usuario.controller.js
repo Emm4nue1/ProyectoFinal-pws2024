@@ -2,7 +2,6 @@ const Usuario = require('../models/usuario');
 const bcrypt = require('bcrypt');
 const usuarioCtrl = {};
 const jwt = require('jsonwebtoken');
-const usuario = require('../models/usuario');
 
 usuarioCtrl.getUsuarios = async (req, res) => {
     try {
@@ -22,6 +21,8 @@ usuarioCtrl.createUsuario = async (req, res) => {
     try {
         const existeUsuario = await Usuario.findOne({ email: usuario.email });
         if (!existeUsuario) {
+            const cifrado = await bcrypt.genSalt(5);
+            usuario.password = await bcrypt.hash(usuario.password, cifrado);
             await usuario.save();
             res.status(201).json({
                 'status': '1',
@@ -34,6 +35,7 @@ usuarioCtrl.createUsuario = async (req, res) => {
             });
         }
     } catch (error) {
+        console.log(error);
         res.status(400).json({
             'status': '0',
             'message': 'Error al guardar el usuario.'

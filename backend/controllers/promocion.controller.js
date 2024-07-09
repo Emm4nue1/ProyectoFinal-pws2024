@@ -17,8 +17,9 @@ promocionCtrl.createPromocion = async (req, res) => {
 // Obtener todas las promociones
 promocionCtrl.getPromociones = async (req, res) => {
   try {
-    const promociones = await Promocion.find({ usuario: req.usuario_id }).populate("local");
-    res.json(promociones);
+    const promociones = await Promocion.find().populate('local');
+    const filteredPromociones = promociones.filter(promocion => promocion.local.usuario == req.usuario_id);
+    res.json(filteredPromociones);
   } catch (error) {
     console.error('Error:', error);
     res.status(500).json({ status: '0', msg: 'Error procesando operación.', error: error.message });
