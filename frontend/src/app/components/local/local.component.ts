@@ -17,10 +17,20 @@ export class LocalComponent {
 
   locales: Array<Local> = [];
 
+  // habilitadoAux!:boolean;
+  // alquiladoAux!:boolean;
+
+  habilitadoAux: boolean | undefined = undefined;
+  alquiladoAux: boolean | undefined = undefined;
+
+
+
   constructor( private router:Router , private localService:LocalService ) {
     this.verLocales();
+    //this.verLocalesFiltros(false,false);
 
   }
+  
 
 //Muestra lista de Locales
   verLocales():void{
@@ -33,6 +43,20 @@ export class LocalComponent {
         console.log(error);
       })
   }
+
+  
+  verLocalesFiltros(): void {
+    console.log(this.habilitadoAux, this.alquiladoAux);
+    this.localService.getLocalesFiltros(this.habilitadoAux, this.alquiladoAux).subscribe(
+      result => {
+        //console.log(result);
+        this.locales = result;
+      },
+      (error) => {
+        console.log(error);
+      })
+  }
+
 
 
   modificarLocal(_id:string){

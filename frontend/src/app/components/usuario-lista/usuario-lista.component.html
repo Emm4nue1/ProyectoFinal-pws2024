@@ -1,22 +1,35 @@
 <body>
+    <div class="container mt-5">
 
-    <div class="container">
-
-        <div class="input-group mt-5">
-            <span class="input-group-text">Busqueda por Rol</span>
-            <select class="form-select" id="idrol" name="rol" placeholder="Seleccione un Rol" [(ngModel)]= "rolAux" >
-                <option value="" disabled selected>Seleccione un Rol</option>
-                <option [ngValue]="">Todos</option>
-                <option *ngFor="let r of roles" [ngValue]="r.nombre">{{r.nombre}}</option>
-            </select>
-
-            <span class="input-group-text">Busqueda por Apellido</span>
-            <input name="apellido" type="text" class="form-control" id="idapellido" [(ngModel)] = "apellidoAux" >
-            
-            <span class="input-group-text">Busqueda por DNI</span>
-            <input name="dni" type="text" class="form-control" id="iddni" [(ngModel)] = "dniAux">
-
-            <button type="button" class="btn btn-outline-success" (click)="buscarYLimpiar()">Buscar</button>
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-12 mb-3">
+                <div class="input-group">
+                    <span class="input-group-text">Búsqueda por Rol</span>
+                    <select class="form-select" id="idrol" name="rol" [(ngModel)]="rolAux">
+                        <!-- <option [ngValue]="" disabled selected>Seleccione Rol</option> -->
+                        <option [ngValue]="">Todos</option>
+                        <option *ngFor="let r of roles" [ngValue]="r.nombre">{{r.nombre}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12 mb-3">
+                <div class="input-group">
+                    <span class="input-group-text">Búsqueda por Apellido</span>
+                    <input name="apellido" type="text" class="form-control" id="idapellido" [(ngModel)]="apellidoAux">
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12 mb-3">
+                <div class="input-group">
+                    <span class="input-group-text">Búsqueda por DNI</span>
+                    <input name="dni" type="text" class="form-control" id="iddni" [(ngModel)]="dniAux">
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-6 col-sm-12 mb-3">
+                <button type="button" class="btn btn-outline-dark" (click)="getUsuarios(apellidoAux,rolAux,dniAux)">Buscar</button>
+            </div>
+            <div class="col-lg-2 col-md-6 col-sm-12 mb-3">
+                <button type="button" class="btn btn-outline-success" (click)="buscarYLimpiar()">Mostrar Todos</button>
+            </div>
         </div>
 
         <div class="row mt-3">

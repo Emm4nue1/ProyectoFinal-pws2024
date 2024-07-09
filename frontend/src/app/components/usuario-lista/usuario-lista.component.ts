@@ -34,7 +34,7 @@ export class UsuarioListaComponent {
   }
 
   buscarYLimpiar(): void {
-    this.getUsuarios(this.apellidoAux, this.rolAux, this.dniAux);
+    this.getUsuarios("", "",0);
     this.limpiarCampos();
   }
   getUsuarios(apellidoAux: string, rolAux: string, dniAux: number): void {

@@ -1,8 +1,41 @@
+<div class="my-5 mx-5">
+    <div class="row">
+        <div class="col-lg-3 col-md-6 col-sm-12">
+            <div class="input-group">
+                <span class="input-group-text">Habilitado:</span>
+                <select class="form-select" id="habilitado" name="habilitado" [(ngModel)]="habilitadoAux">
+                    <option [ngValue]= "undefined">Cualquiera</option>
+                    <option [ngValue]= "true">Sí</option>
+                    <option [ngValue]= "false">No</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-12">
+            <div class="input-group">
+                <span class="input-group-text">Alquilado:</span>
+                <select class="form-select" id="alquilado" name="alquilado" [(ngModel)]="alquiladoAux">
+                    <option [ngValue]= "undefined">Cualquiera</option>
+                    <option [ngValue]= "true">Sí</option>
+                    <option [ngValue]= "false">No</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-12">
+            <button type="button" class="btn btn-outline-dark" (click)="verLocalesFiltros()">Filtrar</button>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-lg-3 col-md-6 col-sm-12">
+            <button type="button" class="btn btn-outline-success" (click)="verLocales()">Mostrar Todos</button>
+        </div>
 
+    </div>
+</div>
 
 
 <div class="row justify-content-center ">
     <div class="col-12 col-sm-12 col-md-11 contenedor">
+
         <h1>Listado de locales</h1>
         <div class="col-md-4">
             <button type="button" class="btn btn-primary my-3" (click)="agregarLocal()"> AGREGAR </button>
@@ -18,7 +51,7 @@
                     <th scope="col">Habilitado</th>
                     <th scope="col">Imagen</th>
                     <th scope="col"></th>
-                    
+
                 </tr>
             </thead>
             <tbody>
@@ -33,19 +66,17 @@
                     <td>{{locales.imagen}}</td>
                     <td>
                         <div class="btn-lista-promocion">
-                            <button type="button" class="btn btn-warning m-md-2"(click)="modificarLocal(locales._id)">
+                            <button type="button" class="btn btn-warning m-md-2" (click)="modificarLocal(locales._id)">
                                 <i class="bi bi-pencil-square"></i>
                             </button>
-                            <button type="button" class="btn btn-danger m-md-2"(click)="eliminarLocal(locales._id)">
+                            <button type="button" class="btn btn-danger m-md-2" (click)="eliminarLocal(locales._id)">
                                 <i class="bi bi-trash"></i>
                             </button>
-                            
-                        </div> 
+
+                        </div>
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
 </div>
-
-
