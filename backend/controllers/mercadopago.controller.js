@@ -1,57 +1,33 @@
-// import {MercadoPagoConfig, Payment, Preference} from 'mercadopago';
+const mercadopago = require("mercadopago");
 
-// const mercadopagoCtrl = {}
+const mercadopagoCtrl = {}
 
-// function getClient(access_token){
-//     const client = new MercadoPagoConfig({ access_token });
-//     return client;
-// }
+mercadopagoCtrl.createPreference = async(req, res) => {
+    var client = new mercadopago.MercadoPagoConfig({ 
+        accessToken: 'APP_USR-1182613218721804-070902-d698eb10ae39fee5d57db8564882b40a-1894150556', 
+        options: { timeout: 5000, idempotencyKey: 'abc' } 
+    });
 
-// mercadopagoCtrl.createPreference = async(req, res) => {
-//     const client = getClient(req.access_token);
+    const body = {
+        items: [
+			{
+				title: req.body.description,
+				unit_price: Number(req.body.price),
+				quantity: Number(req.body.quantity),
+			}
+		],
+		back_urls: {
+			"success": "http://localhost:4200/home",
+			"failure": "http://localhost:4200/home",
+			"pending": "http://localhost:4200/home"
+		},
+		auto_return: "approved",
+    }
 
-//     const body = {
-//         items: [
-// 			{
-// 				title: req.body.description,
-// 				unit_price: Number(req.body.price),
-// 				quantity: Number(req.body.quantity),
-// 			}
-// 		],
-// 		back_urls: {
-// 			"success": "http://localhost:4200/home",
-// 			"failure": "http://localhost:4200/home",
-// 			"pending": "http://localhost:4200/home"
-// 		},
-// 		auto_return: "approved",
-//     }
+    const preference = new mercadopago.Preference(client);
+    var preferenceCreate = await preference.create({ body });
 
-//     const preference = new Preference(client);
-//     var preferenceCreate = await preference.create(body);
+    res.status(200).json(preferenceCreate);
+}
 
-//     console.log(preferenceCreate);
-//     //return json(preferenceCreate);
-// }
-
-// mercadopagoCtrl.payment = async (req, res) => {
-//     const client = getClient(req.access_token);
-//     const payment = new Payment(client);
-
-//     const body = {
-//         transaction_amount: 12.34,
-//         description: '<DESCRIPTION>',
-//         payment_method_id: '<PAYMENT_METHOD_ID>',
-//         payer: {
-//             email: '<EMAIL>'
-//         },
-//     };
-
-//     const requestOptions = {
-//         idempotencyKey: 'abc',
-//     };
-
-    
-//     var paymentCreate = await payment.create({ body, requestOptions }).then(console.log).catch(console.log);    
-// }
-
-// module.exports = mercadopagoCtrl;
+module.exports = mercadopagoCtrl;
