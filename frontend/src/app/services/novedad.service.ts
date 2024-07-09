@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -16,6 +16,17 @@ export class NovedadService {
       headers: new HttpHeaders({
 
       })
+    }
+    return this.http.get(this.urlBase, httpOption);
+  }
+
+  getNovedadesFiltro(estado: string): Observable<any> {
+    let httpOption = {
+      headers: new HttpHeaders({
+
+      }),
+      params: new HttpParams()
+        .append('estado', estado)
     }
     return this.http.get(this.urlBase, httpOption);
   }

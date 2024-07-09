@@ -62,7 +62,7 @@ export class UsuarioFormComponent {
 
 
   agregarUsuario(){
-    console.log(this.usuario);
+    //console.log(this.usuario);
     this.usuarioService.addUsuario(this.usuario).subscribe(
       result => {
         if (result.status ==  1){

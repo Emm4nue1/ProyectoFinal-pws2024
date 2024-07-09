@@ -1,7 +1,8 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Usuario } from '../models/usuario';
+
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +18,20 @@ export class UsuarioService {
   getUsuarios(): Observable<any> {
     let httpOptions = {
       headers: new HttpHeaders({
-        
+        'content-type': 'application/json'
       }),
+    }
+    return this._http.get(this.urlHost, httpOptions);
+  }
+  getUsuariosFiltros(apeUsu: string, roAux: string,dniAux: number): Observable<any> {
+    let httpOptions = {
+      headers: new HttpHeaders({
+        'content-type': 'application/json'
+      }),
+      params: new HttpParams()
+        .append('apellido', apeUsu)
+        .append('rol', roAux)
+        .append('dni', dniAux)
     }
     return this._http.get(this.urlHost, httpOptions);
   }

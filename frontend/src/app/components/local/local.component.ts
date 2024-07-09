@@ -8,7 +8,7 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-local',
   standalone: true,
-  imports: [CommonModule,FormsModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './local.component.html',
   styleUrl: './local.component.css'
 })
@@ -17,17 +17,29 @@ export class LocalComponent {
 
   locales: Array<Local> = [];
 
-  constructor( private router:Router , private localService:LocalService ) {
+  // habilitadoAux!:boolean;
+  // alquiladoAux!:boolean;
+
+  habilitadoAux: boolean | undefined = undefined;
+  alquiladoAux: boolean | undefined = undefined;
+
+
+
+  constructor(private router: Router, private localService: LocalService) {
     this.verLocales();
+    //this.verLocalesFiltros(false,false);
 
   }
 
-//Muestra lista de Locales
-  verLocales():void{
+
+  //Muestra lista de Locales
+  verLocales(): void {
+    this.habilitadoAux = undefined;
+    this.alquiladoAux = undefined;
     this.localService.getLocales().subscribe(
       result => {
         //console.log(result);
-        this.locales=result;
+        this.locales = result;
       },
       (error) => {
         console.log(error);
@@ -35,7 +47,21 @@ export class LocalComponent {
   }
 
 
-  modificarLocal(_id:string){
+  verLocalesFiltros(): void {
+    console.log(this.habilitadoAux, this.alquiladoAux);
+    this.localService.getLocalesFiltros(this.habilitadoAux, this.alquiladoAux).subscribe(
+      result => {
+        //console.log(result);
+        this.locales = result;
+      },
+      (error) => {
+        console.log(error);
+      })
+  }
+
+
+
+  modificarLocal(_id: string) {
     console.log(this.locales);
     this.router.navigate(['local-forms', _id]);
   }
@@ -43,15 +69,15 @@ export class LocalComponent {
   agregarLocal() {
     this.router.navigate(['local-forms', "0"]);
   }
-  
+
 
   //Elimina Local de la Lista
-  eliminarLocal(_id:string){
+  eliminarLocal(_id: string) {
     this.localService.deleteLocal(_id).subscribe(
-      (result:any)=>{
+      (result: any) => {
         this.verLocales();
 
-      }, (error:any) =>{
+      }, (error: any) => {
         console.log(error);
       }
     )
@@ -59,6 +85,6 @@ export class LocalComponent {
 
 
 
-  
+
 
 }

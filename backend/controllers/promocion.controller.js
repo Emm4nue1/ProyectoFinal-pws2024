@@ -26,6 +26,7 @@ promocionCtrl.getPromociones = async (req, res) => {
   }
 };
 
+
 // Obtener una promoción por ID
 promocionCtrl.getPromocionById = async (req, res) => {
   try {

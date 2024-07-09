@@ -1,6 +1,36 @@
 <body>
-
-    <div class="container">
+    <div class="container mt-5">
+        <h4>Buscar por:</h4>
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-12 mb-3">
+                <div class="input-group">
+                    <span class="input-group-text">Filtrar por Rol</span>
+                    <select class="form-select" id="idrol" name="rol" [(ngModel)]="rolAux" (change)="getUsuarios(apellidoAux,rolAux,dniAux)">
+                        <option value="" selected>Todos</option>
+                        <option *ngFor="let r of roles" [ngValue]="r.nombre">{{r.nombre}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12 mb-3">
+                <div class="input-group">
+                    <span class="input-group-text">Apellido</span>
+                    <input name="apellido" type="text" class="form-control" id="idapellido" [(ngModel)]="apellidoAux">
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12 mb-3">
+                <div class="input-group">
+                    <span class="input-group-text">DNI</span>
+                    <input name="dni" type="text" class="form-control" id="iddni" [(ngModel)]="dniAux">
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-6 col-sm-12 mb-3">
+                <button type="button" class="btn btn-outline-dark"
+                    (click)="getUsuarios(apellidoAux,rolAux,dniAux)">Buscar</button>
+            </div>
+            <div class="col-lg-2 col-md-6 col-sm-12 mb-3">
+                <button type="button" class="btn btn-outline-success" (click)="buscarYLimpiar()">Mostrar Todos</button>
+            </div>
+        </div>
 
         <div class="row mt-3">
             <h3 class="col-12 text-center text-primary text-decoration-underline">LISTADO DE USUARIOS</h3>

@@ -16,6 +16,8 @@ export class NovedadListaComponent {
   novedad: Novedad = new Novedad();
   novedades: Array<Novedad> = [];
 
+  estadoAux: string="";
+
   constructor(private novedadService: NovedadService,
     private router: Router) {
     this.novedad = new Novedad();
@@ -25,8 +27,27 @@ export class NovedadListaComponent {
   }
 
   obtenerNovedades() {
+    this.estadoAux = "";
     this.novedades = new Array<Novedad>();
     this.novedadService.getNovedades().subscribe(
+      (result) => {
+        console.log(result);
+        let vnovedad = new Novedad();
+        result.forEach((element: any) => {
+          Object.assign(vnovedad, element);
+          this.novedades.push(vnovedad);
+          vnovedad = new Novedad();
+        });
+      },
+      (error) => {
+        console.log(error);
+      }
+    )
+  }
+
+  obtenerNovedadesFiltro() {
+    this.novedades = new Array<Novedad>();
+    this.novedadService.getNovedadesFiltro(this.estadoAux).subscribe(
       (result) => {
         console.log(result);
         let vnovedad = new Novedad();

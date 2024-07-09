@@ -2,11 +2,33 @@ const Usuario = require('../models/usuario');
 const bcrypt = require('bcrypt');
 const usuarioCtrl = {};
 const jwt = require('jsonwebtoken');
+const Rol = require('../models/rol');
 
 usuarioCtrl.getUsuarios = async (req, res) => {
     try {
-        console.log(req);
-        const usuarios = await Usuario.find().populate("rol");
+        let filter = {};
+
+        // Filtro para apellido
+        if (req.query.apellido != null && req.query.apellido != '') {
+            filter.apellido = { $regex: req.query.apellido, $options: 'i' };
+        }
+        // Filtro para dni
+        if (req.query.dni != null && req.query.dni != 0) {
+            filter.dni = req.query.dni;
+        }
+        //Filtro para rol (por nombre del rol)
+        if (req.query.rol != null && req.query.rol != '') {
+            const rol = await Rol.findOne({ nombre: { $regex: req.query.rol, $options: 'i' } });
+            if (rol) {
+                filter.rol = rol._id;
+            } else {
+                return res.status(404).json({
+                    'status': '0',
+                    'message': 'Rol no encontrado'
+                });
+            }
+        }
+        const usuarios = await Usuario.find(filter).populate("rol");
         res.json(usuarios);
     } catch (error) {
         res.status(500).json({
@@ -105,42 +127,42 @@ usuarioCtrl.deleteUsuario = async (req, res) => {
 };
 
 usuarioCtrl.loginUsuario = async (req, res) => {
-    const { email , password } = req.body;
-    
+    const { email, password } = req.body;
+
     try {
-      const usuario = await Usuario.findOne({ email }).populate('rol');
-      console.log(usuario);
-      if (!usuario) {
-        return res.status(404).json({
-          status: '0',
-          message: 'Usuario no encontrado'
+        const usuario = await Usuario.findOne({ email }).populate('rol');
+        console.log(usuario);
+        if (!usuario) {
+            return res.status(404).json({
+                status: '0',
+                message: 'Usuario no encontrado'
+            });
+        }
+
+        const esContraseñaValida = await bcrypt.compare(password, usuario.password);
+        if (!esContraseñaValida) {
+            return res.status(401).json({
+                status: '0',
+                message: 'Contraseña inválida'
+            });
+        }
+
+        res.json({
+            status: '1',
+            message: 'Inicio de sesión exitoso',
+            token: createToken(usuario)
         });
-      }
-  
-      const esContraseñaValida = await bcrypt.compare(password, usuario.password);
-      if (!esContraseñaValida) {
-        return res.status(401).json({
-          status: '0',
-          message: 'Contraseña inválida'
-        });
-      }
-  
-      res.json({
-        status: '1',
-        message: 'Inicio de sesión exitoso',
-        token: createToken(usuario)
-      });
     } catch (error) {
         console.log(error);
-      res.status(500).json({
-        status: '0',
-        message: 'Error al iniciar sesión'
-      });
+        res.status(500).json({
+            status: '0',
+            message: 'Error al iniciar sesión'
+        });
     }
-  };
+};
 
 
-function createToken(usuario){
+function createToken(usuario) {
     const payload = {
         usuario_id: usuario._id,
         username: usuario.nombre + " " + usuario.apellido,
