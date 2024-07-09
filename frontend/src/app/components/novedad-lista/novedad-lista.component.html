@@ -1,4 +1,26 @@
-<div class="row justify-content-center ">
+
+<div class="row mx-5 mt-5">
+    <h4>Filtrar por: </h4>
+    <div class="col-lg-4 col-md-6 col-sm-12 mb-3">
+        <div class="input-group">
+            <span class="input-group-text">Estado:</span>
+            <select class="form-select" id="idrol" name="rol" [(ngModel)]= "estadoAux" (change)= "obtenerNovedadesFiltro()">
+                <option value="" selected>Todos</option>       
+                <option value= "Pendiente">Pendiente</option>
+                <option value= "Procesado">Procesado</option>
+            </select>
+        </div>
+    </div>
+    <div class="row my-2">
+        <div class="col-lg-3 col-md-6 col-sm-12">
+            <button type="button" class="btn btn-outline-success" (click)=" obtenerNovedades()">Mostrar Todos</button>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="row justify-content-center m-3 ">
     <div class="col-12 col-sm-12 col-md-11 contenedor">
         <h1>Listado de novedades</h1>
         <div class="col-md-4">

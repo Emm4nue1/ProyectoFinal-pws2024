@@ -10,6 +10,8 @@ const Usuario = require('../models/usuario');
 
 localCtrl.getLocales = async (req, res) => {
     try {
+
+        //CRISTIAN
         //let filter = { usuario: req.usuario_id };
         let filter = { };
 
@@ -23,12 +25,9 @@ localCtrl.getLocales = async (req, res) => {
             filter.alquilado = req.query.alquilado === 'true';
         }
 
-        console.log('Filter:', filter);  // Log para depuración
         const locales = await Local.find(filter).populate("usuario");
-        console.log('Locales encontrados:', locales);  // Log para depuración
         res.json(locales);
     } catch (error) {
-        console.error('Error al obtener los locales:', error);
         res.status(500).json({
             'status': '0',
             'message': 'Error al obtener los locales'

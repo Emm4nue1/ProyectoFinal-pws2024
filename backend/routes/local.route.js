@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const authCtrl = require('../controllers/auth.controller');
 
+// CRISTIAN
 //router.get('/', authCtrl.verifyToken, localCtrl.getLocales);
 router.get('/', localCtrl.getLocales);
 router.post('/', localCtrl.createLocal);

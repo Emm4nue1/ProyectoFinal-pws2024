@@ -1,6 +1,8 @@
 const Novedad = require('../models/novedad');
 const novedadCtrl = {};
 
+
+
 // Crear una nueva novedad
 novedadCtrl.createNovedad = async (req, res) => {
   console.log('req.body:', req.body);
@@ -15,9 +17,26 @@ novedadCtrl.createNovedad = async (req, res) => {
 };
 
 // Obtener todas las novedades
+//CRISTIAN
+// novedadCtrl.getNovedades = async (req, res) => {
+//   try {
+//     const novedades = await Novedad.find({ usuario: req.usuario_id }).populate(['local', 'usuario']);
+//     res.json(novedades);
+//   } catch (error) {
+//     console.error('Error:', error);
+//     res.status(500).json({ status: '0', msg: 'Error procesando operación.', error: error.message });
+//   }
+// };
+
 novedadCtrl.getNovedades = async (req, res) => {
   try {
-    const novedades = await Novedad.find({ usuario: req.usuario_id }).populate(['local', 'usuario']);
+    
+    filter = {};
+    if (req.query.estado != null && req.query.estado != '') {
+      filter.estado = req.query.estado;
+    }
+
+    const novedades = await Novedad.find(filter).populate(['local', 'usuario']);
     res.json(novedades);
   } catch (error) {
     console.error('Error:', error);
