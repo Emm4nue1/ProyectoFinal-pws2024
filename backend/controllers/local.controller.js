@@ -40,14 +40,21 @@ localCtrl.getLocalById = async (req, res) => {
 
 //Crear local. Probado.
 localCtrl.createLocal = async (req, res) => {
-    console.log(req);
-    var local = new Local(req.body)
     try {
-        await local.save();
-        res.json({
-            'status': '1',
-            'message': 'Local creado'
-        })
+        const local = await Local.findOne({ numeroLocal: req.body.numeroLocal});
+        if (local) {
+            return res.json({
+                'status': '0',
+                'message': 'El local ya existe'
+            })
+        }else{
+            const local1 = new Local(req.body);
+            await local1.save();
+            res.json({
+                'status': '1',
+                'message': 'Local creado'
+            })
+        }
     } catch (error) {
         console.log(error);
         res.status(400).json({

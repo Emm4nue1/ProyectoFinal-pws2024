@@ -4,11 +4,13 @@ import { Router } from '@angular/router';
 import { LocalService } from '../../services/local.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { SiNoPipe } from '../../pipes/si-no.pipe';
+
 
 @Component({
   selector: 'app-local',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, SiNoPipe],
   templateUrl: './local.component.html',
   styleUrl: './local.component.css'
 })
@@ -75,6 +77,7 @@ export class LocalComponent {
   eliminarLocal(_id: string) {
     this.localService.deleteLocal(_id).subscribe(
       (result: any) => {
+        alert("Local eliminado");
         this.verLocales();
 
       }, (error: any) => {
@@ -82,9 +85,4 @@ export class LocalComponent {
       }
     )
   }
-
-
-
-
-
 }
