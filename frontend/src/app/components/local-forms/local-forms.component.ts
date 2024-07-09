@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LocalService } from '../../services/local.service';
 import { Local } from '../../models/local';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-local-forms',
@@ -17,6 +18,8 @@ export class LocalFormsComponent {
 
   local = new Local();
   accion: string = "new";
+
+  toastSrvc = inject(ToastrService);
   
   constructor( private router:Router, 
     private localService:LocalService,
@@ -60,11 +63,11 @@ export class LocalFormsComponent {
     this.localService.postLocal(this.local).subscribe(
       (result) => {
         if(result.status == 0){
-          alert("Local ya existe.");
+          this.toastSrvc.warning("El número de local ingresado ya existe.", "Atención");
           return;
         }else{
           console.log(result)
-          alert("Local Creado");
+          this.toastSrvc.success("Local creado con éxito.", "Operación exitosa");
           this.router.navigate(['local-lista']);
         }
       },
@@ -79,7 +82,7 @@ export class LocalFormsComponent {
     this.localService.putLocal(this.local).subscribe(
       (result)=>{
         //console.log(result);
-        alert("Local Actualizado");
+        this.toastSrvc.success("Local modificado con éxito.", "Operación exitosa");
         this.router.navigate(['local-lista'])
 
       },
@@ -92,9 +95,4 @@ export class LocalFormsComponent {
   volverLocal(){
     this.router.navigate(['local-lista']);
   }
-
-
-
-
-
 }
