@@ -48,14 +48,28 @@
                 <label class="form-check-label" for="alquilado">Alquilado</label>
             </div>
 
-            <div class="mb-3">
+            <!-- <div class="mb-3">
                 <label for="img" class="form-label">Imagen</label>
                 <input type="text" class="form-control" id="img" name="img" placeholder="Ingrese una url de la imagen"
                     [(ngModel)]="local.imagen" required #imagenlocal="ngModel" >
                 <div class="alert alert-danger m-2" [hidden]="imagenlocal.valid || imagenlocal.pristine">
                         Campo obligatorio. Imagen del local.
                 </div>
+            </div> -->
+
+            <div class="mb-3">
+                <label for="urlimagen" class="form-label fw-semibold">IMAGEN</label>
+                <div>
+                    <input type="file" name="urlimagen" id="urlimagen" accept="image/*"
+                        class="form-control-file d-block" (change)="seleccionImg($event)"  ngModel #urlimagen="ngModel"
+                        required />
+                </div>
+                <div *ngIf="urlimagen.invalid && (urlimagen.dirty || urlimagen.touched)"
+                    class="alert alert-danger rounded-0 mt-1" >
+                    Campo obligatorio. Imagen del local.
+                </div>
             </div>
+
 
             <div class="boton-formulario">
                 <button *ngIf="accion == 'new'" class="btn btn-success m-md-2" type="submit" 

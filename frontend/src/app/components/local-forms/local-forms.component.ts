@@ -95,4 +95,23 @@ export class LocalFormsComponent {
   volverLocal(){
     this.router.navigate(['local-lista']);
   }
+
+
+
+  seleccionImg(event: any) {
+    const files = event.target.files[0];
+    if (files.size > 100000) {//limite de tamaño de imagen hasta 1mb 
+      alert('El tamaño  de imagen maximo es 80 KB');
+      event.target.value = null;
+    } else {
+      const reader = new FileReader();
+      reader.onload = () => {
+        let base64 = reader.result as string;
+        this.local.imagen = base64;//almaceno en imagen el url base64
+      };
+      reader.readAsDataURL(files);
+    }
+  }
+
+
 }
