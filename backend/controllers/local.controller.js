@@ -14,7 +14,7 @@ localCtrl.getLocales = async (req, res) => {
         let filter = { usuario: req.usuario_id };
         //let filter = { };
 
-        if (req.query.habilitado != null ) {
+        if (req.query.habilitado != null) {
             filter.habilitado = req.query.habilitado === 'true';
         }
 
@@ -23,6 +23,23 @@ localCtrl.getLocales = async (req, res) => {
         }
 
         const locales = await Local.find(filter).populate("usuario");
+        res.json(locales);
+    } catch (error) {
+        res.status(500).json({
+            'status': '0',
+            'message': 'Error al obtener los locales'
+        });
+    }
+};
+
+localCtrl.getLocalesPublicos = async (req, res) => {
+    try {
+
+        let filter = {};
+        filter.habilitado = 'true';
+        filter.alquilado = 'false';
+
+        const locales = await Local.find(filter);
         res.json(locales);
     } catch (error) {
         res.status(500).json({
@@ -41,13 +58,13 @@ localCtrl.getLocalById = async (req, res) => {
 //Crear local. Probado.
 localCtrl.createLocal = async (req, res) => {
     try {
-        const local = await Local.findOne({ numeroLocal: req.body.numeroLocal});
+        const local = await Local.findOne({ numeroLocal: req.body.numeroLocal });
         if (local) {
             return res.json({
                 'status': '0',
                 'message': 'El local ya existe'
             })
-        }else{
+        } else {
             const local1 = new Local(req.body);
             await local1.save();
             res.json({

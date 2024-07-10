@@ -37,41 +37,22 @@
   </div>
 </div>
 
-<div class="row row-contenedor mb-3 p-5 m-3">
-  <section>
-      <h2 class="anton-sc-regular">
-          Locales Disponibles
-      </h2>
-
-      <div class="card mb-3">
-          <div class="row g-0">
-            <div class="col-4 col-md-4 card-imagen">
-              <img src="https://storage.googleapis.com/portales-prod-images/1521/property-images/2024/6/03d26bac-ac5d-4317-904f-854321f2aeed_thumbnail.jpeg" class="img-fluid rounded-start" alt="...">
-            </div>
-            <div class="col-8 col-md-8 card-cuerpo">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
-              </div>
-            </div>
+<div class="row row-contenedor mb-3">
+  <h2 class="anton-sc-regular">Locales Disponibles</h2>
+  <section class="contenedor-cards">
+       <div class="col-4" *ngFor="let local of locales">
+         <div class="card mb-3 text-bg-light">
+          <h5>{{ local.costoMes | currency: 'ARS':'symbol':'1.1-2'}}</h5>
+          <div class="card-img">
+            <img [src]="local.imagen" class="card-img-top" alt="..." />
           </div>
-      </div>
-
-      <div class="card mb-3">
-          <div class="row g-0">
-            <div class="col-4 col-md-4 card-imagen">
-              <img src="https://i.pinimg.com/736x/a9/7f/cd/a97fcda6abc47628f45d9d90e0b65d13.jpg" class="img-fluid rounded-start" alt="...">
-            </div>
-            <div class="col-8 col-md-8 card-cuerpo">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
-              </div>
-            </div>
+          <div class="card-body">
+            <h5 class="card-title text-truncate">Local N° {{local.numeroLocal}}</h5>
+            <p title={{local.superficie}}>Superficie: {{local.superficie}} metros cuadrados</p>
           </div>
-      </div>
+        </div>
+       </div>
+      
   </section>
 </div>
 
