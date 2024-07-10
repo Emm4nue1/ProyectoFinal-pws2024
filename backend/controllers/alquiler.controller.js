@@ -1,4 +1,5 @@
 const Alquiler = require('../models/alquiler');
+const Local = require('../models/local');
 const alquilerCtrl = {}
 
 alquilerCtrl.getAlquileres = async (req, res) => {
@@ -21,8 +22,12 @@ alquilerCtrl.getAlquilerById = async (req, res) => {
 
 
 alquilerCtrl.createAlquiler = async (req, res) => {
-    var alquiler = new Alquiler(req.body)
     try {
+        const local = await Local.findById({_id: req.body.local._id});
+        local.alquilado = true;
+        await local.save();
+        var alquiler = new Alquiler(req.body)
+        alquiler.local = local;
         await alquiler.save();
         res.json({
             'status': '1',
@@ -56,6 +61,10 @@ alquilerCtrl.updateAlquiler = async (req, res) => {
 
 alquilerCtrl.deleteAlquiler = async (req, res) => {
     try{
+        const alquiler = await Alquiler.findById(req.params.id);
+        const local = await Local.findById({_id: alquiler.local._id});
+        local.alquilado = false;
+        await local.save();
         await Alquiler.deleteOne({_id: req.params.id});
         res.json({
             'status': '1',

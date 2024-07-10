@@ -10,7 +10,7 @@ import { ApiMethod } from 'ngx-facebook/providers/facebook';
 @Component({
   selector: 'app-promocion-lista',
   standalone: true,
-  imports: [CommonModule, FormsModule,FacebookModule.forRoot()],
+  imports: [CommonModule, FormsModule],
   templateUrl: './promocion-lista.component.html',
   styleUrl: './promocion-lista.component.css'
 })
