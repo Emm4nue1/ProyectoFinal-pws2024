@@ -52,6 +52,7 @@
                     <th scope="col">Costo del Mes</th>
                     <th scope="col">Habilitado</th>
                     <th scope="col">Acción</th>
+                    <th scope="col"></th>
 
                 </tr>
             </thead>
@@ -64,6 +65,7 @@
                     <td>{{locales.alquilado | siNo}}</td>
                     <td>{{locales.costoMes | currency: 'ARS':'symbol':'1.1-2'}}</td>
                     <td>{{locales.habilitado | siNo}}</td>
+                    <td> <img [src]="locales.imagen" alt="imagen de local" width="100px" height="100px"> </td>
                     <td>
                         <div class="btn-lista-promocion">
                             <button type="button" class="btn btn-warning m-md-2" (click)="modificarLocal(locales._id)">
