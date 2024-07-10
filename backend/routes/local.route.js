@@ -5,6 +5,7 @@ const authCtrl = require('../controllers/auth.controller');
 
 
 router.get('/', authCtrl.verifyToken, localCtrl.getLocales);
+router.get('/home', localCtrl.getLocalesPublicos);
 router.post('/', localCtrl.createLocal);
 router.get('/:id', localCtrl.getLocalById);
 router.put('/:id', localCtrl.updateLocal);
