@@ -18,22 +18,29 @@ export class PromocionListaComponent {
   msjPosteo?:string="hola prueba";
   promociones: Array<Promocion> = [];//Para obtener todas las sucripciones de la bd.
 
+  sortOrder: string = "";
+
   constructor(private promocionService: PromocionService, private router: Router,private fb:FacebookService) {
     this.obtenerPromociones();
     this.posteoFb();
   }
 
-  obtenerPromociones() {
-    this.promocionService.getPromociones().subscribe(
-      (result) => {
+
+  obtenerPromociones(): void {
+    this.promocionService.getPromocionesFiltro(this.sortOrder).subscribe(
+      result => {
         console.log(result);
         this.promociones = result;
-        
       },
-      (error) => {
+      error => {
         console.log(error);
       }
-    )
+    );
+  }
+
+  onSortOrderChange(sortOrder: string): void {
+    this.sortOrder = sortOrder;
+    this.obtenerPromociones();
   }
 
   agregarPromocion() {
