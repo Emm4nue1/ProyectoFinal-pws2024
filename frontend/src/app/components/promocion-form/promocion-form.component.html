@@ -30,11 +30,24 @@
                     <input type="date" class="form-control" id="fecha-fin" name="fecha-fin"
                         placeholder="Ingrese el nombre" [(ngModel)]="promocion.fechaFin">
                 </div>
-                <div class="mb-3">
+                <!-- <div class="mb-3">
                     <label for="imagen" class="form-label">Imagen</label>
                     <input type="text" class="form-control" id="imagen" name="imagen"
                         placeholder="Ingrese la url de una imagen" [(ngModel)]="promocion.imagen">
+                </div> -->
+                <div class="mb-3">
+                    <label for="urlimagen" class="form-label fw-semibold">IMAGEN</label>
+                    <div>
+                        <input type="file" name="urlimagen" id="urlimagen" accept="image/*"
+                            class="form-control-file d-block" (change)="seleccionImg($event)"  ngModel #urlimagen="ngModel"
+                            required />
+                    </div>
+                    <div *ngIf="urlimagen.invalid && (urlimagen.dirty || urlimagen.touched)"
+                        class="alert alert-danger rounded-0 mt-1" >
+                        Campo obligatorio. Imagen del local.
+                    </div>
                 </div>
+
                 <div class="boton-formulario">
                     <button *ngIf="accion == 'new'" type="submit" class="btn btn-success m-md-2" (click)="crearPromocion()">Registrar</button>
                     <button *ngIf="accion == 'update'"type="submit" class="btn btn-warning m-md-2" (click)="modificarPromocion()">Modificar</button>

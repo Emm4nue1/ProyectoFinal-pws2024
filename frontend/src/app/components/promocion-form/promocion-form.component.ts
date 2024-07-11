@@ -111,4 +111,20 @@ export class PromocionFormComponent {
     this.router.navigate(['promocion-lista']);
     }
 
+
+    seleccionImg(event: any) {
+      const files = event.target.files[0];
+      if (files.size > 1000000) {//limite de tamaño de imagen hasta 1mb 
+        alert('El tamaño  de imagen maximo es 1MB');
+        event.target.value = null;
+      } else {
+        const reader = new FileReader();
+        reader.onload = () => {
+          let base64 = reader.result as string;
+          this.promocion.imagen = base64;//almaceno en imagen el url base64
+        };
+        reader.readAsDataURL(files);
+      }
+    }
+
 }
