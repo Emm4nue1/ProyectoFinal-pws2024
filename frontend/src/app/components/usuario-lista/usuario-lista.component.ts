@@ -47,7 +47,7 @@ export class UsuarioListaComponent {
     }
     this.usuarioService.getUsuariosFiltros(apellidoAux, rolAux, dniAux ).subscribe(
       (result: any) => {
-        this.usuarios = result;
+        this.usuarios = result.reverse();
         //console.log(this.usuarios);
       },
       (error) => {
@@ -85,18 +85,29 @@ export class UsuarioListaComponent {
     );
   }
 
-  cargarRoles() {
-    this.roles = new Array<Rol>();
+  // cargarRoles() {
+  //   this.roles = new Array<Rol>();
+  //   this.rolService.getRoles().subscribe(
+  //     result => {
+  //       let vrol: Rol = new Rol();
+  //       result.forEach((element: any) => {
+  //         Object.assign(vrol, element);
+  //         this.roles.push(vrol);
+  //         vrol = new Rol();
+  //       });
+  //     }
+  //   )
+  // }
+  cargarRoles(): void {
     this.rolService.getRoles().subscribe(
       result => {
-        let vrol: Rol = new Rol();
-        result.forEach((element: any) => {
-          Object.assign(vrol, element);
-          this.roles.push(vrol);
-          vrol = new Rol();
-        });
+        this.roles = result.filter((rol: Rol) => rol.nombre !== 'duenio');
+      },
+      error => {
+        console.error('Error al cargar los roles', error);
       }
-    )
+    );
   }
+
 
 }

@@ -56,18 +56,15 @@ export class UsuarioFormComponent {
     this.roles = new Array<Rol>();
   }
 
-  cargarRoles() {
-    this.roles = new Array<Rol>();
+  cargarRoles(): void {
     this.rolService.getRoles().subscribe(
       result => {
-        let vrol: Rol = new Rol();
-        result.forEach((element: any) => {
-          Object.assign(vrol, element);
-          this.roles.push(vrol);
-          vrol = new Rol();
-        });
+        this.roles = result.filter((rol: Rol) => rol.nombre !== 'duenio');
+      },
+      error => {
+        console.error('Error al cargar los roles', error);
       }
-    )
+    );
   }
 
   agregarUsuario(){
@@ -102,16 +99,13 @@ export class UsuarioFormComponent {
     this.usuario = new Usuario();
   }
 
-  cargarUsuario(id: string): void {
+  cargarUsuario(id: string) {
     this.usuarioService.getUsuario(id).subscribe(
-      (result: any) => {
-        this.usuario = result;
-        //console.log(this.propietario);
-      },
-      (error: any) => {
-        console.log(error);
+      result => {
+        Object.assign(this.usuario, result);
+        this.usuario.rol = this.roles.find(rol => rol._id === this.usuario.rol._id)!
       }
-    )
+    );
   }
 
   irALista(){

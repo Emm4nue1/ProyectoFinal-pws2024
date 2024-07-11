@@ -4,18 +4,19 @@ const usuarioCtrl = {};
 const jwt = require('jsonwebtoken');
 const Rol = require('../models/rol');
 
+
 usuarioCtrl.getUsuarios = async (req, res) => {
     try {
         let filter = {};
-        // Filtro para apellido
+
         if (req.query.apellido != null && req.query.apellido != '') {
             filter.apellido = { $regex: req.query.apellido, $options: 'i' };
         }
-        // Filtro para dni
+
         if (req.query.dni != null && req.query.dni != 0) {
             filter.dni = req.query.dni;
         }
-        //Filtro para rol (por nombre del rol)
+
         if (req.query.rol != null && req.query.rol != '') {
             const rol = await Rol.findOne({ nombre: { $regex: req.query.rol, $options: 'i' } });
             if (rol) {
@@ -27,6 +28,12 @@ usuarioCtrl.getUsuarios = async (req, res) => {
                 });
             }
         }
+
+        const rolDuenio = await Rol.findOne({ nombre: 'duenio' });
+        if (rolDuenio) {
+            filter.rol = { $ne: rolDuenio._id };
+        }
+
         const usuarios = await Usuario.find(filter).populate("rol");
         res.json(usuarios);
     } catch (error) {

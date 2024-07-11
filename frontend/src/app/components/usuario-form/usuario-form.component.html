@@ -31,13 +31,13 @@
                     <label for="dni" class="form-label">DNI</label>
                     <input type="text" class="form-control" id="dni" name="dni" placeholder="Ingrese DNI"
                         [(ngModel)]="usuario.dni" required #dni="ngModel" autocomplete="off"
-                        pattern="^[1-9][0-9]{7,8}$">
+                        pattern="^[1-9][0-9]{7,8}$" maxlength="8">                        
                     <div *ngIf="dni.invalid && (dni.dirty || dni.touched ||email.touched)" class="alert alert-danger m-2">
                         <div *ngIf="dni.errors?.['required']">
                             Campo obligatorio.
                         </div>
                         <div *ngIf="dni.errors?.['pattern']">
-                            El DNI debe ser un número positivo de 8 o 9 dígitos.
+                            El DNI debe ser un número positivo de 8 dígitos.
                         </div>
                     </div>
                 </div>
@@ -63,7 +63,7 @@
                     <label for="telefono" class="form-label">Teléfono</label>
                     <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Ingrese número de teléfono"
                         [(ngModel)]="usuario.telefono" required #telefono="ngModel" autocomplete="off"
-                        pattern="^[1-9][0-9]{3,}$">
+                        pattern="^[1-9][0-9]{3,}$" maxlength="10">
                     <div *ngIf="telefono.invalid && (telefono.dirty || telefono.touched ||password.touched)" class="alert alert-danger m-2">
                         <div *ngIf="telefono.errors?.['required']">
                             Campo obligatorio. Teléfono.
@@ -74,7 +74,6 @@
                     </div>
                 </div>
                 
-
                 <div class="mb-3">
                     <label for="password" class="form-label">Password</label>
                     <input type="password" class="form-control" id="passwword" name="password" placeholder="Ingrese la contraseña"
@@ -87,7 +86,6 @@
                 <div class="mb-3">
                     <label for="rol" class="form-label">Rol</label>
                     <select class="form-select" id="rol" name="rol" [(ngModel)]="usuario.rol">
-                        <option *ngIf="accion == 'update'" [ngValue]="usuario.rol">{{usuario.rol.nombre}}</option>
                         <option *ngFor="let r of roles" [ngValue]="r">{{r.nombre}}</option>
                     </select>
                 </div>
@@ -98,17 +96,7 @@
 
                     <button type="button" class="btn btn-primary m-md-2"(click)="irALista()">Ir a lista Usuarios</button>
                 </div>
-
-
-
-
-
-
             </div>
         </form>
-
-
-
     </div>
-
 </div>
