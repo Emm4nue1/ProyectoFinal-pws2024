@@ -1,98 +1,31 @@
-/* * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-} */
-
-.form-register {
-    width: 700px;
-    background: #24303c;
-    padding: 30px;
-    margin: auto;
-    margin-top: 100px;
-    border-radius: 25px;
-    font-family: 'calibri';
-    color: white;
-    box-shadow: 7px 13px 37px #000;
-    text-align: center;
+.contenedor{
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    align-items: center;
 }
 
-.form-register h4 {
-    font-size: 30px;
-    margin-bottom: 60px;
-    color: white;
-    position: relative;
+.formulario {
+    width: 80%;
+    border: solid 5px rgb(0, 105, 137);
+    border-radius: 20px;
+    overflow: hidden;
 }
 
-.form-register h4::after {
-    content: ' ';
-    width: 30px;
-    height: 4px;
-    border-radius: 3px;
-    background: #04BD7D;
-    position: absolute;
-    bottom: -12px;
-    left: 50%;
-    transform: translate(-50%);
-}
-
-span {
-    background: #24303c;
-    padding: 10px;
-    border: 1px solid #1f53c5;
-    margin-bottom: 16px;
-    font-family: 'calibri';
-    font-size: 18px;
-    color: white;
-}
-
-select {
-    background: #24303c;
-    padding: 10px;
-    margin-bottom: 16px;
-    border: 1px solid #1f53c5;
-    font-family: 'calibri';
-    font-size: 18px;
-    color: #ffffff;
-}
-
-.form-control {
-    background: #24303c;
-    padding: 10px;
-    margin-bottom: 16px;
-    border: 1px solid #1f53c5;
-    font-family: 'calibri';
-    font-size: 18px;
-    color: #ffffff;
-}
-
-.form-register p {
-    height: 40px;
-    text-align: center;
-    font-size: 18px;
-    line-height: 40px;
-}
-
-.form-register a {
-    color: white;
-    text-decoration: none;
-}
-
-.form-register a:hover {
-    color: white;
-    text-decoration: underline;
-}
-
-.form-register .botons {
+.encabezado {
     width: 100%;
-    background: #1f53c5;
-    border: none;
-    padding: 12px;
+    background-color: rgb(0, 105, 137);
+    height: 2em;
+}
+.encabezado h5 {
+    text-align: center;
     color: white;
-    margin: 16px 0;
-    font-size: 16px;
 }
 
-.btn {
-    padding: 8px;
+.boton-formulario {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
