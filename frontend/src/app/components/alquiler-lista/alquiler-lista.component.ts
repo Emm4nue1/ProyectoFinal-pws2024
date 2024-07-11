@@ -9,6 +9,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Constantes } from '../../helpers/constantes';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-alquiler-lista',
@@ -18,6 +20,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './alquiler-lista.component.css'
 })
 export class AlquilerListaComponent {
+  rol = Constantes;
   local: Local = new Local();
   usuario: Usuario = new Usuario();
   alquiler: Alquiler = new Alquiler();
@@ -26,11 +29,16 @@ export class AlquilerListaComponent {
   toastSrvc= inject(ToastrService);
 
   constructor(private alquilerService: AlquilerService,
+    private authService: AuthService,
     private usuarioService: UsuarioService,
     private localService: LocalService,
     private router: Router) { 
     this.iniciarVariables();
       this.obtenerAlquiler();
+  }
+
+  hasRole(role: String){
+    return this.authService.getRole() == role;
   }
 
   iniciarVariables(){

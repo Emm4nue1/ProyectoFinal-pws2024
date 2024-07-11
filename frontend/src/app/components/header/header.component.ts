@@ -5,6 +5,7 @@ import { UsuarioListaComponent } from '../usuario-lista/usuario-lista.component'
 import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common';
 import { MercadopagoService } from '../../services/mercadopago.service';
+import { Constantes } from '../../helpers/constantes';
 
 @Component({
   selector: 'app-header',
@@ -14,6 +15,8 @@ import { MercadopagoService } from '../../services/mercadopago.service';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
+  rol = Constantes;
+
   constructor(private authService: AuthService, private router: Router, private mercadopagoService: MercadopagoService) {
   }
 

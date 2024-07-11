@@ -13,7 +13,7 @@
               Inicio</a>
           </li>
          
-          <li class="nav-item dropdown">
+          <li class="nav-item dropdown" *ngIf="isAuthenticated() && hasRole(rol.DUENIO)">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"
               routerLinkActive="active">
               <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-people" viewBox="0 0 16 16">
@@ -31,7 +31,7 @@
             </ul>
           </li>
           
-          <li class="nav-item dropdown" *ngIf="hasRole('propietario')">
+          <li class="nav-item dropdown" *ngIf="isAuthenticated() && (hasRole(rol.DUENIO) || hasRole(rol.PROPIETARIO))">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"
               routerLinkActive="active">
               <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-rocket-takeoff" viewBox="0 0 16 16">
@@ -41,7 +41,7 @@
               </svg>
               Promoción</a>
             <ul class="dropdown-menu">
-              <li class="nav-item">
+              <li class="nav-item" *ngIf="hasRole('propietario')">
                 <a class="nav-link custom-nav-link" [routerLink]="['promocion-form','0']"
                   routerLinkActive="active">Nueva promoción</a>
               </li>
@@ -52,7 +52,7 @@
             </ul>
           </li>
 
-          <li class="nav-item dropdown">
+          <li class="nav-item dropdown" *ngIf="isAuthenticated()">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"
               routerLinkActive="active"> 
               <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -72,7 +72,7 @@
             </ul>
           </li>
 
-          <li class="nav-item dropdown">
+          <li class="nav-item dropdown" *ngIf="isAuthenticated() && (hasRole(rol.ADMINISTRATIVO) || hasRole(rol.PROPIETARIO))">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"
               routerLinkActive="active"> 
               <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-file-earmark-text" viewBox="0 0 16 16">
@@ -81,7 +81,7 @@
               </svg>
               Alquiler</a>
             <ul class="dropdown-menu">
-              <li class="nav-item">
+              <li class="nav-item" *ngIf="hasRole(rol.ADMINISTRATIVO)">
                 <a class="nav-link custom-nav-link" [routerLink]="['alquiler-form','0']"
                   routerLinkActive="active">Nuevo alquiler</a>
               </li>
@@ -93,10 +93,9 @@
           </li>
 
 
-          <li class="nav-item dropdown">
+          <li class="nav-item dropdown" *ngIf="isAuthenticated() && hasRole(rol.DUENIO)">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"
-              routerLinkActive="active"> 
-              
+              routerLinkActive="active">
               <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-building-fill" viewBox="0 0 16 16">
                 <path d="M3 0a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h3v-3.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5V16h3a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1zm1 2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3.5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5M4 5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zM7.5 5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5m2.5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zM4.5 8h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5m2.5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3.5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5"/>
               </svg>
@@ -110,10 +109,6 @@
                 <a class="nav-link custom-nav-link" [routerLink]="['local-lista']"
                   routerLinkActive="active">Lista</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link custom-nav-link" [routerLink]="['promocion-form']"
-                  routerLinkActive="active">Promocion</a>
-              </li>
             </ul>
           </li>
         </ul>
@@ -124,8 +119,8 @@
           <button type="submit" class="btn btn-primary" (click)="cerrarSesion()">Cerrar Sesión</button>
         </div>
 
-        <button (click)="comprar()">Pagar Mercadopago</button>
-        <div id="wallet_container"></div>
+        <!-- <button (click)="comprar()">Pagar Mercadopago</button>
+        <div id="wallet_container"></div> -->
       </div>
     </div>
   </nav>

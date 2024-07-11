@@ -4,6 +4,8 @@ import { Novedad } from '../../models/novedad';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Constantes } from '../../helpers/constantes';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-novedad-lista',
@@ -13,17 +15,23 @@ import { Router } from '@angular/router';
   styleUrl: './novedad-lista.component.css'
 })
 export class NovedadListaComponent {
+  rol = Constantes;
   novedad: Novedad = new Novedad();
   novedades: Array<Novedad> = [];
 
   estadoAux: string="";
 
   constructor(private novedadService: NovedadService,
-    private router: Router) {
+    private router: Router,
+    private authService: AuthService) {
     this.novedad = new Novedad();
     this.novedades = [];
 
     this.obtenerNovedades();
+  }
+
+  hasRole(role: String){
+    return this.authService.getRole() == role;
   }
 
   obtenerNovedades() {

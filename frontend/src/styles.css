@@ -9,3 +9,7 @@ html {
     display: flex;
     flex-direction: column;
 }
+
+.contenedor {
+    min-height: 70vh;
+}

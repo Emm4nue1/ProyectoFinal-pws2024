@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FacebookModule, FacebookService, InitParams } from 'ngx-facebook';
 import { ApiMethod } from 'ngx-facebook/providers/facebook';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-promocion-lista',
@@ -20,11 +21,17 @@ export class PromocionListaComponent {
 
   sortOrder: string = "";
 
-  constructor(private promocionService: PromocionService, private router: Router,private fb:FacebookService) {
+  constructor(private promocionService: PromocionService, 
+    private router: Router, 
+    private fb:FacebookService,
+    private authService: AuthService) {
     this.obtenerPromociones();
     this.posteoFb();
   }
 
+  hasRole(role: String){
+    return this.authService.getRole() == role;
+  }
 
   obtenerPromociones(): void {
     this.promocionService.getPromocionesFiltro(this.sortOrder).subscribe(

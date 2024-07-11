@@ -46,7 +46,7 @@
                     <td>{{n.texto}}</td>
                     <td>{{n.estado}}</td>
                     <td>
-                        <div class="btn-lista-promocion">
+                        <div class="btn-lista-promocion" *ngIf="hasRole(rol.ADMINISTRATIVO) || hasRole(rol.PROPIETARIO)">
                             <button type="button" class="btn btn-danger m-md-2" (click)="eliminarNovedad(n._id)">Eliminar</button>
                             <button type="button" class="btn btn-warning m-md-2"(click)="modificarNovedad(n._id)">Modificar</button>
                         </div>
