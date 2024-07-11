@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { AlquilerService } from '../../services/alquiler.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -8,6 +8,7 @@ import { Local } from '../../models/local';
 import { Usuario } from '../../models/usuario';
 import { Alquiler } from '../../models/alquiler';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-alquiler-form',
@@ -24,6 +25,7 @@ export class AlquilerFormComponent {
   local = new Local();
 
   accion: string = "new";
+  toastSrvc= inject(ToastrService);
 
   constructor(
     private alquilerService: AlquilerService,
@@ -100,10 +102,11 @@ export class AlquilerFormComponent {
     this.alquilerService.addAlquiler(this.alquiler).subscribe(
       (result) => {
         console.log(result);
-        alert("Alquiler creado");
+        this.toastSrvc.success("Alquiler creado", "Operación exitosa");
         this.irALista();
       },
       (error) => {
+        this.toastSrvc.error("Error al crear alquiler", "Operación fallida");
         console.log(error);
       }
     )
@@ -113,10 +116,11 @@ export class AlquilerFormComponent {
     this.alquilerService.updateAlquiler(this.alquiler).subscribe(
       (result) => {
         console.log(result);
-        alert("Alquiler modificado");
+        this.toastSrvc.success("Alquiler modificado", "Operación exitosa");
         this.irALista();
       },
       (error) => {
+        this.toastSrvc.error("Error al modificar alquiler", "Operación fallida");
         console.log(error);
       }
     )
