@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Usuario } from '../../models/usuario';
 import { Rol } from '../../models/rol';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UsuarioService } from '../../services/usuario.service';
 import { RolService } from '../../services/rol.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-usuario-form',
@@ -19,6 +20,8 @@ export class UsuarioFormComponent {
   accion: string = 'new';
   usuario!: Usuario;
   roles!: Array<Rol>;
+
+  toastSrvc = inject(ToastrService);
 
   constructor(private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -66,28 +69,27 @@ export class UsuarioFormComponent {
     this.usuarioService.addUsuario(this.usuario).subscribe(
       result => {
         if (result.status ==  1){
-          alert("Usuario registrado con exito");
+          this.toastSrvc.success("Usuario registrado con exito", "Usuario Registrado");
           this.router.navigate(['usuario-lista'])
         }
       },
       error => {
-        alert("Error al registrar Usuario");
+        this.toastSrvc.error("Error al registrar Usuario", "Error");
         console.log(error);
       }
     )
-    //this.usuario = new Usuario();
   }
 
-  acualizarUsuario(){
+  actualizarUsuario(){
     this.usuarioService.updateUsuario(this.usuario).subscribe(
       result => {
         if (result.status ==  1){
-          alert("Usuario actualizado con exito");
+          this.toastSrvc.success("Usuario actualizado con exito", "Usuario Actualizado");
           this.router.navigate(['usuario-lista'])
         }
       },
       (error: any) => {
-        alert("Error al actualizar Usuario");
+        this.toastSrvc.error("Error al actualizar Usuario", "Error");
         console.log(error);
       }
     )
@@ -106,7 +108,7 @@ export class UsuarioFormComponent {
     )
   }
 
-  atras(){
+  irALista(){
     this.router.navigate(['usuario-lista'])
   }
 

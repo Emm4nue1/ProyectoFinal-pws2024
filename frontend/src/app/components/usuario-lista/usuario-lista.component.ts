@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Usuario } from '../../models/usuario';
 import { UsuarioService } from '../../services/usuario.service';
 import { Router } from '@angular/router';
@@ -6,6 +6,7 @@ import { RolService } from '../../services/rol.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Rol } from '../../models/rol';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -23,6 +24,8 @@ export class UsuarioListaComponent {
   apellidoAux: string = "";
   rolAux: string = "";
   dniAux: number=0;
+
+  toastSrvc = inject(ToastrService);
 
   constructor(private router: Router,
     private usuarioService: UsuarioService,
@@ -72,8 +75,8 @@ export class UsuarioListaComponent {
     this.usuarioService.deleteUsuario(usuario).subscribe(
       (result: any) => {
         if (result.status == 1) {
-          alert('Usuario eliminado correctamente');
-          location.reload()
+          this.toastSrvc.success('Usuario eliminado correctamente', 'Usuario eliminado');
+          this.getUsuarios(this.apellidoAux, this.rolAux, this.dniAux);
         }
       },
       (error) => {

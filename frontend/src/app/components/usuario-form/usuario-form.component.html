@@ -1,59 +1,93 @@
-<section class="form-register">
-    <h4>GESTION DE USUARIO</h4>
-    <div class="controls">
+<div class="row justify-content-center m-o">
+    <div class="col-12 col-sm-12 col-md-7 contenedor">
+        <h1>Gestion de Usuario</h1>
+        <form class="formulario" #formLocal="ngForm">
+            <div class="encabezado">
+                <h5>Registrar Usuario</h5>
+            </div>
+            <div class="contenedor-formulario p-3">
 
-        <div class="input-group">
-            <span class="input-group-text">Apellido</span>
-            <input name="apellido" type="text" class="form-control" id="idapellido" [(ngModel)]="usuario.apellido">
-        </div>
+                <div class="mb-3">
+                    <label for="apellido" class="form-label">Apellido</label>
+                    <input type="text" class="form-control" id="apellido" name="apellido"
+                        placeholder="Ingrese el apellido" [(ngModel)]="usuario.apellido" required
+                        #apellido="ngModel" autocomplete="off">
+                    <div class="alert alert-danger m-2" [hidden]="apellido.valid || apellido.pristine">
+                        Campo obligatorio. Apellido.
+                    </div>
+                </div>
 
-        <div class="input-group">
-            <span class="input-group-text">Nombres</span>
-            <input name="nombre" type="text" class="form-control" id="idnombre" [(ngModel)]="usuario.nombre">
-        </div>
+                <div class="mb-3">
+                    <label for="nombre" class="form-label">Nombres</label>
+                    <input type="text" class="form-control" id="nombre" name="nombre"
+                        placeholder="Ingrese el nombre" [(ngModel)]="usuario.nombre" required
+                        #nombre="ngModel" autocomplete="off">
+                    <div class="alert alert-danger m-2" [hidden]="nombre.valid || nombre.pristine">
+                        Campo obligatorio. Nombre.
+                    </div>
+                </div>
 
-        <div class="input-group">
-            <span class="input-group-text">DNI</span>
-            <input name="dni" type="number" class="form-control" id="iddni" [(ngModel)]="usuario.dni">
-        </div>
+                <div class="mb-3">
+                    <label for="dni" class="form-label">DNI</label>
+                    <input type="text" class="form-control" id="dni" name="dni" placeholder="Ingrese numero de DNI"
+                        [(ngModel)]="usuario.dni" required #dni="ngModel" autocomplete="off">
+                        <div class="alert alert-danger m-2" [hidden]="dni.valid || dni.pristine">
+                            Campo obligatorio. DNI.
+                        </div>
+                </div>
 
-        <div class="input-group">
-            <span class="input-group-text">Email</span>
-            <input name="email" type="text" class="form-control" id="idemail" [(ngModel)]="usuario.email">
-        </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Ingrese email"
+                        [(ngModel)]="usuario.email" required #email="ngModel" autocomplete="off">
+                        <div class="alert alert-danger m-2" [hidden]="email.valid || email.pristine">
+                            Campo obligatorio. Email.
+                        </div>
+                </div>
 
-        <div class="input-group">
-            <span class="input-group-text">Telefono</span>
-            <input name="telefono" type="text" class="form-control" id="idtelefono" [(ngModel)]="usuario.telefono">
-        </div>
+                <div class="mb-3">
+                    <label for="telefono" class="form-label">Teléfono</label>
+                    <input type="number" class="form-control" id="telefono" name="telefono" placeholder="Ingrese numero de telefono"
+                        [(ngModel)]="usuario.telefono" required #telefono="ngModel" autocomplete="off">
+                        <div class="alert alert-danger m-2" [hidden]="telefono.valid || telefono.pristine">
+                            Campo obligatorio. Telefono.
+                        </div>
+                </div>
 
-        <div class="input-group">
-            <span class="input-group-text">Password</span>
-            <input name="password" type="password" id="inputPassword6" class="form-control"
-                aria-describedby="passwordHelpInline" [(ngModel)]="usuario.password">
-        </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="passwword" name="password" placeholder="Ingrese la contraseña"
+                        [(ngModel)]="usuario.password" required #password="ngModel" autocomplete="off">
+                        <div class="alert alert-danger m-2" [hidden]="password.valid || password.pristine">
+                            Campo obligatorio. Password.
+                        </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="rol" class="form-label">Rol</label>
+                    <select class="form-select" id="rol" name="rol" [(ngModel)]="usuario.rol">
+                        <option *ngIf="accion == 'update'" [ngValue]="usuario.rol">{{usuario.rol.nombre}}</option>
+                        <option *ngFor="let r of roles" [ngValue]="r">{{r.nombre}}</option>
+                    </select>
+                </div>
+
+                <div class="boton-formulario">
+                    <button *ngIf="accion == 'new' && usuario.rol.nombre != ''" type="submit" class="btn btn-success m-md-2" (click)="agregarUsuario()">Registrar</button>
+                    <button *ngIf="accion == 'update'"type="submit" class="btn btn-warning m-md-2" (click)="actualizarUsuario()">Actualizar</button>
+
+                    <button type="button" class="btn btn-primary m-md-2"(click)="irALista()">Ir a lista Usuarios</button>
+                </div>
 
 
-        <div class="input-group">
-            <span class="input-group-text">Rol</span>
-            <select class="form-select" id="idrol" name="rol" [(ngModel)]="usuario.rol">
-                <option *ngIf="accion == 'update'" [ngValue]="usuario.rol">{{usuario.rol.nombre}}</option>
-                <option *ngFor="let r of roles" [ngValue]="r">{{r.nombre}}</option>
-            </select>
-        </div>
 
-        <!-- <div class="mb-3 form-check">
-            <label class="form-check-label" for="idactivo">Activo</label>
-            <input type="checkbox" class="form-check-input" id="idactivo" name="activo">
-        </div> -->
+
+
+
+            </div>
+        </form>
+
+
 
     </div>
 
-    <button *ngIf="accion == 'new'" type="button" class="btn btn-outline-success"
-        (click)="agregarUsuario()">Guardar</button>
-    <button *ngIf="accion == 'update'" type="button" class="btn btn-outline-success"
-        (click)="acualizarUsuario()">Actualizar</button>
-    <button type="button" class="btn btn-outline-primary mx-5" (click)="atras()">Ir a Lista</button>
-
-
-</section>
+</div>
