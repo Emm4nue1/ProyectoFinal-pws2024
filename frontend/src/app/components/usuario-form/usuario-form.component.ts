@@ -118,4 +118,16 @@ export class UsuarioFormComponent {
     this.router.navigate(['usuario-lista'])
   }
 
+  validarCamposUsuario(){
+    return !(
+      this.usuario.apellido != '' && 
+      this.usuario.nombre != '' && 
+      this.usuario.dni > 0 &&
+      this.usuario.email != '' && 
+      this.usuario.telefono > 0  &&
+      this.usuario.password != '' && 
+      this.usuario.rol.nombre != ''
+    );
+  }
+
 }
