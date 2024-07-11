@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Alquiler } from '../models/alquiler';
 
 declare var MercadoPago: any;
 
@@ -18,17 +19,20 @@ export class MercadopagoService {
     });
   }
 
-  createPreference(): Observable<any> {
+  createPreference(alquiler: Alquiler): Observable<any> {
     let httpOption = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
     }
 
+    var fechaAlquiler = new Date(alquiler.fechaAlquiler);
     const orderData = {
+      product_id: alquiler._id,
+      title: "Pago de Alquiler",
       quantity: 1,
-      description: "test",
-      price: 20
+      description: "Pago de Alquiler - Mes de Pago: " + this.formatDate(fechaAlquiler) + " - Alquiler Id: " + alquiler._id,
+      price: alquiler.costoalquiler
     };
 
     const body = JSON.stringify(orderData);
@@ -46,5 +50,13 @@ export class MercadopagoService {
         },
       },
     });
+  }
+
+  formatDate(fechaAlquiler: Date) : String {
+    const year = fechaAlquiler.getUTCFullYear();
+    const month = String(fechaAlquiler.getUTCMonth() + 1).padStart(2, '0');
+    const day = String(fechaAlquiler.getUTCDate()).padStart(2, '0');
+    
+    return `${day}-${month}-${year}`;
   }
 }

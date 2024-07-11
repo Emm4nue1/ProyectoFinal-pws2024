@@ -31,8 +31,10 @@
                             <button type="button" class="btn btn-warning m-md-2"(click)="modificarAlquiler(a._id)">Modificar</button>
                         </div>
                         <div class="btn-lista-alquiler" *ngIf="hasRole(rol.ADMINISTRATIVO) || hasRole(rol.PROPIETARIO)">
-                            <button type="button" class="btn btn-success m-md-2" (click)="pagarAlquiler(a._id)">Pagar Total</button>
-                            <button type="button" class="btn btn-success m-md-2" (click)="pagarAlquiler(a._id)">Pagar Adelanto</button>
+                            <button type="button" class="btn btn-success m-md-2" (click)="pagarAlquiler(a)">Pagar Total</button>
+                            <button type="button" class="btn btn-success m-md-2" (click)="pagarAdelanto(a._id)">Pagar Adelanto</button>
+
+                            <!-- <div id="wallet_container"></div> -->
                         </div>
                     </td>
                 </tr>

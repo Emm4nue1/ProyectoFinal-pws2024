@@ -1,6 +1,4 @@
 import { Component, inject } from '@angular/core';
-import { UsuarioService } from '../../services/usuario.service';
-import { LocalService } from '../../services/local.service';
 import { AlquilerService } from '../../services/alquiler.service';
 import { Local } from '../../models/local';
 import { Usuario } from '../../models/usuario';
@@ -11,6 +9,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Constantes } from '../../helpers/constantes';
 import { AuthService } from '../../services/auth.service';
+import { MercadopagoService } from '../../services/mercadopago.service';
 
 @Component({
   selector: 'app-alquiler-lista',
@@ -30,9 +29,8 @@ export class AlquilerListaComponent {
 
   constructor(private alquilerService: AlquilerService,
     private authService: AuthService,
-    private usuarioService: UsuarioService,
-    private localService: LocalService,
-    private router: Router) { 
+    private router: Router, 
+    private mercadopagoService: MercadopagoService) { 
     this.iniciarVariables();
       this.obtenerAlquiler();
   }
@@ -70,7 +68,22 @@ export class AlquilerListaComponent {
     this.router.navigate(['alquiler-form', "0"]);
   }
 
-  pagarAlquiler(idAlquiler: string){
+  pagarAlquiler(alquiler: Alquiler){
+    this.mercadopagoService.createPreference(alquiler).subscribe({
+      next: (result) => {
+        window.location.href = result.sandbox_init_point;
+      },
+      error: (error) => {
+        alert(error);
+      }
+    });
+  }
+
+  createCheckoutButton(preferenceId: any){
+    this.mercadopagoService.createCheckout(preferenceId);
+  }
+
+  pagarAdelanto(idAlquiler: string){
     this.router.navigate(['alquiler-form', idAlquiler]);
   }
 

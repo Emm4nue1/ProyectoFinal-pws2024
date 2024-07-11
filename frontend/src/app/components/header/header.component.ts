@@ -4,7 +4,6 @@ import { UsuarioFormComponent } from '../usuario-form/usuario-form.component';
 import { UsuarioListaComponent } from '../usuario-lista/usuario-lista.component';
 import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common';
-import { MercadopagoService } from '../../services/mercadopago.service';
 import { Constantes } from '../../helpers/constantes';
 
 @Component({
@@ -17,7 +16,7 @@ import { Constantes } from '../../helpers/constantes';
 export class HeaderComponent {
   rol = Constantes;
 
-  constructor(private authService: AuthService, private router: Router, private mercadopagoService: MercadopagoService) {
+  constructor(private authService: AuthService, private router: Router) {
   }
 
   isAuthenticated(){
@@ -35,20 +34,5 @@ export class HeaderComponent {
 
   hasRole(role: String){
     return this.authService.getRole() == role;
-  }
-
-  comprar(){
-    this.mercadopagoService.createPreference().subscribe({
-      next: (result) => {
-        window.location.href = result.sandbox_init_point;
-      },
-      error: (error) => {
-        alert(error);
-      }
-    });
-  }
-
-  createCheckoutButton(preferenceId: any){
-    this.mercadopagoService.createCheckout(preferenceId);
   }
 }

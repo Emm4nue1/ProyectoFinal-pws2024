@@ -11,15 +11,17 @@ mercadopagoCtrl.createPreference = async(req, res) => {
     const body = {
         items: [
 			{
-				title: req.body.description,
+				id: req.body.product_id,
+				title: req.body.title,
 				unit_price: Number(req.body.price),
 				quantity: Number(req.body.quantity),
+				description: req.body.description
 			}
 		],
 		back_urls: {
-			"success": "http://localhost:4200/home",
-			"failure": "http://localhost:4200/home",
-			"pending": "http://localhost:4200/home"
+			"success": "https://localhost:4200/home",
+			"failure": "https://localhost:4200/home",
+			"pending": "https://localhost:4200/home"
 		},
 		auto_return: "approved",
     }
