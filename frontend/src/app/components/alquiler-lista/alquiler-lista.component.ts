@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { UsuarioService } from '../../services/usuario.service';
 import { LocalService } from '../../services/local.service';
 import { AlquilerService } from '../../services/alquiler.service';
@@ -8,6 +8,7 @@ import { Alquiler } from '../../models/alquiler';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-alquiler-lista',
@@ -21,6 +22,8 @@ export class AlquilerListaComponent {
   usuario: Usuario = new Usuario();
   alquiler: Alquiler = new Alquiler();
   alquileres: Array<Alquiler> = new Array<Alquiler>();
+  //injecto el servicio de toast.
+  toastSrvc= inject(ToastrService);
 
   constructor(private alquilerService: AlquilerService,
     private usuarioService: UsuarioService,
@@ -67,7 +70,7 @@ export class AlquilerListaComponent {
     this.alquilerService.deleteAlquiler(idAlquiler).subscribe(
       (result) => {
         console.log(result);
-        alert("Alquiler eliminado");
+        this.toastSrvc.success("Alquiler eliminado", "Operación exitosa");
         this.obtenerAlquiler();
       },
       (error) => {
