@@ -7,6 +7,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UsuarioService } from '../../services/usuario.service';
 import { RolService } from '../../services/rol.service';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from '../../services/auth.service';
+import { Constantes } from '../../helpers/constantes';
 
 @Component({
   selector: 'app-usuario-form',
@@ -16,7 +18,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './usuario-form.component.css'
 })
 export class UsuarioFormComponent {
-
+  rol = Constantes;
   accion: string = 'new';
   usuario!: Usuario;
   roles!: Array<Rol>;
@@ -26,10 +28,15 @@ export class UsuarioFormComponent {
   constructor(private activatedRoute: ActivatedRoute,
     private router: Router,
     private usuarioService: UsuarioService,
-    private rolService: RolService
+    private rolService: RolService,
+    private authService: AuthService
   ) {
     this.iniciarVariable();
     this.cargarRoles();
+
+    if(!authService.isLoggedIn() || authService.getRole()! == this.rol.ADMINISTRATIVO || authService.getRole()! == this.rol.PROPIETARIO){
+      router.navigateByUrl("/home");
+    }
   }
 
   ngOnInit(): void {
@@ -62,7 +69,6 @@ export class UsuarioFormComponent {
       }
     )
   }
-
 
   agregarUsuario(){
     //console.log(this.usuario);

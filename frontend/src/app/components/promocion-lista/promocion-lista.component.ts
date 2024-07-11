@@ -4,7 +4,7 @@ import { Promocion } from '../../models/promocion';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { FacebookModule, FacebookService, InitParams } from 'ngx-facebook';
+import { FacebookService, InitParams } from 'ngx-facebook';
 import { ApiMethod } from 'ngx-facebook/providers/facebook';
 import { AuthService } from '../../services/auth.service';
 
@@ -16,20 +16,20 @@ import { AuthService } from '../../services/auth.service';
   styleUrl: './promocion-lista.component.css'
 })
 export class PromocionListaComponent {
-  msjPosteo?:string="hola prueba";
+  msjPosteo?: string = "hola prueba";
   promociones: Array<Promocion> = [];//Para obtener todas las sucripciones de la bd.
 
   sortOrder: string = "";
 
-  constructor(private promocionService: PromocionService, 
-    private router: Router, 
-    private fb:FacebookService,
+  constructor(private promocionService: PromocionService,
+    private router: Router,
+    private fbService: FacebookService,
     private authService: AuthService) {
     this.obtenerPromociones();
-    this.posteoFb();
+    this.sesionFb();
   }
 
-  hasRole(role: String){
+  hasRole(role: String) {
     return this.authService.getRole() == role;
   }
 
@@ -68,23 +68,24 @@ export class PromocionListaComponent {
     )
   }
 
-  posteoFb(){
+  posteoFb() {
     var apiMethod: ApiMethod = "post";
-    this.fb.api('/348066471731907/feed', apiMethod,
-    {
-    "message": this.msjPosteo,
-    "access_token":"EAAKnza2tB7kBO9y0XfiOZCdJ19HYjMTZAdcX0dZBHbw6y7ilvSxk0q6m2VVay4WOaMHaD7QpI5H04GZBGl68NxaQ5gI7OgmaemVsEJcPCWpDqLi4nhZAOHkssNJkkzZCAQiadIZBfnfgxJ5NkFLMuEAI25NAJNPaXBRF6P4fDWWuESbPzst6wPDlXdqmjTZAyZBZAV5Q4JtkoADTnmiZCYdOIKcE0aV"
-    });
-    }
+    this.fbService.api('/348066471731907/feed', apiMethod,
+      {
+        "message": this.msjPosteo,
+        "access_token": "EAAKnza2tB7kBOZBHePLT6xdMjHof9TWbCF0dbeebYH2EqYnVZBif1BdXP1UHTD7UJkun3cVDaxGLPZAauUU815fIaVpN5tzXJHk2ujQt2ayzgMPLDoF2UK9AFic9yUscLyZAbQZA8M31ZBHaQqsHNIMLpVOXsyeGIjZCnnQ98IT00E5dvLwrAHCZCyY3fLZA80NVpVb2R7hcvKv9zdbHH9RynFwPmqwZDZD"
+      });
+  }
 
-  sesionFb(){
-      let initParams: InitParams = {
+  sesionFb() {
+    let initParams: InitParams = {
       appId: '1757474011058319',
-      autoLogAppEvents : true,
-      xfbml : true,
-      version : 'v7.0'
-      };
-      this.fb.init(initParams);
-      }
-     
+      autoLogAppEvents: true,
+      xfbml: true,
+      version: 'v7.0'
+    };
+
+    this.fbService.init(initParams);
+    this.posteoFb();
+  }
 }

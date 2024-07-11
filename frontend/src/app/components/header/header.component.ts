@@ -40,7 +40,7 @@ export class HeaderComponent {
   comprar(){
     this.mercadopagoService.createPreference().subscribe({
       next: (result) => {
-        this.createCheckoutButton(result.id);
+        window.location.href = result.sandbox_init_point;
       },
       error: (error) => {
         alert(error);

@@ -1,4 +1,4 @@
-<div class="row justify-content-center m-o">
+<div class="row justify-content-center m-0 p-0">
     <div class="col-12 col-sm-12 col-md-7 contenedor">
         <h1>Crear Locales</h1>
         <form class="formulario" #formLocal="ngForm">
@@ -73,7 +73,7 @@
 
             <div class="boton-formulario">
                 <button *ngIf="accion == 'new'" class="btn btn-success m-md-2" type="submit" 
-                [disabled]="formLocal.invalid"(click)="crearLocal()"> Guardar</button>
+                [disabled]="formLocal.invalid || validarCampos()"(click)="crearLocal()"> Guardar</button>
                 <button *ngIf="accion == 'update'" class="btn btn-success m-md-2" type="submit" 
                 [disabled]="formLocal.invalid" (click)="modificarLocal()"> Actualizar</button>
                 <button class="btn btn-primary m-md-2" type="submit"  (click)="volverLocal()">

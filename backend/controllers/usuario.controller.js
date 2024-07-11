@@ -7,7 +7,6 @@ const Rol = require('../models/rol');
 usuarioCtrl.getUsuarios = async (req, res) => {
     try {
         let filter = {};
-
         // Filtro para apellido
         if (req.query.apellido != null && req.query.apellido != '') {
             filter.apellido = { $regex: req.query.apellido, $options: 'i' };

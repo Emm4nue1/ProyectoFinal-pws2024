@@ -26,9 +26,13 @@
                     <td>{{a.fechaAlquiler | date: "dd-MM-yyyy": "GMT"}}</td>
                     <td>{{a.plazomes}}</td>
                     <td>
-                        <div class="btn-lista-alquiler">
+                        <div class="btn-lista-alquiler" *ngIf="hasRole(rol.ADMINISTRATIVO)">
                             <button type="button" class="btn btn-danger m-md-2" (click)="eliminarAlquiler(a._id)">Eliminar</button>
                             <button type="button" class="btn btn-warning m-md-2"(click)="modificarAlquiler(a._id)">Modificar</button>
+                        </div>
+                        <div class="btn-lista-alquiler" *ngIf="hasRole(rol.ADMINISTRATIVO) || hasRole(rol.PROPIETARIO)">
+                            <button type="button" class="btn btn-success m-md-2" (click)="pagarAlquiler(a._id)">Pagar Total</button>
+                            <button type="button" class="btn btn-success m-md-2" (click)="pagarAlquiler(a._id)">Pagar Adelanto</button>
                         </div>
                     </td>
                 </tr>

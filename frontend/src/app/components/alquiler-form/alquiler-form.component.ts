@@ -9,6 +9,7 @@ import { Usuario } from '../../models/usuario';
 import { Alquiler } from '../../models/alquiler';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Constantes } from '../../helpers/constantes';
 
 @Component({
   selector: 'app-alquiler-form',
@@ -18,6 +19,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './alquiler-form.component.css'
 })
 export class AlquilerFormComponent {
+  rol = Constantes;
   locales = Array<Local>();
   propietarios = Array<Usuario>();
   alquiler = new Alquiler();
@@ -86,15 +88,15 @@ export class AlquilerFormComponent {
   }
 
   cargarPropietarios(): void {
-    this.usuarioService.getUsuarios().subscribe(
-      (result: any) => {
+    this.usuarioService.getUsuarioByRoleName(this.rol.PROPIETARIO).subscribe({
+      next: (result) => {
         this.propietarios = result;
         console.log(this.propietarios);
       },
-      (error: any) => {
-        console.log(error);
+      error: (error) => {
+        alert(error);
       }
-    )
+    });
   }
 
   crearAlquiler() {

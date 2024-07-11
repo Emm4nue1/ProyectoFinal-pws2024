@@ -44,6 +44,15 @@ export class UsuarioService {
     }
     return this._http.get(this.urlHost + id, httpOptions);
   }
+
+  getUsuarioByRoleName(name: string): Observable<any> {
+    let httpOptions = {
+      headers: new HttpHeaders({
+        
+      }),
+    }
+    return this._http.get(`${this.urlHost}?rol=${name}`, httpOptions);
+  }
   
   addUsuario(usuario: Usuario):Observable<any>{
     console.log("usuario en service", usuario);

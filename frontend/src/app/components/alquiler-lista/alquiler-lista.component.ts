@@ -70,6 +70,10 @@ export class AlquilerListaComponent {
     this.router.navigate(['alquiler-form', "0"]);
   }
 
+  pagarAlquiler(idAlquiler: string){
+    this.router.navigate(['alquiler-form', idAlquiler]);
+  }
+
   modificarAlquiler(idAlquiler: string){
     this.router.navigate(['alquiler-form', idAlquiler]);
   }
