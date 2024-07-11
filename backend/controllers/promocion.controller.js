@@ -15,17 +15,38 @@ promocionCtrl.createPromocion = async (req, res) => {
 };
 
 // Obtener todas las promociones
+// promocionCtrl.getPromociones = async (req, res) => {
+//   try {
+//     const promociones = await Promocion.find().populate('local');
+//     const filteredPromociones = promociones.filter(promocion => promocion.local.usuario == req.usuario_id);
+//     res.json(filteredPromociones);
+//   } catch (error) {
+//     console.error('Error:', error);
+//     res.status(500).json({ status: '0', msg: 'Error procesando operación.', error: error.message });
+//   }
+// };
 promocionCtrl.getPromociones = async (req, res) => {
   try {
-    const promociones = await Promocion.find().populate('local');
+    let promociones;
+
+    const sortOrder = req.query.sortOrder;
+
+    if (sortOrder) {
+      const sortValue = sortOrder === 'desc' ? -1 : 1;
+      promociones = await Promocion.find().populate('local').sort({ fechaFin: sortValue });
+    } else {
+      promociones = await Promocion.find().populate('local');
+    }
+   
     const filteredPromociones = promociones.filter(promocion => promocion.local.usuario == req.usuario_id);
+
     res.json(filteredPromociones);
+
   } catch (error) {
     console.error('Error:', error);
     res.status(500).json({ status: '0', msg: 'Error procesando operación.', error: error.message });
   }
 };
-
 
 // Obtener una promoción por ID
 promocionCtrl.getPromocionById = async (req, res) => {

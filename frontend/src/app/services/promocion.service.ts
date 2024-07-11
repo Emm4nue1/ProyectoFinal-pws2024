@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Promocion } from '../models/promocion';
@@ -18,6 +18,17 @@ export class PromocionService {
         'Content-Type': 'application/json'
       })
     }
+    return this.http.get(this.urlBase, httpOption);
+  }
+
+  getPromocionesFiltro(sortOrder: string): Observable<any> {
+    const httpOption = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json'
+      }),
+      params: new HttpParams()
+      .append('sortOrder', sortOrder)
+    };
     return this.http.get(this.urlBase, httpOption);
   }
 
