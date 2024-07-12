@@ -6,11 +6,10 @@
                 <h5>Registrar Local</h5>
             </div>
             <div class="contenedor-formulario p-3">
-
-            
+                <p class="text-danger"[hidden]="!formLocal.invalid && !validarCampos()">*Todos los campos son obligatorios</p>
             <div class="mb-3">
                 <label for="numero" class="form-label">Número de Local</label>
-                <input type="text" class="form-control" id="numero" name="numero" placeholder="Ingrese número de Local"
+                <input type="number" class="form-control" id="numero" name="numero" placeholder="Ingrese número de Local"
                     [(ngModel)]="local.numeroLocal" required #nrolocal="ngModel" autocomplete="off">
                     <div class="alert alert-danger m-2" [hidden]="nrolocal.valid || nrolocal.pristine">
                         Campo obligatorio. Número de local.
@@ -19,19 +18,27 @@
             <div class="mb-3">
                 <label for="superficie" class="form-label">Superficie</label>
                 <input type="number" class="form-control" id="superficie" name="superficie"
-                    placeholder="Ingrese Superficie Local" [(ngModel)]="local.superficie" required #suplocal="ngModel" autocomplete="off">
+                    placeholder="Ingrese Superficie Local" [(ngModel)]="local.superficie" required #suplocal="ngModel" autocomplete="off"
+                    pattern="^[1-9]\d*$">
                 <div class="alert alert-danger m-2" [hidden]="suplocal.valid || suplocal.pristine">
-                        Campo obligatorio. Superficie del local.
+                    Campo obligatorio. Superficie del local.
+                </div>
+                <div class="alert alert-danger m-2" [hidden]="suplocal.control.value > 0 || suplocal.pristine">
+                    El número debe ser mayor que cero.
                 </div>
             </div>
 
             <div class="mb-3">
                 <label for="mes" class="form-label">Costo Mes</label>
                 <input type="number" class="form-control" id="mes" name="mes" placeholder="Ingrese costo del Mes"
-                    [(ngModel)]="local.costoMes" required #costomeslocal="ngModel" autocomplete="off">
+                    [(ngModel)]="local.costoMes" required #costomeslocal="ngModel" autocomplete="off"
+                    pattern="^[1-9]\d*$">
                 <div class="alert alert-danger m-2" [hidden]="costomeslocal.valid || costomeslocal.pristine">
-                        Campo obligatorio. Costo del local.
-                 </div>
+                    Campo obligatorio. Costo del local.
+                </div>
+                <div class="alert alert-danger m-2" [hidden]="costomeslocal.control.value > 0 || costomeslocal.pristine">
+                    El número debe ser mayor que cero.
+                </div>
             </div>
 
             <div class="form-check mb-4">
