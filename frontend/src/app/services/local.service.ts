@@ -8,7 +8,7 @@ import { Local } from '../models/local';
 })
 export class LocalService {
 
-  urlBase: string = "http://localhost:3000/api/";
+  urlBase: string = "https://proyectofinal-pws2024-2.onrender.com/api/";
   constructor(private http: HttpClient) {
 
   }

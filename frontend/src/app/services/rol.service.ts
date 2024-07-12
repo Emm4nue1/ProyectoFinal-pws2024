@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class RolService {
 
-  urlHost: string = 'http://localhost:3000/api/rol/';
+  urlHost: string = 'https://proyectofinal-pws2024-2.onrender.com/api/rol/';
 
   constructor(private _http:HttpClient) { 
 

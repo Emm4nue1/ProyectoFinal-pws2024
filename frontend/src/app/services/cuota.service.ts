@@ -7,7 +7,7 @@ import { Cuota } from '../models/cuota';
   providedIn: 'root'
 })
 export class CuotaService {
-  urlBase: string = "http://localhost:3000/api/alquiler/cuota/";
+  urlBase: string = "https://proyectofinal-pws2024-2.onrender.com/api/alquiler/cuota/";
   
   constructor(private http: HttpClient) { }
   
