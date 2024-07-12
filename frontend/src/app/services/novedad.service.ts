@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class NovedadService {
 
-  urlBase: string = 'https://proyectofinal-pws2024-2.onrender.com/api/local/novedades/';
+  urlBase: string = 'http://localhost:3000/api/local/novedades/';
 
   constructor(private http: HttpClient) { }
 

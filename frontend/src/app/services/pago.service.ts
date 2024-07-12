@@ -7,7 +7,7 @@ import { Pago } from '../models/pago';
   providedIn: 'root'
 })
 export class PagoService {
-  urlBase: string = "https://proyectofinal-pws2024-2.onrender.com/api/alquiler/pago/";
+  urlBase: string = "http://localhost:3000/api/alquiler/pago/";
   
   constructor(private http: HttpClient) { }
   

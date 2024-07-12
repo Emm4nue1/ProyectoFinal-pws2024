@@ -19,7 +19,7 @@ export class MercadopagoService {
   readonly monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
     "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
 
-  urlBase: string = 'https://proyectofinal-pws2024-2.onrender.com/api/mercadopago';
+  urlBase: string = 'http://localhost:3000/api/mercadopago';
 
   constructor(private http: HttpClient) {
     this.mercadoPago = new MercadoPago("APP_USR-1536e292-06d7-4c55-b191-dceac72d056c", {

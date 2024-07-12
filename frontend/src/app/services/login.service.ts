@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 
 export class LoginService {
-  url: string = 'https://proyectofinal-pws2024-2.onrender.com/api/usuario/login';
+  url: string = 'http://localhost:3000/api/usuario/login';
   constructor(private http: HttpClient) { }
 
   loginUser(email:string, password:string):Observable<any>{

@@ -8,7 +8,7 @@ import { Alquiler } from '../models/alquiler';
 })
 export class AlquilerService {
 
-  urlHost: string = 'https://proyectofinal-pws2024-2.onrender.com/api/alquiler/';
+  urlHost: string = 'http://localhost:3000/api/alquiler/';
 
   constructor(private _http: HttpClient) {
     

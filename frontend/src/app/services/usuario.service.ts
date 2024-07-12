@@ -9,7 +9,7 @@ import { Usuario } from '../models/usuario';
 })
 export class UsuarioService {
 
-  urlHost: string = 'https://proyectofinal-pws2024-2.onrender.com/api/usuario/';
+  urlHost: string = 'http://localhost:3000/api/usuario/';
 
   constructor(private _http: HttpClient ) {
 
