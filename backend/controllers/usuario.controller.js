@@ -7,7 +7,7 @@ const Rol = require('../models/rol');
 
 usuarioCtrl.getUsuarios = async (req, res) => {
     try {
-        let filter = {};
+        let filter = { };
 
         if (req.query.apellido != null && req.query.apellido != '') {
             filter.apellido = { $regex: req.query.apellido, $options: 'i' };
@@ -29,13 +29,14 @@ usuarioCtrl.getUsuarios = async (req, res) => {
             }
         }
 
-        const rolDuenio = await Rol.findOne({ nombre: 'duenio' });
-        if (rolDuenio) {
-            filter.rol = { $ne: rolDuenio._id };
-        }
-
+        // const rolDuenio = await Rol.findOne({ nombre: 'duenio' });
+        // if (rolDuenio) {
+        //     filter.rol = { $ne: rolDuenio._id };
+        // }
+        
         const usuarios = await Usuario.find(filter).populate("rol");
         res.json(usuarios);
+       
     } catch (error) {
         res.status(500).json({
             'status': '0',

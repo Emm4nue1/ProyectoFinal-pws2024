@@ -3,7 +3,7 @@ const express = require('express');
 const authCtrl = require('../controllers/auth.controller');
 const router = express.Router();
 
-router.get('/', alquilerCtrl.getAlquileres);
+router.get('/', authCtrl.verifyToken,alquilerCtrl.getAlquileres);
 router.get('/usuario', authCtrl.verifyToken, alquilerCtrl.getAlquileresByUsuario);
 router.post('/', alquilerCtrl.createAlquiler);
 router.get('/:id', alquilerCtrl.getAlquilerById);
