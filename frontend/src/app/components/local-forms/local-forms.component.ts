@@ -114,6 +114,13 @@ export class LocalFormsComponent {
   }
 
   validarCampos(){
-    return !(this.local.superficie > 0 && this.local.costoMes > 0);
+    return !(this.local.superficie > 0 &&
+       this.local.costoMes > 0 &&
+      this.local.numeroLocal!='0' &&
+      this.local.numeroLocal!='-1' &&
+      this.local.numeroLocal!='-2' &&
+      this.local.numeroLocal!='-3' 
+    
+    );
   }
 }
