@@ -58,7 +58,7 @@
             </ul>
           </li>
 
-          <li class="nav-item dropdown" *ngIf="isAuthenticated() && (hasRole(rol.ADMINISTRATIVO) || hasRole(rol.DUENIO))">
+          <li class="nav-item dropdown" *ngIf="isAuthenticated() && (hasRole(rol.ADMINISTRATIVO) || hasRole(rol.DUENIO) || hasRole(rol.PROPIETARIO))">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"
               routerLinkActive="active">
               <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
@@ -70,7 +70,7 @@
               </svg>
               Novedad</a>
             <ul class="dropdown-menu">
-              <li class="nav-item">
+              <li class="nav-item" *ngIf="hasRole(rol.ADMINISTRATIVO) || hasRole(rol.DUENIO)">
                 <a class="nav-link custom-nav-link" [routerLink]="['novedad-form','0']" routerLinkActive="active">Nueva
                   novedad</a>
               </li>
