@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { NovedadService } from '../../services/novedad.service';
 import { Novedad } from '../../models/novedad';
 import { LocalService } from '../../services/local.service';
@@ -8,6 +8,7 @@ import { Usuario } from '../../models/usuario';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-novedad-form',
@@ -20,7 +21,7 @@ export class NovedadFormComponent{
   novedad: Novedad = new Novedad();
   local: Local = new Local();
   usuario: Usuario = new Usuario();
-
+  toastSrvc = inject(ToastrService);
   locales: Array<Local> = [];
   usuarios: Array<Usuario> = [];
 
@@ -97,7 +98,7 @@ export class NovedadFormComponent{
         });
       },
       (error) => {
-        console.log(error);
+        console.log('Error:',error);
       }
     )
   }
@@ -106,14 +107,14 @@ export class NovedadFormComponent{
     console.log(this.novedad);
     this.novedadService.createNovedad(this.novedad).subscribe(
       (result) => {
+        this.toastSrvc.success('Novedad creada correctamente', 'Operación exitosa');
         alert("Novedad creada");
-        console.log(result);
         this.novedad = new Novedad();
         this.router.navigate(['novedad-lista']);
       },
       (error) => {
-        alert("Error al crear la novedad");
-        console.log(error);
+        this.toastSrvc.error('Error al crear la novedad', 'Operación fallida');
+        console.log('Error:',error);
       }
     )
   }
@@ -121,19 +122,27 @@ export class NovedadFormComponent{
   actualizarNovedad() {
     this.novedadService.updateNovedad(this.novedad).subscribe(
       (result) => {
-        alert("Novedad actualizada");
-        console.log(result);
+        this.toastSrvc.success('Novedad actualizada correctamente', 'Operación exitosa ');
         this.novedad = new Novedad();
         this.router.navigate(['novedad-lista']);
       },
       (error) => {
-        alert("Error al actualizar la novedad");
-        console.log(error);
+        this.toastSrvc.error('Error al actualizar la novedad', 'Operación fallida');
+        console.log('Error:',error);
       }
     )
   }
 
   irALista() {
     this.router.navigate(['novedad-lista']);
+  }
+
+  validarCamposNovedad() {
+    return !(
+      this.novedad.usuario.nombre != "" &&
+      this.novedad.local.numeroLocal != "" &&
+      this.novedad.texto != "" &&
+      this.novedad.estado != ""
+    );
   }
 }
