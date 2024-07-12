@@ -41,7 +41,7 @@ export class NovedadListaComponent {
     this.novedadService.getNovedades().subscribe(
       (result) => {
         console.log(result);
-        this.novedades = result;
+        this.novedades = result.reverse();
       },
       (error) => {
         console.log(error);
