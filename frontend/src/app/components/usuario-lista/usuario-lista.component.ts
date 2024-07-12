@@ -41,7 +41,7 @@ export class UsuarioListaComponent {
     this.limpiarCampos();
   }
   getUsuarios(apellidoAux: string, rolAux: string, dniAux: number): void {
-    //console.log(rolAux);
+    console.log(rolAux);
     if (rolAux == "Todos"){
       rolAux = "";
     }

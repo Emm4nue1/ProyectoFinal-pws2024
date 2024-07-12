@@ -31,9 +31,9 @@ novedadCtrl.createNovedad = async (req, res) => {
 novedadCtrl.getNovedades = async (req, res) => {
   try {
     
-    let filter = {};
+    //let filter = {};
 
-    // let filter = { usuario: req.usuario_id };
+    let filter = { usuario: req.usuario_id };
 
     if (req.query.estado != null && req.query.estado != '') {
       filter.estado = req.query.estado;

@@ -12,7 +12,7 @@ alquilerCtrl.getAlquileresByUsuario = async (req, res) => {
     try {
 
         let filter = { usuario: req.usuario_id };
-        
+        console.log(filter);
         const alquileres = await Alquiler.find(filter).populate(['usuario', 'local']);
         res.json(alquileres);
     } catch (error) {
