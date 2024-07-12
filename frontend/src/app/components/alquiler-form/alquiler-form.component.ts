@@ -76,12 +76,14 @@ export class AlquilerFormComponent {
   cargarLocales(): void {
     this.localService.getLocalesFiltros(true, false).subscribe(
       result => {
+        console.log("CARGA DE LOCALES",result);
         this.locales = result;
       },
       (error) => {
         console.log(error);
       })
   }
+
   iniciarVariable(): void {
     this.alquiler = new Alquiler();
     this.locales = new Array<Local>();

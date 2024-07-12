@@ -62,6 +62,11 @@ novedadCtrl.getNovedades = async (req, res) => {
         filter = {};
     } else {
         filter = { usuario: req.usuario_id };
+        
+      if (req.query.estado != null && req.query.estado != '') {
+        filter.estado = req.query.estado;
+      }
+
     }
     const novedades = await Novedad.find(filter).populate(['local', 'usuario']);
     res.json(novedades);

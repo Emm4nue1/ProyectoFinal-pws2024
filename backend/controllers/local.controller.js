@@ -2,6 +2,7 @@ const Local = require('../models/local');
 const localCtrl = {}
 const Usuario = require('../models/usuario');
 
+const Rol = require('../models/rol');
 //Obtener todos los locales.Probado.
 // localCtrl.getLocales = async (req, res) => {
 //     var locales = await Local.find({ usuario: req.usuario_id });
@@ -10,20 +11,44 @@ const Usuario = require('../models/usuario');
 
 localCtrl.getLocales = async (req, res) => {
     try {
+        let filter = {};
+        const usuario = await Usuario.findById(req.usuario_id).populate('rol');
+        const rolNombre = usuario.rol.nombre;
+        if (rolNombre == 'duenio') {
+            filter = {};
+            if (req.query.habilitado != null) {
+                filter.habilitado = req.query.habilitado === 'true';
+            } else {
 
-        let filter = { usuario: req.usuario_id };
-        //let filter = { };
+            }
 
-        if (req.query.habilitado != null) {
-            filter.habilitado = req.query.habilitado === 'true';
+            if (req.query.alquilado != null) {
+                filter.alquilado = req.query.alquilado === 'true';
+            } 
+
+            const locales = await Local.find(filter).populate("usuario");
+            res.json(locales);
+        } else {
+            // let filter = { usuario: req.usuario_id };
+            filter = {};
+
+            if (req.query.habilitado != null) {
+                filter.habilitado = req.query.habilitado === 'true';
+            } else {
+
+            }
+
+            if (req.query.alquilado != null) {
+                filter.alquilado = req.query.alquilado === 'true';
+            } else {
+                filter = { usuario: req.usuario_id };
+            }
+            const locales = await Local.find(filter).populate("usuario");
+            res.json(locales);
         }
 
-        if (req.query.alquilado != null) {
-            filter.alquilado = req.query.alquilado === 'true';
-        }
 
-        const locales = await Local.find(filter).populate("usuario");
-        res.json(locales);
+
     } catch (error) {
         res.status(500).json({
             'status': '0',
