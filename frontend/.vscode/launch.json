@@ -7,7 +7,7 @@
       "type": "chrome",
       "request": "launch",
       "preLaunchTask": "npm: start",
-      "url": "https://proyecto-final-pws2024-2-8pryui2a8-emm4nue1s-projects.vercel.app/"
+      "url": "https://proyecto-final-pws2024-2.vercel.app/"
     },
     {
       "name": "ng test",
