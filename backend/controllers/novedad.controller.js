@@ -1,6 +1,8 @@
 const Novedad = require('../models/novedad');
 const novedadCtrl = {};
 
+const Usuario = require('../models/usuario');
+const Rol = require('../models/rol');
 
 
 // Crear una nueva novedad
@@ -28,29 +30,46 @@ novedadCtrl.createNovedad = async (req, res) => {
 //   }
 // };
 
+// novedadCtrl.getNovedades = async (req, res) => {
+//   try {
+
+//     //let filter = {};
+
+//     let filter = { usuario: req.usuario_id };
+
+//     if (req.query.estado != null && req.query.estado != '') {
+//       filter.estado = req.query.estado;
+//     }
+
+//     const novedades = await Novedad.find(filter).populate({
+//       path: 'local',
+//       populate: { path: 'usuario' }
+//     })
+//     .populate('usuario');
+
+//     res.json(novedades);
+//   } catch (error) {
+//     console.error('Error:', error);
+//     res.status(500).json({ status: '0', msg: 'Error procesando operación.', error: error.message });
+//   }
+// };
 novedadCtrl.getNovedades = async (req, res) => {
   try {
-    
-    //let filter = {};
-
-    let filter = { usuario: req.usuario_id };
-
-    if (req.query.estado != null && req.query.estado != '') {
-      filter.estado = req.query.estado;
+    let filter = {};
+    const usuario = await Usuario.findById(req.usuario_id).populate('rol');
+    const rolNombre = usuario.rol.nombre;
+    if (rolNombre == 'administrativo') {
+        filter = {};
+    } else {
+        filter = { usuario: req.usuario_id };
     }
-
-    const novedades = await Novedad.find(filter).populate({
-      path: 'local',
-      populate: { path: 'usuario' }
-    })
-    .populate('usuario');
-
+    const novedades = await Novedad.find(filter).populate(['local', 'usuario']);
     res.json(novedades);
-  } catch (error) {
+  } catch {
     console.error('Error:', error);
     res.status(500).json({ status: '0', msg: 'Error procesando operación.', error: error.message });
   }
-};
+}
 
 // Obtener una novedad por ID
 novedadCtrl.getNovedadById = async (req, res) => {

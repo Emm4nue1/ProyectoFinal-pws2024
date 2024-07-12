@@ -51,22 +51,22 @@
                     <th scope="col">Alquilado</th>
                     <th scope="col">Costo del Mes</th>
                     <th scope="col">Habilitado</th>
+                    <th scope="col">Imagen</th>
                     <th scope="col">Acción</th>
-                    <th scope="col"></th>
 
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let locales of locales">
+                <tr *ngFor="let locales of locales; let i = index">
 
-                    <th>#</th>
-                    <td>{{locales.numeroLocal}}</td>
-                    <td>{{locales.superficie}}</td>
-                    <td>{{locales.alquilado | siNo}}</td>
-                    <td>{{locales.costoMes | currency: 'ARS':'symbol':'1.1-2'}}</td>
-                    <td>{{locales.habilitado | siNo}}</td>
+                    <th class="align-middle">{{i+1}}</th>
+                    <td class="align-middle">{{locales.numeroLocal}}</td>
+                    <td class="align-middle">{{locales.superficie}} m²</td>
+                    <td class="align-middle">{{locales.alquilado | siNo}}</td>
+                    <td class="align-middle">{{locales.costoMes | currency: 'ARS ':'symbol':'1.1-2'}}</td>
+                    <td class="align-middle">{{locales.habilitado | siNo}}</td>
                     <td> <img [src]="locales.imagen" alt="imagen de local" width="100px" height="100px"> </td>
-                    <td>
+                    <td class="align-middle">
                         <div class="btn-lista-promocion">
                             <button type="button" class="btn btn-warning m-md-2" (click)="modificarLocal(locales._id)">
                                 <i class="bi bi-pencil-square"></i>

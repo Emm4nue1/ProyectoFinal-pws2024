@@ -17,15 +17,15 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let a of alquileres">
+                <tr *ngFor="let a of alquileres; let i = index">
 
-                    <th>#</th>
-                    <td>{{a.local.numeroLocal}}</td>
-                    <td>{{a.usuario.apellido}}, {{a.usuario.nombre}}</td>
-                    <td>{{a.costoalquiler}}</td>
-                    <td>{{a.fechaAlquiler | date: "dd-MM-yyyy": "GMT"}}</td>
-                    <td>{{a.plazomes}}</td>
-                    <td>
+                    <th class="align-middle">{{i+1}}</th>
+                    <td class="align-middle">{{a.local.numeroLocal}}</td>
+                    <td class="align-middle">{{a.usuario.apellido}}, {{a.usuario.nombre}}</td>
+                    <td class="align-middle">ARS {{a.costoalquiler}}</td>
+                    <td class="align-middle">{{a.fechaAlquiler | date: "dd-MM-yyyy": "GMT"}}</td>
+                    <td class="align-middle">{{a.plazomes}}</td>
+                    <td class="align-middle"> 
                         <div class="btn-lista-alquiler" *ngIf="hasRole(rol.ADMINISTRATIVO)">
                             <button type="button" class="btn btn-danger m-md-2" (click)="eliminarAlquiler(a._id)">Eliminar</button>
                             <button type="button" class="btn btn-warning m-md-2"(click)="modificarAlquiler(a._id)">Modificar</button>

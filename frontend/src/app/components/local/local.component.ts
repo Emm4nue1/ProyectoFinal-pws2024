@@ -42,7 +42,7 @@ export class LocalComponent {
     this.localService.getLocales().subscribe(
       result => {
         //console.log(result);
-        this.locales = result;
+        this.locales = result.reverse();
       },
       (error) => {
         console.log(error);
