@@ -58,7 +58,7 @@
             </ul>
           </li>
 
-          <li class="nav-item dropdown" *ngIf="isAuthenticated()">
+          <li class="nav-item dropdown" *ngIf="isAuthenticated() && (hasRole(rol.ADMINISTRATIVO) || hasRole(rol.DUENIO))">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"
               routerLinkActive="active">
               <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"

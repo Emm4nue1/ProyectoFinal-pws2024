@@ -41,12 +41,7 @@ export class NovedadListaComponent {
     this.novedadService.getNovedades().subscribe(
       (result) => {
         console.log(result);
-        let vnovedad = new Novedad();
-        result.forEach((element: any) => {
-          Object.assign(vnovedad, element);
-          this.novedades.push(vnovedad);
-          vnovedad = new Novedad();
-        });
+        this.novedades = result;
       },
       (error) => {
         console.log(error);
@@ -85,7 +80,6 @@ export class NovedadListaComponent {
       (result) => {
         console.log(result);
         this.toastSrvc.success("Novedad eliminada correctamente", "Operación exitosa");
-        alert("Novedad eliminada");
         this.obtenerNovedades();
       },
       (error) => {

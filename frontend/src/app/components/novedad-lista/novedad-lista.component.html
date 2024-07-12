@@ -31,7 +31,7 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">N° de Local</th>
-                    <th scope="col">Usuario</th>
+                    <th scope="col">Registró Novedad</th>
                     <th scope="col">Descripcion</th>
                     <th scope="col">Estado</th>
                     <th scope="col">Acción</th>
@@ -46,7 +46,7 @@
                     <td>{{n.texto}}</td>
                     <td>{{n.estado}}</td>
                     <td>
-                        <div class="btn-lista-promocion" *ngIf="hasRole(rol.ADMINISTRATIVO) || hasRole(rol.PROPIETARIO)">
+                        <div class="btn-lista-promocion" *ngIf="hasRole(rol.ADMINISTRATIVO) || hasRole(rol.DUENIO)">
                             <button type="button" class="btn btn-danger m-md-2" (click)="eliminarNovedad(n._id)">
                                 <i class="bi bi-trash"></i>
                             </button>
