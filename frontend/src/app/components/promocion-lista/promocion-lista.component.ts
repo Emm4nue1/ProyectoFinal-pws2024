@@ -28,6 +28,7 @@ export class PromocionListaComponent {
     private router: Router,
     private fbService: FacebookService,
     private authService: AuthService) {
+    this.sesionFb();
     this.obtenerPromociones();
   }
 
