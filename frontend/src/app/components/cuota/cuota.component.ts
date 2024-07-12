@@ -44,6 +44,7 @@ export class CuotaComponent implements OnInit{
       }
 
       if (preferenceId != null){
+        this.estadoPago = this.estados.PENDIENTE;
         var fechaPago = new Date();
         this.preferenceId = preferenceId;
         this.mesActual = this.monthNames[fechaPago.getUTCMonth()]

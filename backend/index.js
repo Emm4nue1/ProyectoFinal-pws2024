@@ -5,7 +5,7 @@ const app = express();
 //middlewares
 app.use(express.json({ limit: '2mb' }));
 app.use(express.urlencoded({ limit: '2mb', extended: true }));
-app.use(cors({origin: 'https://localhost:4200'}));
+app.use(cors({origin: 'http://localhost:4200'}));
 //Cargamos el modulo de direccionamiento de rutas
 app.use('/api/usuario', require('./routes/usuario.route.js'));
 app.use('/api/local/novedades', require('./routes/novedad.route.js'));
