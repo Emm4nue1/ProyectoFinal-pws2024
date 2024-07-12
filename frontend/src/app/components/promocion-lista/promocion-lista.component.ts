@@ -76,12 +76,11 @@ export class PromocionListaComponent {
     )
   }
 
-  posteoFb(msj:string, date: string, numeroLocal: string) {
+  posteoFb(msj:string, numeroLocal: string) {
     this.btnFacebook = true;
     var apiMethod: ApiMethod = "post";
     var newMsg = "Para por nuestro local: " + numeroLocal + "\n";
-    newMsg += msj + "\n";
-    newMsg += this.parsearFecha(new Date(date));
+    newMsg += msj;
 
     this.msjPosteo=newMsg;
     this.fbService.api('/348066471731907/feed', apiMethod,
@@ -92,13 +91,6 @@ export class PromocionListaComponent {
 
     this.toastSrvc.success("Publicación reposteada con éxito.", "Facebook");
     this.btnFacebook = false;
-  }
-
-  parsearFecha(fecha: Date): string {
-    var anio = fecha.getUTCFullYear();
-    var mes = String(fecha.getUTCMonth() + 1).padStart(2, '0');
-    var dia = String(fecha.getUTCDate()).padStart(2, '0');
-    return `${anio}-${mes}-${dia}`;
   }
 
   sesionFb() {
