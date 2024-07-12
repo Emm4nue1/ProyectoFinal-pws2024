@@ -7,13 +7,7 @@
             </div>
             <div class="contenedor-formulario p-3">
                 <p class="text-danger"[hidden]="!formNovedad.invalid && !validarCamposNovedad()">*Todos los campos son obligatorios</p>
-                <div class="mb-3">
-                    <label for="usuario" class="form-label">Usuario</label>
-                    <select class="form-select" id="usuario" name="usuario" [(ngModel)]="novedad.usuario">
-                        <option *ngIf="accion == 'update'" [ngValue]="novedad.usuario">{{novedad.usuario.apellido}}, {{novedad.usuario.nombre}}</option>
-                        <option *ngFor="let u of usuarios" [ngValue]="u">{{u.apellido}}, {{u.nombre}}</option>       
-                    </select>
-                </div>
+                
                 <div class="mb-3">
                     <label for="local" class="form-label">Locales</label>
                     <select class="form-select" id="local" name="local" [(ngModel)]="novedad.local">

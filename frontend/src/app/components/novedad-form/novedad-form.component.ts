@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-novedad-form',
@@ -31,7 +32,8 @@ export class NovedadFormComponent{
     private localService: LocalService,
     private usuarioService: UsuarioService,
     private router: Router,
-    private activatedRoute: ActivatedRoute) {
+    private activatedRoute: ActivatedRoute,
+    private authService: AuthService) {
     this.iniciarVariable();
     this.obtenerLocales();
     this.obtenerUsuarios();
@@ -105,10 +107,10 @@ export class NovedadFormComponent{
 
   agregarNovedad() {
     console.log(this.novedad);
+    this.novedad.usuario._id = this.authService.getUserId()!;
     this.novedadService.createNovedad(this.novedad).subscribe(
       (result) => {
         this.toastSrvc.success('Novedad creada correctamente', 'Operación exitosa');
-        alert("Novedad creada");
         this.novedad = new Novedad();
         this.router.navigate(['novedad-lista']);
       },
@@ -139,7 +141,6 @@ export class NovedadFormComponent{
 
   validarCamposNovedad() {
     return !(
-      this.novedad.usuario.nombre != "" &&
       this.novedad.local.numeroLocal != "" &&
       this.novedad.texto != "" &&
       this.novedad.estado != ""
