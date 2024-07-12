@@ -3,6 +3,8 @@ import { LocalService } from '../../services/local.service';
 import { Local } from '../../models/local';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { PromocionService } from '../../services/promocion.service';
+import { Promocion } from '../../models/promocion';
 
 @Component({
   selector: 'app-home',
@@ -13,8 +15,11 @@ import { FormsModule } from '@angular/forms';
 })
 export class HomeComponent {
   locales: Array<Local> = [];
-  constructor(private localService: LocalService) {
+  promociones: Array<Promocion> = [];
+  constructor(private localService: LocalService,
+              private promocionService: PromocionService) {
     this.obtenerLocales();
+    this.obtenerPromociones();
    }
 
    obtenerLocales() {
@@ -33,4 +38,17 @@ export class HomeComponent {
       }
     )
    }
+
+   obtenerPromociones(){
+    this.promocionService.getPromocionesPublicas().subscribe(
+      (result) => {
+        console.log(result);
+        this.promociones = result;
+      },
+      (error) => {
+        console.log(error);
+      })
+  }
+  
+
 }

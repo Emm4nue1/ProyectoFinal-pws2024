@@ -14,6 +14,7 @@
     font-style: normal;
   }
 
+  /*Estilo para el section de promociones*/
 .row-contenedor {
     display: flex;
     flex-direction: column;
@@ -32,6 +33,21 @@
     height: 50vh;
 }
 
+.carousel-caption{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.carousel-caption h4,p{
+  text-align: center;
+  width: max-content;
+  color: white;
+  background-color: black;
+  border: 2px solid white;
+  border-radius: 10px;
+}
+
 .carousel-item img {
     width: 100%;
     height: 50vh;
@@ -41,6 +57,8 @@
 h2{
     text-align: center;
 }
+
+
 /* Seccion de Locales */
 .contenedor-cards {
     width: 80%;

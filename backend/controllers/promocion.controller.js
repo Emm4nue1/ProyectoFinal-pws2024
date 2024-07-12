@@ -48,6 +48,16 @@ promocionCtrl.getPromociones = async (req, res) => {
   }
 };
 
+promocionCtrl.getPromocionesPublicas = async (req, res) => {
+  try {
+    const promociones = await Promocion.find().populate('local');
+    res.json(promociones);
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).json({ status: '0', msg: 'Error procesando operación.', error: error.message });
+  }
+}
+
 // Obtener una promoción por ID
 promocionCtrl.getPromocionById = async (req, res) => {
   try {
