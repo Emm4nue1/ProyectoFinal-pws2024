@@ -5,8 +5,7 @@
         "node": ">=18 <19"
     },
     "scripts": {
-        "start": "cd backend && node index.js",
-        "prebuild": "cd backend && npm install",
+        "start": "cd backend && npm start",        
         "build": "cd frontend && npm run build"
     }
 }
