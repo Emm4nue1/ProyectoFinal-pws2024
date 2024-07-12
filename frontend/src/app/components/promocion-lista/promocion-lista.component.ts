@@ -19,7 +19,7 @@ import { ToastrService } from 'ngx-toastr';
 export class PromocionListaComponent {
   msjPosteo?: string;
   promociones: Array<Promocion> = [];//Para obtener todas las sucripciones de la bd.
-
+  btnFacebook: boolean = false;
   sortOrder: string = "";
 
   toastSrvc = inject(ToastrService);
@@ -72,6 +72,7 @@ export class PromocionListaComponent {
   }
 
   posteoFb(msj:string) {
+    this.btnFacebook = true;
     var apiMethod: ApiMethod = "post";
     this.msjPosteo=msj;
     this.fbService.api('/348066471731907/feed', apiMethod,
@@ -79,6 +80,9 @@ export class PromocionListaComponent {
         "message": this.msjPosteo,
         "access_token": "EAAKnza2tB7kBOwQPK9Y0ymkKZBmdZCtWrZCElkf1JCDXGsy0eL8UJkh6kX5sEwTgTvzmVF134eqWZAZBFDlVQX4I0ckhmQQStqQkrDCmGrQEIAqMGkMqCxwZAuisYVVWvH3EV3otsoWTZBYZCxgf7MjJHk5BGsJuv7K8hvHDY0CF323BBvNZBTihZBiCBjAHHQHRKdFPW1aJxXABfr9e4WmvgoYLrZAKQZDZD"
       });
+
+    this.toastSrvc.success("Publicación reposteada con éxito.", "Facebook");
+    this.btnFacebook = false;
   }
 
   sesionFb() {
