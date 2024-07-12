@@ -23,6 +23,15 @@ export class AlquilerService {
     return this._http.get(this.urlHost, httpOptions);
   }
 
+  getAlquileresByPropietario(): Observable<any> {
+    let httpOptions = {
+      headers: new HttpHeaders({
+        
+      }),
+    }
+    return this._http.get(this.urlHost + "propietario", httpOptions);
+  }
+
   getAlquileresByUsuario(): Observable<any>{
     let httpOptions = {
       headers: new HttpHeaders({
@@ -42,7 +51,6 @@ export class AlquilerService {
   }
   
   addAlquiler(alquiler: Alquiler):Observable<any>{
-    console.log("entro addAlquiler",alquiler);
     let httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'

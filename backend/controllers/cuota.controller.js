@@ -45,7 +45,6 @@ cuotaCtrl.getCuotaById = async (req, res) => {
 
 // Actualizar una cuota por ID
 cuotaCtrl.updateCuota = async (req, res) => {
-  console.log('req.body:', req.body);
   try {
     const cuota = await Cuota.findByIdAndUpdate(req.params.id, req.body, { new: true });
     if (!cuota) {

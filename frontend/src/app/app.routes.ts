@@ -13,6 +13,7 @@ import { LocalComponent } from './components/local/local.component';
 import { LocalFormsComponent } from './components/local-forms/local-forms.component';
 import { EstadisticaComponent } from './components/estadistica/estadistica.component';
 import { CuotaComponent } from './components/cuota/cuota.component';
+import { HistorialPagoComponent } from './components/historial-pago/historial-pago.component';
 
 export const routes: Routes = [
     {path: 'usuario-lista', component:UsuarioListaComponent},
@@ -34,5 +35,6 @@ export const routes: Routes = [
     {path: 'estadistica', component: EstadisticaComponent},
     {path: 'cuota', component: CuotaComponent},
     {path: 'home', component: HomeComponent },
+    {path: 'historial-pago', component: HistorialPagoComponent},
     {path: '**', pathMatch: 'full', redirectTo: 'home' },
 ];

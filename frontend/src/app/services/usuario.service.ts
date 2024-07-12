@@ -55,7 +55,6 @@ export class UsuarioService {
   }
   
   addUsuario(usuario: Usuario):Observable<any>{
-    console.log("usuario en service", usuario);
     let httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'

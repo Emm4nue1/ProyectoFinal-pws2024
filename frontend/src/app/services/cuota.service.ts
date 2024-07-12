@@ -16,7 +16,6 @@ export class CuotaService {
       'Content-Type': 'application/json'
     });
     const body = { cuota };
-    console.log(cuota);
     return this.http.post(this.urlBase, body, { headers: headers });
   }
 }

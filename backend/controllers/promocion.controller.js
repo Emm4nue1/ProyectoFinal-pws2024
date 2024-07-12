@@ -3,7 +3,6 @@ const promocionCtrl = {};
 
 // Crear una nueva promoción
 promocionCtrl.createPromocion = async (req, res) => {
-  console.log('req.body:', req.body);
   try {
     const promocion = new Promocion(req.body);
     await promocion.save();
@@ -74,7 +73,6 @@ promocionCtrl.getPromocionById = async (req, res) => {
 
 // Actualizar una promoción por ID
 promocionCtrl.updatePromocion = async (req, res) => {
-  console.log('req.body:', req.body);
   try {
     const promocion = await Promocion.findByIdAndUpdate(req.params.id, req.body, { new: true });
     if (!promocion) {

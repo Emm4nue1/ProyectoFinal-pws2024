@@ -75,7 +75,6 @@ export class MercadopagoService {
       price: cuotaAlquiler.alquiler.costoalquiler
     };
 
-    console.log(orderData);
     const body = JSON.stringify(orderData);
     return this.http.post(`${this.urlBase}/create_preference`, body, httpOption);
   }

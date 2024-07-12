@@ -57,7 +57,6 @@ export class EstadisticaComponent implements OnInit {
   obtenerNovedades() {
     this.novedadService.getNovedades().subscribe(
       result => {
-        console.log(result);
         result.forEach((novedad: any) => {
           if (novedad.estado == "Pendiente") {
             this.novedadPendiente++;

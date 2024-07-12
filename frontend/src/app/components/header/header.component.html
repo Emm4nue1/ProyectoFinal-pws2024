@@ -102,6 +102,10 @@
                 <a class="nav-link custom-nav-link" [routerLink]="['alquiler-lista']"
                   routerLinkActive="active">Lista</a>
               </li>
+              <li class="nav-item" *ngIf="hasRole(rol.PROPIETARIO)">
+                <a class="nav-link custom-nav-link" [routerLink]="['historial-pago']"
+                  routerLinkActive="active">Historial de Pagos</a>
+              </li>
             </ul>
           </li>
 

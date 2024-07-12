@@ -40,7 +40,6 @@ pagoCtrl.getPagoById = async (req, res) => {
 
 // Actualizar un pago por ID
 pagoCtrl.updatePago = async (req, res) => {
-  console.log('req.body:', req.body);
   try {
     const pago = await Pago.findByIdAndUpdate(req.params.id, req.body, { new: true });
     if (!pago) {

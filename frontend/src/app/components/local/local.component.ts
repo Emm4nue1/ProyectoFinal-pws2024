@@ -41,7 +41,6 @@ export class LocalComponent {
     this.alquiladoAux = undefined;
     this.localService.getLocales().subscribe(
       result => {
-        //console.log(result);
         this.locales = result.reverse();
       },
       (error) => {
@@ -51,10 +50,8 @@ export class LocalComponent {
 
 
   verLocalesFiltros(): void {
-    console.log(this.habilitadoAux, this.alquiladoAux);
     this.localService.getLocalesFiltros(this.habilitadoAux, this.alquiladoAux).subscribe(
       result => {
-        //console.log(result);
         this.locales = result;
       },
       (error) => {
@@ -65,7 +62,6 @@ export class LocalComponent {
 
 
   modificarLocal(_id: string) {
-    console.log(this.locales);
     this.router.navigate(['local-forms', _id]);
   }
 

@@ -66,7 +66,6 @@ export class LocalFormsComponent {
           this.toastSrvc.warning("El número de local ingresado ya existe.", "Atención");
           return;
         }else{
-          console.log(result)
           this.toastSrvc.success("Local creado con éxito.", "Operación exitosa");
           this.router.navigate(['local-lista']);
         }
@@ -81,7 +80,6 @@ export class LocalFormsComponent {
     
     this.localService.putLocal(this.local).subscribe(
       (result)=>{
-        //console.log(result);
         this.toastSrvc.success("Local modificado con éxito.", "Operación exitosa");
         this.router.navigate(['local-lista'])
 

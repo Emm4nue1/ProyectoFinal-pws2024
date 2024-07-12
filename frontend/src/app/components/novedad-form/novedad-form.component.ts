@@ -61,9 +61,7 @@ export class NovedadFormComponent{
   cargarNovedadActualizar(idNovedad: string) {
     this.novedadService.getNovedadById(idNovedad).subscribe(
       (result) => {
-        console.log(result);
         Object.assign(this.novedad, result);
-        console.log(this.novedad);
       },
       (error) => {
         console.log(error);
@@ -74,7 +72,6 @@ export class NovedadFormComponent{
   obtenerLocales() {
     this.localService.getLocales().subscribe(
       (result) => {
-        console.log(result);
         let vlocal = new Local();
         result.forEach((element: any) => {
           Object.assign(vlocal, element);
@@ -91,7 +88,6 @@ export class NovedadFormComponent{
   obtenerUsuarios() {
     this.usuarioService.getUsuarios().subscribe(
       (result) => {
-        console.log(result);
         let vusuario = new Usuario();
         result.forEach((element: any) => {
           Object.assign(vusuario, element);
@@ -106,7 +102,6 @@ export class NovedadFormComponent{
   }
 
   agregarNovedad() {
-    console.log(this.novedad);
     this.novedad.usuario._id = this.authService.getUserId()!;
     this.novedadService.createNovedad(this.novedad).subscribe(
       (result) => {

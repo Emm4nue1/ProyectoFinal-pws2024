@@ -10,13 +10,11 @@
         <input name="contraseña" type="password" placeholder="Contraseña" [(ngModel)]="password" required>
         <i class="bx bxs-lock-alt"></i>
       </div>
-      <div class="remember-forgot">
-        <label><input type="checkbox">Recordarme</label>
-        <a href="#">Olvide mi contraseña</a>
-      </div>
-      <button type="submit" class="btn btn-success" (click)="inicioSesion()">Entrar</button>
+      <button type="submit" class="btn btn-success" (click)="inicioSesion()" [disabled]="btnClick">
+        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" [hidden]="!btnClick"></span>
+        Entrar
+      </button>
       <div class="register-link">
-        <p>¿ No tienes cuenta ? <a href="./registro.html">Registrarse</a></p>
         <p>
           <a href="./index.html">Volver al incio</a>
         </p>

@@ -40,7 +40,6 @@ export class NovedadListaComponent {
     this.novedades = new Array<Novedad>();
     this.novedadService.getNovedades().subscribe(
       (result) => {
-        console.log(result);
         this.novedades = result.reverse();
       },
       (error) => {
@@ -53,7 +52,6 @@ export class NovedadListaComponent {
     this.novedades = new Array<Novedad>();
     this.novedadService.getNovedadesFiltro(this.estadoAux).subscribe(
       (result) => {
-        console.log(result);
         let vnovedad = new Novedad();
         result.forEach((element: any) => {
           Object.assign(vnovedad, element);
@@ -78,7 +76,6 @@ export class NovedadListaComponent {
   eliminarNovedad(idNodevad: string) {
     this.novedadService.deleteNovedad(idNodevad).subscribe(
       (result) => {
-        console.log(result);
         this.toastSrvc.success("Novedad eliminada correctamente", "Operación exitosa");
         this.obtenerNovedades();
       },

@@ -7,7 +7,6 @@ const Rol = require('../models/rol');
 
 // Crear una nueva novedad
 novedadCtrl.createNovedad = async (req, res) => {
-  console.log('req.body:', req.body);
   try {
     const novedad = new Novedad(req.body);
     await novedad.save();
@@ -92,7 +91,6 @@ novedadCtrl.getNovedadById = async (req, res) => {
 
 // Actualizar una novedad por ID
 novedadCtrl.updateNovedad = async (req, res) => {
-  console.log('req.body:', req.body);
   try {
     const novedad = await Novedad.findByIdAndUpdate(req.params.id, req.body, { new: true });
     if (!novedad) {

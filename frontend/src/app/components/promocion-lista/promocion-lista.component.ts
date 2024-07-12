@@ -39,7 +39,6 @@ export class PromocionListaComponent {
   obtenerPromociones(): void {
     this.promocionService.getPromocionesFiltro(this.sortOrder).subscribe(
       result => {
-        console.log(result);
         this.promociones = result;
       },
       error => {
