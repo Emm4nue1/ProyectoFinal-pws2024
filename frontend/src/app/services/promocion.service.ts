@@ -42,6 +42,15 @@ export class PromocionService {
     return this.http.get<Promocion>(this.urlBase + idPromocion, httpOption)
   }
 
+  getPromocionesPublicas(): Observable<any>{
+    let httpOption = {
+      headers: new HttpHeaders({
+        
+      })
+    }
+    return this.http.get(this.urlBase + 'home', httpOption);
+  }
+
   postPromocion(promocion: Promocion): Observable<any>{
     let httpOption = {
       headers: new HttpHeaders({
