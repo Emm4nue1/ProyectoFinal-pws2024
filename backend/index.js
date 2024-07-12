@@ -5,7 +5,7 @@ const app = express();
 //middlewares
 app.use(express.json({ limit: '2mb' }));
 app.use(express.urlencoded({ limit: '2mb', extended: true }));
-app.use(cors({origin: 'https://proyectofinal-pws2024-3.onrender.com'}));
+app.use(cors({origin: 'https://proyecto-final-pws2024-2-8pryui2a8-emm4nue1s-projects.vercel.app'}));
 //Cargamos el modulo de direccionamiento de rutas
 app.use('/api/usuario', require('./routes/usuario.route.js'));
 app.use('/api/local/novedades', require('./routes/novedad.route.js'));
