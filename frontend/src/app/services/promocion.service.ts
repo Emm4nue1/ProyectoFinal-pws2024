@@ -8,7 +8,7 @@ import { Promocion } from '../models/promocion';
 })
 export class PromocionService {
 
-  urlBase: string = 'http://localhost:3000/api/promocion/';
+  urlBase: string = 'https://proyectofinal-pws2024-2.onrender.com/api/promocion/';
 
   constructor(private http: HttpClient) { }
 
