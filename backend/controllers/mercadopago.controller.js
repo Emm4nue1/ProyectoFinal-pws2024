@@ -45,9 +45,9 @@ mercadopagoCtrl.createPreference = async(req, res) => {
 				}
 			],
 			back_urls: {
-				"success": "https://proyectofinal-pws2024-3.onrender.com/cuota",
-				"failure": "https://proyectofinal-pws2024-3.onrender.com/cuota",
-				"pending": "https://proyectofinal-pws2024-3.onrender.com/cuota"
+				"success": "https://proyecto-final-pws2024-2-8pryui2a8-emm4nue1s-projects.vercel.app/cuota",
+				"failure": "https://proyecto-final-pws2024-2-8pryui2a8-emm4nue1s-projects.vercel.app/cuota",
+				"pending": "https://proyecto-final-pws2024-2-8pryui2a8-emm4nue1s-projects.vercel.app/cuota"
 			},
 			auto_return: "approved",
 		}
