@@ -3,11 +3,15 @@ const cuotaCtrl = {};
 
 // Crear una nueva cuota
 cuotaCtrl.createCuota = async (req, res) => {
-  console.log('req.body:', req.body);
   try {
-    const cuota = new Cuota(req.body);
-    await cuota.save();
-    res.json({ status: '1', msg: 'Cuota guardada.' });
+    const cuotaExiste = await Cuota.findOne({idMercadoPago: req.body.cuota.idMercadoPago});
+    if (cuotaExiste){
+      res.status(400).json({ status: '0', msg: "La cuota ya ha sido pagada."});
+    }else{
+      const cuota = new Cuota(req.body.cuota);
+      const save = await cuota.save();
+      res.json({ status: '1', msg: 'Cuota guardada.', cuotaId: save._id });
+    }
   } catch (error) {
     console.error('Error:', error);
     res.status(400).json({ status: '0', msg: 'Error procesando operación.', error: error.message });

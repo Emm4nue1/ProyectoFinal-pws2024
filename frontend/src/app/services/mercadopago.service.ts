@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Alquiler } from '../models/alquiler';
@@ -10,6 +10,8 @@ declare var MercadoPago: any;
 })
 export class MercadopagoService {
   private mercadoPago: any;
+  readonly monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+    "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
 
   urlBase: string = 'http://localhost:3000/api/mercadopago';
 
@@ -26,12 +28,12 @@ export class MercadopagoService {
       })
     }
 
-    var fechaAlquiler = new Date(alquiler.fechaAlquiler);
+    var fechaPago = new Date();
     const orderData = {
       product_id: alquiler._id,
       title: "Pago de Alquiler",
       quantity: 1,
-      description: "Pago de Alquiler - Mes de Pago: " + this.formatDate(fechaAlquiler) + " - Alquiler Id: " + alquiler._id,
+      description: "Mes de Pago: " + this.monthNames[fechaPago.getMonth()],
       price: alquiler.costoalquiler
     };
 
@@ -58,5 +60,14 @@ export class MercadopagoService {
     const day = String(fechaAlquiler.getUTCDate()).padStart(2, '0');
     
     return `${day}-${month}-${year}`;
+  }
+
+  obtenerPago(payment_id: string){
+    let httpOption = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    }
+    return this.http.get(this.urlBase + "/payment/" + payment_id, httpOption);
   }
 }
