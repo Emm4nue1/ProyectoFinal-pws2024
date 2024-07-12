@@ -14,7 +14,7 @@ localCtrl.getLocales = async (req, res) => {
         let filter = {};
         const usuario = await Usuario.findById(req.usuario_id).populate('rol');
         const rolNombre = usuario.rol.nombre;
-        if (rolNombre == 'duenio') {
+        if (rolNombre == 'duenio' || rolNombre == 'administrativo') {
             filter = {};
             if (req.query.habilitado != null) {
                 filter.habilitado = req.query.habilitado === 'true';
