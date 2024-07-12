@@ -76,7 +76,7 @@ export class PromocionListaComponent {
     this.fbService.api('/348066471731907/feed', apiMethod,
       {
         "message": this.msjPosteo,
-        "access_token": "EAAKnza2tB7kBO8BA40nIUZAJJUmOZAGN7J4jJrMdzaQmN3NI005dYfaZBTiBmRJzgZAwBrGZAjNC2bwS3gqlQVTRD0hIf5qwpRCOZCqSJAbpPoSNusK8jx8fbDMZADZCgRTF891dXL4B7pSZCOVNkuRD0NDhU6JdMJ8BIM8zxs1pov2qxtoHK3AcUXYYkKJ0JrQVSqGWerXQ63UFt7dJuzY2vEDa9"
+        "access_token": "EAAKnza2tB7kBOwQPK9Y0ymkKZBmdZCtWrZCElkf1JCDXGsy0eL8UJkh6kX5sEwTgTvzmVF134eqWZAZBFDlVQX4I0ckhmQQStqQkrDCmGrQEIAqMGkMqCxwZAuisYVVWvH3EV3otsoWTZBYZCxgf7MjJHk5BGsJuv7K8hvHDY0CF323BBvNZBTihZBiCBjAHHQHRKdFPW1aJxXABfr9e4WmvgoYLrZAKQZDZD"
       });
   }
 
