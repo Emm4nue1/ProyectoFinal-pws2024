@@ -58,7 +58,7 @@ novedadCtrl.getNovedades = async (req, res) => {
     let filter = {};
     const usuario = await Usuario.findById(req.usuario_id).populate('rol');
     const rolNombre = usuario.rol.nombre;
-    if (rolNombre == 'administrativo') {
+    if (rolNombre == 'administrativo' || rolNombre == 'duenio') {
         filter = {};
     } else {
         filter = { usuario: req.usuario_id };
