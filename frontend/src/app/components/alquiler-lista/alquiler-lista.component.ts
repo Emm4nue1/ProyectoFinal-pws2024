@@ -71,16 +71,12 @@ export class AlquilerListaComponent {
   pagarAlquiler(alquiler: Alquiler){
     this.mercadopagoService.createPreference(alquiler).subscribe({
       next: (result) => {
-        this.createCheckoutButton(result.id);
+        this.router.navigateByUrl(`/cuota?preferenceId=${result.id}&totalPagar=${alquiler.costoalquiler}`);
       },
       error: (error) => {
         alert(error);
       }
     });
-  }
-
-  createCheckoutButton(preferenceId: any){
-    this.mercadopagoService.createCheckout(preferenceId);
   }
 
   pagarAdelanto(idAlquiler: string){

@@ -41,7 +41,7 @@ export class MercadopagoService {
     return this.http.post(`${this.urlBase}/create_preference`, body, httpOption);
   }
 
-  async createCheckout(preferenceId: string) {
+  async createCheckout(preferenceId: String) {
     await this.mercadoPago.bricks().create("wallet", "wallet_container", {
       initialization: {
         preferenceId: preferenceId,

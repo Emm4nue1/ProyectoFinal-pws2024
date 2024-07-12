@@ -33,8 +33,6 @@
                         <div class="btn-lista-alquiler" *ngIf="hasRole(rol.ADMINISTRATIVO) || hasRole(rol.PROPIETARIO)">
                             <button type="button" class="btn btn-success m-md-2" (click)="pagarAlquiler(a)">Pagar Total</button>
                             <button type="button" class="btn btn-success m-md-2" (click)="pagarAdelanto(a._id)">Pagar Adelanto</button>
-
-                            <div id="wallet_container"></div>
                         </div>
                     </td>
                 </tr>

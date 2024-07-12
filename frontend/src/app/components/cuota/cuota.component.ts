@@ -13,13 +13,19 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule, RouterLink],
   templateUrl: './cuota.component.html',
-  styleUrl: './cuota.component.css'
+  styleUrl: './cuota.component.css',
 })
 export class CuotaComponent implements OnInit{
   estados = EstadosPago;
-  estadoPago: String = this.estados.PENDIENTE;
+  estadoPago: String = "";
+  btnPagarAlquiler: Boolean = false;
+  preferenceId: String = "";
+  mesActual: String = "";
+  anioActual: String = "";
+  totalPagar: number = 0;
 
-
+  readonly monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+    "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
   constructor(
     private route: ActivatedRoute, 
     private cuotaService: CuotaService, 
@@ -30,10 +36,30 @@ export class CuotaComponent implements OnInit{
   ngOnInit(): void {
     this.route.queryParams.subscribe(async params => {
       const status = params['status'];
+      const preferenceId = params['preferenceId'];
+      const totalPagar = params['totalPagar'];
+
       if (status != null && status == "approved"){
         await this.registrarPago(params['payment_id']);
       }
+
+      if (preferenceId != null){
+        var fechaPago = new Date();
+        this.preferenceId = preferenceId;
+        this.mesActual = this.monthNames[fechaPago.getUTCMonth()]
+        this.anioActual = fechaPago.getFullYear().toString();
+        this.totalPagar = totalPagar;
+      }
     });
+  }
+
+  pagarAlquiler(){
+    this.btnPagarAlquiler = true;
+    this.createCheckoutButton();
+  }
+
+  createCheckoutButton(){
+    this.mercadopagoService.createCheckout(this.preferenceId);
   }
 
   async registrarPago(payment_id: string){

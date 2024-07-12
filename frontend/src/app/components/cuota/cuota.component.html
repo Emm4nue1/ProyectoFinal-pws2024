@@ -1,10 +1,19 @@
 <div *ngIf="estadoPago == this.estados.PENDIENTE">
-    HOLA MUNDO
+    <div class="row m-0 p-0 text-center mt-5">
+        <h5>Va a pagar el mes de {{mesActual}} de {{anioActual}}</h5>
+        <h5>Total a Pagar: {{ totalPagar | currency: 'ARS'}}</h5>
+        <div class="col-md-12 mt-4">
+            <button type="button" class="btn btn-success m-md-2" (click)="pagarAlquiler()" [disabled]="btnPagarAlquiler">Pagar Total</button>
+        </div>
+        <div class="d-flex justify-content-center mt-5">
+            <div id="wallet_container" class="col-md-4"></div>
+        </div>
+    </div>
 </div>
 
 <div *ngIf="estadoPago == this.estados.APROBADO">
     <div class="row m-0 p-0 text-center mt-5">
-        <h5>Pago Aprobado con éxito!</h5>
+        <h3>Pago Aprobado con éxito!</h3>
         <div class="col-md-12 mt-4">
             <a [routerLink]="['/home']" class="btn btn-primary">Volver al Inicio</a>
         </div>
@@ -13,7 +22,7 @@
 
 <div *ngIf="estadoPago == this.estados.ERROR">
     <div class="row m-0 p-0 text-center mt-5">
-        <h5>La cuota ya ha sido pagada!</h5>
+        <h3>La cuota ya ha sido pagada!</h3>
         <div class="col-md-12 mt-4">
             <a [routerLink]="['/home']" class="btn btn-primary">Volver al Inicio</a>
         </div>
