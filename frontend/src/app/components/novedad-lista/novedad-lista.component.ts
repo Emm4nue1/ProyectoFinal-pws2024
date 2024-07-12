@@ -25,6 +25,13 @@ export class NovedadListaComponent {
   constructor(private novedadService: NovedadService,
     private router: Router,
     private authService: AuthService) {
+
+    if(!this.authService.isLoggedIn()){
+      this.router.navigateByUrl("/home");
+      return;
+    }
+  
+
     this.novedad = new Novedad();
     this.novedades = [];
 

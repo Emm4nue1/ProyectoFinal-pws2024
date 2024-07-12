@@ -10,6 +10,7 @@ import { Alquiler } from '../../models/alquiler';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Constantes } from '../../helpers/constantes';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-alquiler-form',
@@ -34,7 +35,14 @@ export class AlquilerFormComponent {
     private localService: LocalService,
     private usuarioService: UsuarioService,
     private router: Router,
-    private activatedRoute: ActivatedRoute) {
+    private activatedRoute: ActivatedRoute,
+    private authService: AuthService) {
+
+    if(!this.authService.isLoggedIn()){
+      this.router.navigateByUrl("/home");
+      return;
+    }
+
     this.cargarLocales();
     this.cargarPropietarios();
     this.iniciarVariable();

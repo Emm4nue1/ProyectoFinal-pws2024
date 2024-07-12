@@ -34,6 +34,12 @@ export class NovedadFormComponent{
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private authService: AuthService) {
+
+    if(!this.authService.isLoggedIn()){
+      this.router.navigateByUrl("/home");
+      return;
+    }
+  
     this.iniciarVariable();
     this.obtenerLocales();
     this.obtenerUsuarios();

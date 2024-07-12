@@ -33,7 +33,6 @@ export class UsuarioFormComponent {
   ) {
     this.iniciarVariable();
     this.cargarRoles();
-
     if(!authService.isLoggedIn() || authService.getRole()! == this.rol.ADMINISTRATIVO || authService.getRole()! == this.rol.PROPIETARIO){
       router.navigateByUrl("/home");
     }

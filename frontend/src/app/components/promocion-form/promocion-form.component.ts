@@ -9,6 +9,7 @@ import { Local } from '../../models/local';
 import { AlquilerService } from '../../services/alquiler.service';
 import { Alquiler } from '../../models/alquiler';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-promocion-form',
@@ -32,7 +33,15 @@ export class PromocionFormComponent {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private localService: LocalService,
-    private alquilerService: AlquilerService){
+    private alquilerService: AlquilerService,
+    private authService: AuthService){
+
+    if(!this.authService.isLoggedIn()){
+      this.router.navigateByUrl("/home");
+      return;
+    }
+  
+
     this.cargarLocales()
   }
 

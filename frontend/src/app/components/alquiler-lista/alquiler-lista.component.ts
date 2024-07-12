@@ -39,6 +39,11 @@ export class AlquilerListaComponent {
     private authService: AuthService,
     private router: Router, 
     private mercadopagoService: MercadopagoService) { 
+      if(!this.authService.isLoggedIn()){
+        this.router.navigateByUrl("/home");
+        return;
+      }
+  
     this.iniciarVariables();
       this.obtenerAlquiler();
   }

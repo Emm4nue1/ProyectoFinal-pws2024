@@ -25,7 +25,13 @@ export class LocalFormsComponent {
     private localService:LocalService,
     private activatedRoute: ActivatedRoute,
     private authService: AuthService
-  ){}
+  ){
+    if(!this.authService.isLoggedIn()){
+      this.router.navigateByUrl("/home");
+      return;
+    }
+
+  }
 
 
   ngOnInit(): void {

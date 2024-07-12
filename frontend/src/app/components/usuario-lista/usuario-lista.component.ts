@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Rol } from '../../models/rol';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from '../../services/auth.service';
 
 
 @Component({
@@ -18,7 +19,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class UsuarioListaComponent {
 
-  usuarios: Array<Usuario>;
+  usuarios!: Array<Usuario>;
 
   roles!: Array<Rol>;
   apellidoAux: string = "";
@@ -29,8 +30,15 @@ export class UsuarioListaComponent {
 
   constructor(private router: Router,
     private usuarioService: UsuarioService,
-    private rolService: RolService
+    private rolService: RolService,
+    private authService: AuthService
   ) {
+
+    if(!this.authService.isLoggedIn()){
+      this.router.navigateByUrl("/home");
+      return;
+    }
+
     this.usuarios = new Array<Usuario>();
     this.getUsuarios("", "",0);
     this.cargarRoles();

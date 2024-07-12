@@ -28,6 +28,11 @@ export class PromocionListaComponent {
     private router: Router,
     private fbService: FacebookService,
     private authService: AuthService) {
+    if(!this.authService.isLoggedIn()){
+      this.router.navigateByUrl("/home");
+      return;
+    }
+  
     this.sesionFb();
     this.obtenerPromociones();
   }

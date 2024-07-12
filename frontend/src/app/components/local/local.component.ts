@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SiNoPipe } from '../../pipes/si-no.pipe';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from '../../services/auth.service';
 
 
 @Component({
@@ -28,7 +29,12 @@ export class LocalComponent {
 
 
 
-  constructor(private router: Router, private localService: LocalService) {
+  constructor(private router: Router, private localService: LocalService, private authService: AuthService) {
+    if(!this.authService.isLoggedIn()){
+      this.router.navigateByUrl("/home");
+      return;
+    }
+
     this.verLocales();
     //this.verLocalesFiltros(false,false);
 

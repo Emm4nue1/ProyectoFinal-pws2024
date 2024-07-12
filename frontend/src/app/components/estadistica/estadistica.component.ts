@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Chart } from 'chart.js/auto';
 import { LocalService } from '../../services/local.service';
 import { NovedadService } from '../../services/novedad.service';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-estadistica',
@@ -24,8 +26,16 @@ export class EstadisticaComponent implements OnInit {
   novedadProcesada: number = 0;
   novedadTotal: number = 0;
 
-  constructor(private localService: LocalService,
-              private novedadService: NovedadService) {
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private localService: LocalService,
+    private novedadService: NovedadService) {
+    if(!this.authService.isLoggedIn()){
+      this.router.navigateByUrl("/home");
+      return;
+    }
+
     this.obtenerLocales();
     this.obtenerNovedades();
   }
