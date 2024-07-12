@@ -86,7 +86,7 @@ export class PromocionListaComponent {
     this.fbService.api('/348066471731907/feed', apiMethod,
       {
         "message": this.msjPosteo,
-        "access_token": "EAAKnza2tB7kBOwQPK9Y0ymkKZBmdZCtWrZCElkf1JCDXGsy0eL8UJkh6kX5sEwTgTvzmVF134eqWZAZBFDlVQX4I0ckhmQQStqQkrDCmGrQEIAqMGkMqCxwZAuisYVVWvH3EV3otsoWTZBYZCxgf7MjJHk5BGsJuv7K8hvHDY0CF323BBvNZBTihZBiCBjAHHQHRKdFPW1aJxXABfr9e4WmvgoYLrZAKQZDZD"
+        "access_token": "EAAKnza2tB7kBO80kGGZA34ksZAoFFG6Jxun8hCMC3GqkiGAjGZBc641TwrTWyMhF4qLcRh7Mvzw3eAxzdPc0Xy2m8yWGs9qxxoZC3K9JVeU11lZAPkUFuIxzZC2UDZBJ5hVvzBqYR38ujbvGLAS1nusH6l2BR7rUzbcQSZBQ81LiUd2yO7FYZCbNkRYBKWkqsa9aCELIIJo6sJkjFOkGkBBqSo9Ghhl8ZD"
       });
 
     this.toastSrvc.success("Publicación reposteada con éxito.", "Facebook");
