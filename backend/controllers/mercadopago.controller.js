@@ -45,9 +45,9 @@ mercadopagoCtrl.createPreference = async(req, res) => {
 				}
 			],
 			back_urls: {
-				"success": "http://localhost:4200/cuota",
-				"failure": "http://localhost:4200/cuota",
-				"pending": "http://localhost:4200/cuota"
+				"success": "https://proyectofinal-pws2024-3.onrender.com/cuota",
+				"failure": "https://proyectofinal-pws2024-3.onrender.com/cuota",
+				"pending": "https://proyectofinal-pws2024-3.onrender.com/cuota"
 			},
 			auto_return: "approved",
 		}
