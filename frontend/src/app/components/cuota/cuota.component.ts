@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CuotaService } from '../../services/cuota.service';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { MercadopagoService } from '../../services/mercadopago.service';
 import { PagoService } from '../../services/pago.service';
 import { Cuota } from '../../models/cuota';
@@ -20,13 +20,14 @@ export class CuotaComponent implements OnInit{
   estadoPago: String = "";
   btnPagarAlquiler: Boolean = false;
   preferenceId: String = "";
-  mesActual: String = "";
-  anioActual: String = "";
   totalPagar: number = 0;
+  mesActual: string = "";
+  anioActual: string = "";
 
   readonly monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
     "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
   constructor(
+    private router: Router,
     private route: ActivatedRoute, 
     private cuotaService: CuotaService, 
     private mercadopagoService: MercadopagoService,
@@ -38,18 +39,21 @@ export class CuotaComponent implements OnInit{
       const status = params['status'];
       const preferenceId = params['preferenceId'];
       const totalPagar = params['totalPagar'];
-
+      
+      if (status == "null") {
+        this.router.navigateByUrl('/alquiler-lista');
+      }
+      
       if (status != null && status == "approved"){
         await this.registrarPago(params['payment_id']);
       }
 
       if (preferenceId != null){
         this.estadoPago = this.estados.PENDIENTE;
-        var fechaPago = new Date();
         this.preferenceId = preferenceId;
-        this.mesActual = this.monthNames[fechaPago.getUTCMonth()]
-        this.anioActual = fechaPago.getFullYear().toString();
         this.totalPagar = totalPagar;
+        this.mesActual = this.monthNames[params["mesPago"]-1];
+        this.anioActual = params["anioPago"];
       }
     });
   }
@@ -91,10 +95,20 @@ export class CuotaComponent implements OnInit{
 
   private async registrarCuotaMercadoPago(mercadoPagoResponse : any) : Promise<any>{
     var alquilerResponse = mercadoPagoResponse.additional_info.items[0];
+    var fechaSplit = alquilerResponse.description.split(".");
+    var mesDePago = Number(fechaSplit[0]);
+    var anioPago = Number(fechaSplit[1]);
+
+    if(mesDePago == 12 && anioPago < new Date().getUTCFullYear()){
+      mesDePago = 1;
+      anioPago = new Date().getUTCFullYear();
+    }
+
     var cuota = new Cuota();
     cuota.alquiler = alquilerResponse.id;
     cuota.estadoPago = this.estados.APROBADO;
-    cuota.mesPago = new Date().getMonth() + 1;
+    cuota.mesPago = mesDePago;
+    cuota.anioPago = anioPago;
     cuota.montoPago = Number(alquilerResponse.unit_price);
     cuota.idMercadoPago = String(mercadoPagoResponse.id);
 

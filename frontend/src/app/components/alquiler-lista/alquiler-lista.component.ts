@@ -7,9 +7,11 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { Constantes } from '../../helpers/constantes';
+import { Constantes, EstadosPago } from '../../helpers/constantes';
 import { AuthService } from '../../services/auth.service';
 import { MercadopagoService } from '../../services/mercadopago.service';
+import { CuotaAlquiler } from '../../dto/cuota-alquiler';
+import { Cuota } from '../../models/cuota';
 
 @Component({
   selector: 'app-alquiler-lista',
@@ -19,11 +21,17 @@ import { MercadopagoService } from '../../services/mercadopago.service';
   styleUrl: './alquiler-lista.component.css'
 })
 export class AlquilerListaComponent {
+  readonly monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+    "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+  estados = EstadosPago;
   rol = Constantes;
   local: Local = new Local();
   usuario: Usuario = new Usuario();
   alquiler: Alquiler = new Alquiler();
-  alquileres: Array<Alquiler> = new Array<Alquiler>();
+  cuotaAlquiler: Array<CuotaAlquiler> = new Array<CuotaAlquiler>();
+  today: Date = new Date();
+  mesPago: number = 0;
+  anioPago: number = 0;
   //injecto el servicio de toast.
   toastSrvc= inject(ToastrService);
 
@@ -43,19 +51,15 @@ export class AlquilerListaComponent {
     this.local = new Local();
     this.usuario = new Usuario();
     this.alquiler = new Alquiler();
-    this.alquileres = new Array<Alquiler>();
+    this.cuotaAlquiler = new Array<CuotaAlquiler>();
   }
 
   obtenerAlquiler(){
-    this.alquileres = new Array<Alquiler>();
+    this.cuotaAlquiler = new Array<CuotaAlquiler>();
     this.alquilerService.getAlquileres().subscribe(
       (result) => {
-        console.log(result);
-        let valquiler: Alquiler = new Alquiler();
-        result.forEach((element: any) => {
-          Object.assign(valquiler, element);
-          this.alquileres.push(valquiler);
-          valquiler = new Alquiler();
+        result.forEach((cuotaAlquiler: CuotaAlquiler) => {
+          this.cuotaAlquiler.push(cuotaAlquiler);
         });
       },
       error => {
@@ -68,15 +72,47 @@ export class AlquilerListaComponent {
     this.router.navigate(['alquiler-form', "0"]);
   }
 
-  pagarAlquiler(alquiler: Alquiler){
-    this.mercadopagoService.createPreference(alquiler).subscribe({
+  pagarAlquiler(cuotaAlquiler: CuotaAlquiler){
+    this.obtenerUltimoMesPago(cuotaAlquiler.cuota);
+    this.mercadopagoService.createPreference(cuotaAlquiler).subscribe({
       next: (result) => {
-        this.router.navigateByUrl(`/cuota?preferenceId=${result.id}&totalPagar=${alquiler.costoalquiler}`);
+        this.router.navigateByUrl(`/cuota?preferenceId=${result.id}&totalPagar=${cuotaAlquiler.alquiler.costoalquiler}&mesPago=${this.mesPago+1}&anioPago=${this.anioPago}`);
       },
       error: (error) => {
         alert(error);
       }
     });
+  }
+
+  obtenerUltimoMesPago(cuotas: Cuota[]){
+    if (cuotas.length == 0){
+      this.mesPago = this.today.getUTCMonth();
+      this.anioPago = this.today.getUTCFullYear();
+      return;
+    }
+    
+    var maxMesDePago = 0;
+    var maxAnio = cuotas[0].anioPago;
+    cuotas.forEach(cuota => {
+      if (cuota.anioPago > maxAnio){
+        maxAnio = cuota.anioPago;
+        maxMesDePago = cuota.mesPago;
+      }
+    });
+    
+    cuotas.forEach(cuota => {
+      if (cuota.anioPago == maxAnio && cuota.mesPago > maxMesDePago)
+        maxMesDePago = cuota.mesPago;
+    });
+
+
+    if(maxMesDePago == 12 && maxAnio <= new Date().getUTCFullYear()){
+      maxMesDePago = 0;
+      maxAnio = new Date().getUTCFullYear() + 1;
+    }
+
+    this.mesPago = maxMesDePago;
+    this.anioPago = maxAnio;
   }
 
   pagarAdelanto(idAlquiler: string){
@@ -98,6 +134,31 @@ export class AlquilerListaComponent {
         console.log(error);
       }
     )
+  }
+
+  validarMesPago(cuotaAlquiler: CuotaAlquiler){
+    this.obtenerUltimoMesPago(cuotaAlquiler.cuota);
+
+    return this.monthNames[this.mesPago] + " - Año: " + this.anioPago;
+  }
+
+  validarEstados(cuotaAlquiler: CuotaAlquiler){
+    if(cuotaAlquiler.cuota.length > 0){
+      var maxMesDePago = cuotaAlquiler.cuota[0].mesPago;
+      cuotaAlquiler.cuota.forEach((cuota) => {
+        if (cuota.mesPago > maxMesDePago){
+          maxMesDePago = cuota.mesPago
+        }
+      })
+
+      if (this.today.getMonth()+1 < maxMesDePago){
+        return this.estados.PENDIENTE;
+      }else{
+        return this.estados.PENDIENTE;
+      }
+    }else{
+      return this.estados.PENDIENTE;
+    }
   }
 }
 

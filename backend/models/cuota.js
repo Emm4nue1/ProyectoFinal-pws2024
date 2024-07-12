@@ -7,6 +7,7 @@ const CuotaSchema = new Schema({
     montoPago: { type: Number, required: true },
     estadoPago: { type: String, required: true },
     mesPago: { type: Number, required: true },
+    anioPago: { type: Number, required: true },
     idMercadoPago:  { type: String, required: true },
   });
   

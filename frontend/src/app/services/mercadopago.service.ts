@@ -2,6 +2,8 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Alquiler } from '../models/alquiler';
+import { CuotaAlquiler } from '../dto/cuota-alquiler';
+import { Cuota } from '../models/cuota';
 
 declare var MercadoPago: any;
 
@@ -10,6 +12,10 @@ declare var MercadoPago: any;
 })
 export class MercadopagoService {
   private mercadoPago: any;
+  mesPago: number = 0;
+  anioPago: number = 0;
+  today: Date = new Date();
+
   readonly monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
     "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
 
@@ -21,22 +27,55 @@ export class MercadopagoService {
     });
   }
 
-  createPreference(alquiler: Alquiler): Observable<any> {
+  obtenerUltimoMesPago(cuotas: Cuota[]){
+    if (cuotas.length == 0){
+      this.mesPago = this.today.getUTCMonth()+1;
+      this.anioPago = this.today.getUTCFullYear();
+      return;
+    }
+    
+    var maxMesDePago = 0;
+    var maxAnio = cuotas[0].anioPago;
+    cuotas.forEach(cuota => {
+      if (cuota.anioPago > maxAnio){
+        maxAnio = cuota.anioPago;
+        maxMesDePago = cuota.mesPago;
+      }
+    });
+    
+    cuotas.forEach(cuota => {
+      if (cuota.anioPago == maxAnio && cuota.mesPago > maxMesDePago)
+        maxMesDePago = cuota.mesPago;
+    });
+
+    maxMesDePago++;
+    if(maxMesDePago >= 12 && maxAnio <= new Date().getUTCFullYear()){
+      maxMesDePago = 1;
+      maxAnio = new Date().getUTCFullYear() + 1;
+    }
+
+    this.mesPago = maxMesDePago;
+    this.anioPago = maxAnio;
+  }
+
+  createPreference(cuotaAlquiler: CuotaAlquiler): Observable<any> {
     let httpOption = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
     }
 
-    var fechaPago = new Date();
+    this.obtenerUltimoMesPago(cuotaAlquiler.cuota)
+
     const orderData = {
-      product_id: alquiler._id,
+      product_id: cuotaAlquiler.alquiler._id,
       title: "Pago de Alquiler",
       quantity: 1,
-      description: "Mes de Pago: " + this.monthNames[fechaPago.getMonth()],
-      price: alquiler.costoalquiler
+      description: this.mesPago+ "." + this.anioPago,
+      price: cuotaAlquiler.alquiler.costoalquiler
     };
 
+    console.log(orderData);
     const body = JSON.stringify(orderData);
     return this.http.post(`${this.urlBase}/create_preference`, body, httpOption);
   }

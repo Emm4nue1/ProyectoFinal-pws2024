@@ -4,6 +4,7 @@ export class Cuota {
     montoPago: number;
     estadoPago: string;
     mesPago: number;
+    anioPago: number;
     idMercadoPago: String;
     
     constructor() {
@@ -12,6 +13,7 @@ export class Cuota {
         this.estadoPago = "";
         this.mesPago = 0;
         this.idMercadoPago = "";
+        this.anioPago = 0;
     }
 
 }

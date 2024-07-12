@@ -1,6 +1,7 @@
 const Alquiler = require('../models/alquiler');
 const Local = require('../models/local');
 const Usuario = require('../models/usuario');
+const Cuota = require('../models/cuota');
 const alquilerCtrl = {}
 
 const Rol = require('../models/rol');
@@ -12,17 +13,21 @@ const Rol = require('../models/rol');
 
 alquilerCtrl.getAlquileres = async (req, res) => {
     try {
-        let filter = {};
         const usuario = await Usuario.findById(req.usuario_id).populate('rol');
         const rolNombre = usuario.rol.nombre;
-        if (rolNombre == 'administrativo') {
-            filter = {};
-        } else {
-            filter = { usuario: req.usuario_id };
-        }
+        var filter = (rolNombre == 'administrativo') ? {} : { usuario: req.usuario_id };
         const alquileres = await Alquiler.find(filter).populate(['usuario', 'local']);
-        res.json(alquileres);
-
+        const alquileresConCuotas = [];
+        for (let i = 0; i < alquileres.length; i++) {
+            const alquiler = alquileres[i];
+            const cuota = await Cuota.find({ alquiler: alquiler._id });
+            alquileresConCuotas.push({
+            alquiler,
+            cuota
+            });
+        }
+  
+        res.json(alquileresConCuotas);
     } catch {
         res.status(500).json({
             'status': '0',
