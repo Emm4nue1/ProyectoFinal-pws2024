@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { PromocionService } from '../../services/promocion.service';
 import { Promocion } from '../../models/promocion';
 import { CommonModule } from '@angular/common';
@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { FacebookService, InitParams } from 'ngx-facebook';
 import { ApiMethod } from 'ngx-facebook/providers/facebook';
 import { AuthService } from '../../services/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-promocion-lista',
@@ -21,12 +22,14 @@ export class PromocionListaComponent {
 
   sortOrder: string = "";
 
+  toastSrvc = inject(ToastrService);
+
   constructor(private promocionService: PromocionService,
     private router: Router,
     private fbService: FacebookService,
     private authService: AuthService) {
     this.obtenerPromociones();
-    this.sesionFb();
+    // this.sesionFb();
   }
 
   hasRole(role: String) {
@@ -61,6 +64,7 @@ export class PromocionListaComponent {
   eliminarPromocion(_id: string) {
     this.promocionService.deletePromocionById(_id).subscribe(
       (result: any) => {
+        this.toastSrvc.success("Promocion eliminada correctamente", "Promocion eliminada correctamente");
         this.obtenerPromociones();
       }, (error: any) => {
         console.log(error);

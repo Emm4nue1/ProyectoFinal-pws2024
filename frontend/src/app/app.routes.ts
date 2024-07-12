@@ -11,6 +11,7 @@ import { NovedadListaComponent } from './components/novedad-lista/novedad-lista.
 import { AlquilerListaComponent } from './components/alquiler-lista/alquiler-lista.component';
 import { LocalComponent } from './components/local/local.component';
 import { LocalFormsComponent } from './components/local-forms/local-forms.component';
+import { EstadisticaComponent } from './components/estadistica/estadistica.component';
 
 export const routes: Routes = [
 
@@ -30,9 +31,8 @@ export const routes: Routes = [
     {path: 'local-lista', component: LocalComponent},
     {path: 'local-forms', component: LocalFormsComponent},
     {path: 'local-forms/:id', component: LocalFormsComponent},
+    {path: 'estadistica', component: EstadisticaComponent},
     
-
-
     { path: 'home', component: HomeComponent },
     { path: '**', pathMatch: 'full', redirectTo: 'home' },
 

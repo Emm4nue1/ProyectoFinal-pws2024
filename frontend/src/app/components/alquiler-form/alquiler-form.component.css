@@ -8,14 +8,14 @@
 
 .formulario {
     width: 80%;
-    border: solid 5px rgb(99, 3, 110);
+    border: solid 5px rgb(0, 105, 137);
     border-radius: 20px;
     overflow: hidden;
 }
 
 .encabezado {
     width: 100%;
-    background-color: rgb(99, 3, 110);
+    background-color: rgb(0, 105, 137);
     height: 2em;
 }
 .encabezado h5 {

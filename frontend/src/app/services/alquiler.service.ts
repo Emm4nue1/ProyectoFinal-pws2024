@@ -23,6 +23,15 @@ export class AlquilerService {
     return this._http.get(this.urlHost, httpOptions);
   }
 
+  getAlquileresByUsuario(): Observable<any>{
+    let httpOptions = {
+      headers: new HttpHeaders({
+        
+      }),
+    }
+    return this._http.get(this.urlHost + 'usuario', httpOptions);
+  }
+
   getAlquiler(id: string): Observable<any> {
     let httpOptions = {
       headers: new HttpHeaders({

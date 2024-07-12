@@ -1,11 +1,27 @@
 const Alquiler = require('../models/alquiler');
 const Local = require('../models/local');
+const Usuario = require('../models/usuario');
 const alquilerCtrl = {}
 
 alquilerCtrl.getAlquileres = async (req, res) => {
     var alquileres = await Alquiler.find().populate(['usuario', 'local']);
     res.json(alquileres);
 }
+
+alquilerCtrl.getAlquileresByUsuario = async (req, res) => {
+    try {
+
+        let filter = { usuario: req.usuario_id };
+        
+        const alquileres = await Alquiler.find(filter).populate(['usuario', 'local']);
+        res.json(alquileres);
+    } catch (error) {
+        res.status(500).json({
+            'status': '0',
+            'message': 'Error al obtener los locales'
+        });
+    }
+};
 
 alquilerCtrl.getAlquilerById = async (req, res) => {
     try {
@@ -25,6 +41,11 @@ alquilerCtrl.createAlquiler = async (req, res) => {
     try {
         const local = await Local.findById({_id: req.body.local._id});
         local.alquilado = true;
+
+        let usuario = new Usuario();
+        usuario = req.body.usuario;
+        local.usuario = usuario;
+
         await local.save();
         var alquiler = new Alquiler(req.body)
         alquiler.local = local;
