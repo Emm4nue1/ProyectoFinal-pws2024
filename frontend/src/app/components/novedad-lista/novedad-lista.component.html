@@ -29,7 +29,7 @@
         <table class="table table-hover table table-striped table-primary">
             <thead>
                 <tr>
-                    <th scope="col">#</th>
+                    <th class="col">#</th>
                     <th scope="col">N° de Local</th>
                     <th scope="col">Registró Novedad</th>
                     <th scope="col">Descripcion</th>
@@ -38,13 +38,13 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let n of novedades" class="text-bg-danger">
+                <tr *ngFor="let n of novedades; let i = index " class="text-bg-danger">
 
-                    <th>#</th>
-                    <td>{{n.local.numeroLocal}}</td>
-                    <td>{{n.usuario.apellido}}, {{n.usuario.nombre}}</td>
-                    <td>{{n.texto}}</td>
-                    <td>{{n.estado}}</td>
+                    <th class="align-middle">{{i+1}}</th>
+                    <td class="align-middle">{{n.local.numeroLocal}}</td>
+                    <td class="align-middle">{{n.usuario.apellido}}, {{n.usuario.nombre}}</td>
+                    <td class="align-middle">{{n.texto}}</td>
+                    <td class="align-middle">{{n.estado}}</td>
                     <td>
                         <div class="btn-lista-promocion" *ngIf="hasRole(rol.ADMINISTRATIVO) || hasRole(rol.DUENIO)">
                             <button type="button" class="btn btn-danger m-md-2" (click)="eliminarNovedad(n._id)">
