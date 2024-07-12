@@ -79,7 +79,7 @@ export class PromocionListaComponent {
   posteoFb(msj:string, numeroLocal: string) {
     this.btnFacebook = true;
     var apiMethod: ApiMethod = "post";
-    var newMsg = "Pasa por nuestro local: " + numeroLocal + "\n";
+    var newMsg = "Pasa por nuestro local N°: " + numeroLocal + "\n";
     newMsg += msj;
 
     this.msjPosteo=newMsg;
