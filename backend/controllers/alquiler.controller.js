@@ -2,6 +2,7 @@ const Alquiler = require('../models/alquiler');
 const Local = require('../models/local');
 const Usuario = require('../models/usuario');
 const Cuota = require('../models/cuota');
+const Pago = require('../models/pago');
 const alquilerCtrl = {}
 
 const Rol = require('../models/rol');
@@ -28,6 +29,42 @@ alquilerCtrl.getAlquileres = async (req, res) => {
         }
   
         res.json(alquileresConCuotas);
+    } catch {
+        res.status(500).json({
+            'status': '0',
+            'message': 'Error al obtener los locales'
+        });
+    }
+}
+
+alquilerCtrl.getAlquileresByPropietario = async (req, res) => {
+    try {
+        const alquileres = await Alquiler.find({ usuario: req.usuario_id }).populate(['usuario', 'local']);
+        const alquileresConCuotasYPagos = [];
+        for (let i = 0; i < alquileres.length; i++) {
+            const alquiler = alquileres[i];
+            const cuotas = await Cuota.find({ alquiler: alquiler._id });
+
+            for (let j = 0; j < cuotas.length; j++) {
+                const cuota = cuotas[j];
+                const pago = await Pago.find({ cuota: cuota._id });
+                alquileresConCuotasYPagos.push({
+                    alquiler,
+                    cuota,
+                    pago
+                });
+            }
+        }
+  
+        alquileresConCuotasYPagos.sort((a, b) => {
+            if (a.cuota.anioPago === b.cuota.anioPago) {
+                return b.cuota.mesPago - a.cuota.mesPago;
+            } else {
+                return b.cuota.anioPago - a.cuota.anioPago;
+            }
+        });
+
+        res.json(alquileresConCuotasYPagos);
     } catch {
         res.status(500).json({
             'status': '0',

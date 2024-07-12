@@ -7,6 +7,7 @@ import { Cuota } from '../../models/cuota';
 import { EstadosPago } from '../../helpers/constantes';
 import { Pago } from '../../models/pago';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-cuota',
@@ -31,7 +32,12 @@ export class CuotaComponent implements OnInit{
     private route: ActivatedRoute, 
     private cuotaService: CuotaService, 
     private mercadopagoService: MercadopagoService,
-    private pagoService: PagoService){
+    private pagoService: PagoService,
+    private authService: AuthService){
+
+      if(!this.authService.isLoggedIn()){
+        this.router.navigateByUrl("/home");
+      }
   }
 
   ngOnInit(): void {

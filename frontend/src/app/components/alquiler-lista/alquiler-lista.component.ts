@@ -84,6 +84,9 @@ export class AlquilerListaComponent {
     });
   }
 
+  pagarAlquilerAdministrativo(cuotaAlquiler: CuotaAlquiler){
+  }
+
   obtenerUltimoMesPago(cuotas: Cuota[]){
     if (cuotas.length == 0){
       this.mesPago = this.today.getUTCMonth();
@@ -126,7 +129,6 @@ export class AlquilerListaComponent {
   eliminarAlquiler(idAlquiler: string){
     this.alquilerService.deleteAlquiler(idAlquiler).subscribe(
       (result) => {
-        console.log(result);
         this.toastSrvc.success("Alquiler eliminado", "Operación exitosa");
         this.obtenerAlquiler();
       },

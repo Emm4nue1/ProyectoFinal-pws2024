@@ -31,7 +31,6 @@ export class HomeComponent {
           this.locales.push(vlocal);
           vlocal = new Local();
         });
-        console.log(this.locales);
       },
       (error) => {
         console.log(error);
@@ -42,7 +41,6 @@ export class HomeComponent {
    obtenerPromociones(){
     this.promocionService.getPromocionesPublicas().subscribe(
       (result) => {
-        console.log(result);
         this.promociones = result;
       },
       (error) => {

@@ -59,7 +59,6 @@ export class PromocionFormComponent {
 
     this.promocionService.postPromocion(this.promocion).subscribe(
       (result)=>{
-        console.log(result);
         this.toastSrvc.success("Promocion creada con exito", "Promocion Creada");
         this.router.navigate(['promocion-lista']);
       },
@@ -72,7 +71,6 @@ export class PromocionFormComponent {
   cargarPromocionActualizar(id: string): void {
     this.promocionService.getPromocionById(id).subscribe(
       (result: any) => {
-        console.log(result);
         this.promocion = result;
         // this.promocion.nroLocal= this.promocion.local.numeroLocal;
         this.promocion.fechaInicio= this.parsearFecha(new Date(result.fechaInicio))
@@ -94,7 +92,6 @@ export class PromocionFormComponent {
   cargarLocales(): void {
     this.alquilerService.getAlquileresByUsuario().subscribe(
       (result: any) => {
-        console.log(result);
         this.alquileres = result;
       },
       (error: any) => {
@@ -106,7 +103,6 @@ export class PromocionFormComponent {
   modificarPromocion(){
     this.promocionService.updatePromocion(this.promocion).subscribe(
       (result)=>{
-        console.log(result);
         this.toastSrvc.success("Promocion actualizada con exito", "Promocion Actualizada");
         this.router.navigate(['promocion-lista']);
       },

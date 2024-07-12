@@ -102,7 +102,6 @@ export class LocalService {
   }
 
   getLocalesPublicos(): Observable<any> {
-    console.log('entro al service getlLocalesPublicos');
     const httpOption = {
       headers: new HttpHeaders({
       }),

@@ -41,14 +41,12 @@ export class UsuarioListaComponent {
     this.limpiarCampos();
   }
   getUsuarios(apellidoAux: string, rolAux: string, dniAux: number): void {
-    console.log(rolAux);
     if (rolAux == "Todos"){
       rolAux = "";
     }
     this.usuarioService.getUsuariosFiltros(apellidoAux, rolAux, dniAux ).subscribe(
       (result: any) => {
         this.usuarios = result.reverse();
-        //console.log(this.usuarios);
       },
       (error) => {
         console.error('Error:', error);
@@ -67,7 +65,6 @@ export class UsuarioListaComponent {
   }
 
   modificarUsuario(usuario: Usuario) {
-    //console.log(usuario);
     this.router.navigate(['usuario-form', usuario._id]); usuario
   }
 

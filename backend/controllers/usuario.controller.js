@@ -138,7 +138,6 @@ usuarioCtrl.loginUsuario = async (req, res) => {
 
     try {
         const usuario = await Usuario.findOne({ email }).populate('rol');
-        console.log(usuario);
         if (!usuario) {
             return res.status(404).json({
                 status: '0',

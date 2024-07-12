@@ -55,9 +55,7 @@ export class AlquilerFormComponent {
   cargarAlquilerActualizar(idAlquiler: string) {
     this.alquilerService.getAlquiler(idAlquiler).subscribe(
       (result) => {
-        console.log(result);
         Object.assign(this.alquiler, result);
-        console.log(this.alquiler);
         this.alquiler.fechaAlquiler = this.parsearFecha(new Date(result.fechaAlquiler))
       },
       (error) => {
@@ -76,7 +74,6 @@ export class AlquilerFormComponent {
   cargarLocales(): void {
     this.localService.getLocalesFiltros(true, false).subscribe(
       result => {
-        console.log("CARGA DE LOCALES",result);
         this.locales = result;
       },
       (error) => {
@@ -93,7 +90,6 @@ export class AlquilerFormComponent {
     this.usuarioService.getUsuarioByRoleName(this.rol.PROPIETARIO).subscribe({
       next: (result) => {
         this.propietarios = result;
-        console.log(this.propietarios);
       },
       error: (error) => {
         alert(error);
@@ -102,10 +98,8 @@ export class AlquilerFormComponent {
   }
 
   crearAlquiler() {
-    console.log("entro en crear alquiler", this.alquiler);
     this.alquilerService.addAlquiler(this.alquiler).subscribe(
       (result) => {
-        console.log(result);
         this.toastSrvc.success("Alquiler creado", "Operación exitosa");
         this.irALista();
       },
@@ -119,7 +113,6 @@ export class AlquilerFormComponent {
   actualizarAlquiler() {
     this.alquilerService.updateAlquiler(this.alquiler).subscribe(
       (result) => {
-        console.log(result);
         this.toastSrvc.success("Alquiler modificado", "Operación exitosa");
         this.irALista();
       },
