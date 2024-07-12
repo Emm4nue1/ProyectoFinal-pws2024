@@ -17,7 +17,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './promocion-lista.component.css'
 })
 export class PromocionListaComponent {
-  msjPosteo?: string = "hola prueba";
+  msjPosteo?: string;
   promociones: Array<Promocion> = [];//Para obtener todas las sucripciones de la bd.
 
   sortOrder: string = "";
@@ -29,7 +29,6 @@ export class PromocionListaComponent {
     private fbService: FacebookService,
     private authService: AuthService) {
     this.obtenerPromociones();
-    // this.sesionFb();
   }
 
   hasRole(role: String) {
@@ -68,16 +67,17 @@ export class PromocionListaComponent {
         this.obtenerPromociones();
       }, (error: any) => {
         console.log(error);
-      }
+      }                                             
     )
   }
 
-  posteoFb() {
+  posteoFb(msj:string) {
     var apiMethod: ApiMethod = "post";
+    this.msjPosteo=msj;
     this.fbService.api('/348066471731907/feed', apiMethod,
       {
         "message": this.msjPosteo,
-        "access_token": "EAAKnza2tB7kBOZBHePLT6xdMjHof9TWbCF0dbeebYH2EqYnVZBif1BdXP1UHTD7UJkun3cVDaxGLPZAauUU815fIaVpN5tzXJHk2ujQt2ayzgMPLDoF2UK9AFic9yUscLyZAbQZA8M31ZBHaQqsHNIMLpVOXsyeGIjZCnnQ98IT00E5dvLwrAHCZCyY3fLZA80NVpVb2R7hcvKv9zdbHH9RynFwPmqwZDZD"
+        "access_token": "EAAKnza2tB7kBO8BA40nIUZAJJUmOZAGN7J4jJrMdzaQmN3NI005dYfaZBTiBmRJzgZAwBrGZAjNC2bwS3gqlQVTRD0hIf5qwpRCOZCqSJAbpPoSNusK8jx8fbDMZADZCgRTF891dXL4B7pSZCOVNkuRD0NDhU6JdMJ8BIM8zxs1pov2qxtoHK3AcUXYYkKJ0JrQVSqGWerXQ63UFt7dJuzY2vEDa9"
       });
   }
 
@@ -88,8 +88,6 @@ export class PromocionListaComponent {
       xfbml: true,
       version: 'v7.0'
     };
-
     this.fbService.init(initParams);
-    this.posteoFb();
   }
 }
