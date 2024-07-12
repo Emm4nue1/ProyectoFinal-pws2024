@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { NovedadService } from '../../services/novedad.service';
 import { Novedad } from '../../models/novedad';
 import { CommonModule } from '@angular/common';
@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Constantes } from '../../helpers/constantes';
 import { AuthService } from '../../services/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-novedad-lista',
@@ -18,7 +19,7 @@ export class NovedadListaComponent {
   rol = Constantes;
   novedad: Novedad = new Novedad();
   novedades: Array<Novedad> = [];
-
+  toastSrvc = inject(ToastrService);
   estadoAux: string="";
 
   constructor(private novedadService: NovedadService,
@@ -83,6 +84,7 @@ export class NovedadListaComponent {
     this.novedadService.deleteNovedad(idNodevad).subscribe(
       (result) => {
         console.log(result);
+        this.toastSrvc.success("Novedad eliminada correctamente", "Operación exitosa");
         alert("Novedad eliminada");
         this.obtenerNovedades();
       },

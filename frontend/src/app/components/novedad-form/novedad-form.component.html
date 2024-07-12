@@ -1,18 +1,12 @@
 <div class="row justify-content-center m-0 p-0">
     <div class="col-12 col-sm-12 col-md-7 contenedor">
         <h1>Crear nueva novedad</h1>
-        <form class="formulario">
+        <form class="formulario" #formNovedad="ngForm">
             <div class="encabezado">
                 <h5>Registrar novedad</h5>
             </div>
             <div class="contenedor-formulario p-3">
-                <div class="mb-3">
-                    <label for="local" class="form-label">Locales</label>
-                    <select class="form-select" id="local" name="local" [(ngModel)]="novedad.local">
-                        <option *ngIf="accion == 'update'" [ngValue]="novedad.local">{{novedad.local.numeroLocal}}</option>
-                        <option *ngFor="let l of locales" [ngValue]="l">{{l.numeroLocal}}</option>       
-                    </select>
-                </div>
+                <p class="text-danger"[hidden]="!formNovedad.invalid && !validarCamposNovedad()">*Todos los campos son obligatorios</p>
                 <div class="mb-3">
                     <label for="usuario" class="form-label">Usuario</label>
                     <select class="form-select" id="usuario" name="usuario" [(ngModel)]="novedad.usuario">
@@ -21,14 +15,25 @@
                     </select>
                 </div>
                 <div class="mb-3">
+                    <label for="local" class="form-label">Locales</label>
+                    <select class="form-select" id="local" name="local" [(ngModel)]="novedad.local">
+                        <option *ngIf="accion == 'update'" [ngValue]="novedad.local">{{novedad.local.numeroLocal}}</option>
+                        <option *ngFor="let l of locales" [ngValue]="l">{{l.numeroLocal}}</option>       
+                    </select>
+                </div>
+                
+                <div class="mb-3">
                     <label for="texto" class="form-label">Descripción</label>
                     <input type="text" class="form-control" id="texto" name="texto"
-                        placeholder="Ingrese una descripción" [(ngModel)]="novedad.texto">
+                        placeholder="Ingrese una descripción" [(ngModel)]="novedad.texto" required #descripcionNovedad="ngModel">
+                        <div class="alert alert-danger m-2" [hidden]="descripcionNovedad.valid || descripcionNovedad.pristine">
+                            Descripción obligatorio.
+                        </div>
                 </div>
                 <div class="mb-3">
                     <label for="estado" class="form-label">Estado</label>
                     <select class="form-select" id="estado" name="estado" [(ngModel)]="novedad.estado">
-                        <option selected>Seleccione una opcion</option>       
+                        <option value= '' selected>Seleccione una opción</option>       
                         <option value="Pendiente">Pendiente</option>
                         <option value="Procesado">Procesado</option>
                     </select>
@@ -36,7 +41,7 @@
                 
 
                 <div class="boton-formulario">
-                    <button *ngIf="accion == 'new'" type="submit" class="btn btn-success m-md-2" (click)="agregarNovedad()">Registrar</button>
+                    <button *ngIf="accion == 'new'" type="submit" class="btn btn-success m-md-2" [disabled]="formNovedad.invalid || validarCamposNovedad()"(click)="agregarNovedad()">Registrar</button>
                     <button *ngIf="accion == 'update'"type="submit" class="btn btn-warning m-md-2" (click)="actualizarNovedad()">Actualizar</button>
 
                     <button type="button" class="btn btn-primary m-md-2"(click)="irALista()">Ir a lista Novedades</button>
