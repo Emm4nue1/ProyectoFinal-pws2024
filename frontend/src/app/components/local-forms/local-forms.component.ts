@@ -100,8 +100,8 @@ export class LocalFormsComponent {
 
   seleccionImg(event: any) {
     const files = event.target.files[0];
-    if (files.size > 1000000) {//limite de tamaño de imagen hasta 1mb 
-      alert('El tamaño  de imagen maximo es 1MB');
+    if (files.size > 2000000) {//limite de tamaño de imagen hasta 2mb 
+      alert('El tamaño  de imagen maximo es 2MB');
       event.target.value = null;
     } else {
       const reader = new FileReader();

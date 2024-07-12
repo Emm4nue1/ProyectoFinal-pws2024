@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject, Inject } from '@angular/core';
 import { PromocionService } from '../../services/promocion.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -6,6 +6,9 @@ import { Promocion } from '../../models/promocion';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LocalService } from '../../services/local.service';
 import { Local } from '../../models/local';
+import { AlquilerService } from '../../services/alquiler.service';
+import { Alquiler } from '../../models/alquiler';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-promocion-form',
@@ -20,12 +23,16 @@ export class PromocionFormComponent {
   accion: string = "new";
   locales = Array<Local>();
 
+  alquileres = Array<Alquiler>();
+
+  toastSrvc = inject(ToastrService);
+
   constructor(
     private promocionService: PromocionService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private localService: LocalService
-  ){
+    private localService: LocalService,
+    private alquilerService: AlquilerService){
     this.cargarLocales()
   }
 
@@ -53,7 +60,8 @@ export class PromocionFormComponent {
     this.promocionService.postPromocion(this.promocion).subscribe(
       (result)=>{
         console.log(result);
-        
+        this.toastSrvc.success("Promocion creada con exito", "Promocion Creada");
+        this.router.navigate(['promocion-lista']);
       },
       (error)=>{
         console.log(error);
@@ -84,11 +92,10 @@ export class PromocionFormComponent {
   }
 
   cargarLocales(): void {
-    this.localService.getLocales().subscribe(
+    this.alquilerService.getAlquileresByUsuario().subscribe(
       (result: any) => {
-        this.locales = result;
-       
-        console.log(this.locales);
+        console.log(result);
+        this.alquileres = result;
       },
       (error: any) => {
         console.log(error);
@@ -100,6 +107,8 @@ export class PromocionFormComponent {
     this.promocionService.updatePromocion(this.promocion).subscribe(
       (result)=>{
         console.log(result);
+        this.toastSrvc.success("Promocion actualizada con exito", "Promocion Actualizada");
+        this.router.navigate(['promocion-lista']);
       },
       (error)=>{
         console.log(error);
@@ -114,8 +123,8 @@ export class PromocionFormComponent {
 
     seleccionImg(event: any) {
       const files = event.target.files[0];
-      if (files.size > 1000000) {//limite de tamaño de imagen hasta 1mb 
-        alert('El tamaño  de imagen maximo es 1MB');
+      if (files.size > 2000000) {//limite de tamaño de imagen hasta 2mb 
+        this.toastSrvc.warning("El tamaño maximo de la imagen es de 2MB", "Imagen muy grande");
         event.target.value = null;
       } else {
         const reader = new FileReader();
