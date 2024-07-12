@@ -3,9 +3,8 @@ const pagoCtrl = {};
 
 // Crear un nuevo pago
 pagoCtrl.createPago = async (req, res) => {
-  console.log('req.body:', req.body);
   try {
-    const pago = new Pago(req.body);
+    const pago = new Pago(req.body.pago);
     await pago.save();
     res.json({ status: '1', msg: 'Pago guardado.' });
   } catch (error) {

@@ -71,7 +71,7 @@ export class AlquilerListaComponent {
   pagarAlquiler(alquiler: Alquiler){
     this.mercadopagoService.createPreference(alquiler).subscribe({
       next: (result) => {
-        window.location.href = result.sandbox_init_point;
+        this.createCheckoutButton(result.id);
       },
       error: (error) => {
         alert(error);

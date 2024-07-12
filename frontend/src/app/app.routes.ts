@@ -12,9 +12,9 @@ import { AlquilerListaComponent } from './components/alquiler-lista/alquiler-lis
 import { LocalComponent } from './components/local/local.component';
 import { LocalFormsComponent } from './components/local-forms/local-forms.component';
 import { EstadisticaComponent } from './components/estadistica/estadistica.component';
+import { CuotaComponent } from './components/cuota/cuota.component';
 
 export const routes: Routes = [
-
     {path: 'usuario-lista', component:UsuarioListaComponent},
     {path: 'usuario-form', component:UsuarioFormComponent},
     {path: 'usuario-form/:id', component:UsuarioFormComponent},
@@ -32,8 +32,7 @@ export const routes: Routes = [
     {path: 'local-forms', component: LocalFormsComponent},
     {path: 'local-forms/:id', component: LocalFormsComponent},
     {path: 'estadistica', component: EstadisticaComponent},
-    
-    { path: 'home', component: HomeComponent },
-    { path: '**', pathMatch: 'full', redirectTo: 'home' },
-
+    {path: 'cuota', component: CuotaComponent},
+    {path: 'home', component: HomeComponent },
+    {path: '**', pathMatch: 'full', redirectTo: 'home' },
 ];

@@ -1,0 +1,21 @@
+<div *ngIf="estadoPago == this.estados.PENDIENTE">
+    HOLA MUNDO
+</div>
+
+<div *ngIf="estadoPago == this.estados.APROBADO">
+    <div class="row m-0 p-0 text-center mt-5">
+        <h5>Pago Aprobado con éxito!</h5>
+        <div class="col-md-12 mt-4">
+            <a [routerLink]="['/home']" class="btn btn-primary">Volver al Inicio</a>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="estadoPago == this.estados.ERROR">
+    <div class="row m-0 p-0 text-center mt-5">
+        <h5>La cuota ya ha sido pagada!</h5>
+        <div class="col-md-12 mt-4">
+            <a [routerLink]="['/home']" class="btn btn-primary">Volver al Inicio</a>
+        </div>
+    </div>
+</div>
